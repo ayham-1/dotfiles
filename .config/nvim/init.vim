@@ -5,6 +5,7 @@ Plug 'vimwiki/vimwiki'
 Plug 'mhinz/vim-startify'
 Plug 'liuchengxu/vim-which-key'
 Plug 'dylanaraps/wal.vim'
+Plug 'morhetz/gruvbox'
 Plug 'karb94/neoscroll.nvim'
 Plug 'folke/twilight.nvim'
 Plug 'folke/zen-mode.nvim'
@@ -16,6 +17,7 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'akinsho/nvim-bufferline.lua'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'lewis6991/gitsigns.nvim'
+Plug 'nekonako/xresources-nvim'
 
 " Debugger Plugins
 Plug 'puremourning/vimspector'
@@ -80,11 +82,12 @@ nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
 lua require("altffour")
 
 " Setup theme.
-set t_Co=256
-let g:gruvbox_contrast_light="hard"
+"set t_Co=256
 "let g:gruvbox_termcolors=16
+"set g:gruvbox_contrast_light="hard"
 "set background=light
-colorscheme wal
+"colorscheme gruvbox
+"set termguicolors
 "hi Pmenu ctermbg=gray
 "hi PmenuSel ctermbg=white
 "hi PmenuSbar ctermbg=black

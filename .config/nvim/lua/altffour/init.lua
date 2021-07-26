@@ -25,7 +25,7 @@ require('twilight').setup()
 require('zen-mode').setup()
 require('lualine').setup({
 	options = {
-		theme = '16color'
+		theme = 'gruvbox'
 	}
 })
 require('diffview').setup()
