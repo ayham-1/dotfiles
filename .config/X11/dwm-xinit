@@ -24,6 +24,7 @@ exec dstartup &
 exec xephyr-helper &
 exec xhost +si:localuser:"$USER" &
 no-hdmi-port.sh && with-hdmi-port.sh &
+exec unclutter &
 # relaunch DWM if the binary changes, otherwise bail
 csum=""
 new_csum=$(sha1sum $(which dwm))

@@ -6,7 +6,7 @@ ScriptName=${0##*/}
 Version=1.0.0
 
 #browser='firefox' # firefox
-browser='surf-open' # firefox
+browser='dbrowsel' # firefox
 search_engine='https://duckduckgo.com/?q='
 
 # Set menu options:

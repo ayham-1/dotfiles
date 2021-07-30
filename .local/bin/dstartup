@@ -21,7 +21,7 @@ if [ "$ChosenMenu" = "$NormalApps" ]; then
 fi
 
 if [ "$ChosenMenu" = "$DevApps" ]; then
-	input=$(dmenu -i -p "Working Environment ~/:")
+	input=$(ehco | dmenu -i -p "Working Environment ~/:")
 	Environment="$HOME/$input"
 
 	alacritty -t "code0" --working-directory $Environment &

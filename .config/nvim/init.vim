@@ -6,7 +6,6 @@ Plug 'mhinz/vim-startify'
 Plug 'liuchengxu/vim-which-key'
 Plug 'dylanaraps/wal.vim'
 Plug 'morhetz/gruvbox'
-Plug 'karb94/neoscroll.nvim'
 Plug 'folke/twilight.nvim'
 Plug 'folke/zen-mode.nvim'
 Plug 'hoob3rt/lualine.nvim'
@@ -82,11 +81,11 @@ nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
 lua require("altffour")
 
 " Setup theme.
-"set t_Co=256
+set t_Co=256
 "let g:gruvbox_termcolors=16
 "set g:gruvbox_contrast_light="hard"
 "set background=light
-"colorscheme gruvbox
+colorscheme wal
 "set termguicolors
 "hi Pmenu ctermbg=gray
 "hi PmenuSel ctermbg=white
@@ -135,15 +134,33 @@ set ttyfast
 " airline
 let g:airline#extensions#tabline#enabled = 1
 
-" Leader keys
-let mapleader = " "
-map <leader>e :bufdo e!<CR>
-nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 " Telescope
 nnoremap <leader>ff :Telescope find_files<cr>
 nnoremap <leader>fg :Telescope live_grep<cr>
 nnoremap <leader>fb :Telescope buffers<cr>
 nnoremap <leader>fh :Telescope help_tags<cr>
+
+" Keymaps
+nnoremap Y y$
+nnoremap n nzzzv
+nnoremap N nzzzv
+nnoremap J mzJ`z
+inoremap , ,<C-g>u
+inoremap . .<C-g>u
+inoremap ! !<C-g>u
+inoremap ? ?<C-g>u
+
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-1<CR>gv=gv
+vnoremap <C-j> :m .+1<CR>==
+nnoremap <leader>j :m .+1<CR>==
+vnoremap <C-k> :m .-1<CR>==
+nnoremap <leader>k :m .-1<CR>==
+
+" Leader keys
+let mapleader = " "
+map <leader>e :bufdo e!<CR>
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
 " Custom settings.
 set mouse=a

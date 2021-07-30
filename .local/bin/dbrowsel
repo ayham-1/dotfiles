@@ -1,20 +1,16 @@
-#!/usr/bin/env sh
+#!/bin/bash
 
 # Dmenu for selecting which browser to open.
 
-Browsers='1. AC
-2. ACB
-3. CB
-4. O'
+Browsers='1. firefox
+2. surf-open'
 
 Chosen=$(printf '%s' "$Browsers" \
 	| dmenu -i -l 20 -p 'Select browser:')
 [ -z "$Chosen" ] && exit 1
 
 case $Chosen in
-	'1. AC') firefox -P AC "$@";;
-	'2. ACB') firefox -P ACB "$@";;
-	'3. CB') firefox -P CB "$@";;
-	'4. O') firefox -P O "$@";;
+	'1. firefox') firefox "$@";;
+	'2. surf-open') surf-open "$@";;
 	*) eval "$Chosen" "$@";;
 esac

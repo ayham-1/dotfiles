@@ -16,11 +16,6 @@ if pcall(require, 'plenary') then
   end
 end
 
-require('neoscroll').setup({
-	use_local_scrolloff = false,
-	espect_scrolloff = false,
-})
-
 require('twilight').setup()
 require('zen-mode').setup()
 require('lualine').setup({
