@@ -17,6 +17,7 @@ export PATH="/usr/games/:$PATH"
 export PATH="$XDG_BIN_HOME:$PATH"
 
 export GPG_TTY=$(tty)
+export TODOTXT_DEFAULT_ACTION=ls
 
 # ~/ clean-up
 export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority

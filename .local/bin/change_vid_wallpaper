@@ -1,0 +1,15 @@
+#!/bin/sh
+
+removed=$HOME/pix/wallpapers/vid/
+wal_name=$(find $HOME/pix/wallpapers/vid/ -type f | awk 'BEGIN {FS="/"} ; {print $7}' | dmenu -i -l 25)
+cp -f $removed/$wal_name ~/pix/wallpapers/vid/wallpaper
+
+# get pywal background from from the video
+rm $HOME/pix/wallpapers/wallpaper.png
+ffmpeg -i $removed/$wal_name -vf "select=eq(n\,0)" -vframes 1 $HOME/pix/wallpapers/wallpaper.png
+cp $HOME/pix/wallpapers/wallpaper.png $HOME/pix/wallpapers/wallpaper
+
+refresh_wallpaper
+
+pkill -9 refresh_vid_wallpaper
+refresh_vid_wallpaper $removed/$wal_name

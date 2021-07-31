@@ -124,15 +124,28 @@ smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' 
 " Appearance
 set number
 set nowrap
+" toggle invisible characters
 set showbreak=↪
- " toggle invisible characters
 set list
-"set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮,space:·
-"set list
+set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮,space:·
 set ttyfast
 
-" airline
-let g:airline#extensions#tabline#enabled = 1
+" Cursor appearance
+set cursorline
+highlight Cursor ctermbg=white ctermfg=white
+" Default Colors for CursorLine
+highlight  CursorLine ctermbg=Black ctermfg=White
+
+" Change Color when entering Insert Mode
+autocmd InsertEnter * highlight  CursorLine ctermbg=Gray ctermfg=Black
+
+" Revert Color to default when leaving Insert Mode
+autocmd InsertLeave * highlight  CursorLine ctermbg=Black ctermfg=White
+
+" Leader keys
+let mapleader = " "
+map <leader>e :bufdo e!<CR>
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
 " Telescope
 nnoremap <leader>ff :Telescope find_files<cr>
@@ -156,11 +169,6 @@ vnoremap <C-j> :m .+1<CR>==
 nnoremap <leader>j :m .+1<CR>==
 vnoremap <C-k> :m .-1<CR>==
 nnoremap <leader>k :m .-1<CR>==
-
-" Leader keys
-let mapleader = " "
-map <leader>e :bufdo e!<CR>
-nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
 " Custom settings.
 set mouse=a
