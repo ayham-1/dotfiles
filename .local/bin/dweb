@@ -20,7 +20,7 @@ ChosenMenu=$(printf '%s\n%s\n%s\n%s' \
     | dmenu -i -l 10 -p "$ScriptName:")
 # Search web
 if [ "$ChosenMenu" = "$SearchWeb" ]; then
-	search=$(echo "" | dmenu -i -p "Search:")
+	search=$(dmenu -l 1 -i -p "Search:")
 	[ "$search" ] && $($browser "$search_engine$(echo $search | sed -r 's/ /+/g')") &
 fi
 

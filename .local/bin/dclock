@@ -1,0 +1,92 @@
+#!/bin/bash
+
+ScriptName=${0##*/}
+TimerPIDFile="/tmp/dclock.pids"
+
+# MenuItems
+AddTimer="1. Add timer"
+RemTimer="2. Remove timer"
+ListTimers="3. List timers"
+StartStopWatch="4. Start Stopwatch"
+StopStopWatch="5. Stop Stopwatch"
+ListStopWatch="6. Show Stopwatch"
+ResetStopWatch="7. Reset Stopwatch"
+
+_pid_file_cleanup() {
+		# Get timer PIDs
+		readarray -t timer_PIDs < $TimerPIDFile
+
+		[ "${timer_PIDs[0]}" = "" ] && return 1
+		
+		# Remove no longer present timers
+		for PID in "${timer_PIDs[@]}"
+		do
+				[ "$(ps -p "$picked_PID" -o comm=)" = "" ] \
+						&& timer_PIDs=("${timer_PIDs[@]/$PID}")
+		done
+
+		# Save new PIDs
+		touch $TimerPIDFile
+		echo ${timer_PIDs[@]} > $TimerPIDFile
+}
+
+_timer_add() {
+		sleep $1 &
+		
+		# Save pid
+		PID=$!
+		echo $PID >> $TimerPIDFile
+
+		notify-send "$ScriptName" "Added timer with duration: $duration, with \
+		PID: $PID"
+}
+
+_timer_remove() {
+		# Get timer PIDs
+		readarray -t timer_PIDs < $TimerPIDFile
+
+		# Get timers as menuitem
+		declare -a timers_duration
+		declare -a timers_took
+		declare -a timers
+		for PID in "${timer_PIDs[@]}" 
+		do
+				sleep_duration=$(ps -o cmd= -fp $PID | sed 's/^sleep //' -)
+				durations+=($sleep_duration)
+				sleeped_duration=$(ps -o lstart= -p $PID \
+				| sed 's/^sleep //' -)
+				timers+="$PID timer $sleep_duration out of $sleep_duration"
+		done
+
+		# Prompt user to pick
+		picked_PID=$(echo ${timers[@]} \
+				| dmenu -i -l 10 -p "Pick timer to delete:" \
+				| awk 'BEGIN {FS=" "} ; {print $1}')
+
+		# Kill sleep process
+		[ "$(ps -p "$picked_PID" -o comm=)" = "sleep" ] && kill -9 $(awk '{print $1}')
+
+		# Check and notify if timer still active
+		[ "$(ps -p "$picked_PID" -o comm=)" = "sleep" ] \
+				&& notify-send "$ScriptName" "Failed to stop timer with PID: $picked_PID" && exit
+
+		# Remove unset PIDs from $TimerPIDFile
+		_pid_file_cleanup
+
+		notify-send "$ScriptName" "Stopped timer with PID: $picked_PID"
+}
+
+_pid_file_cleanup
+
+ChosenMenu=$(printf '**Timers\n%s\n%s\n%s\n**Stopwatch\n%s\n%s\n%s\n%s' \
+		"$AddTimer" "$RemTimer" "$ListTimers" \
+		"$StartStopWatch" "$StopStopWatch" "$ListStopWatch" "$ResetStopWatch" \
+		| dmenu -i -l 7 -p "$ScriptName")
+
+if [ "$ChosenMenu" = "$AddTimer" ]; then
+		duration=$(printf "h = hours\nm = minutes\ns = seconds" \
+				| dmenu -i -l 3 -p \ "Timer Duration:")
+		_timer_add $duration
+elif [ "$ChosenMenu" = "$RemTimer" ]; then
+		_timer_remove
+fi

@@ -1,4 +1,4 @@
-exec rm ~/.cache/wal/ &
+exec rm -r ~/.cache/wal/ &
 exec wal -n -i ~/pix/wallpapers/wallpaper &
 exec feh --no-fehbg --bg-fill ~/pix/wallpapers/wallpaper &
 exec xrdb ~/.cache/wal/colors.Xresources &
@@ -16,14 +16,11 @@ exec xss-lock -- /usr/bin/slock &
 exec keynav &
 exec light -S 100 &
 umask 002 &
-if test -f /usr/lib/ssh/x11-ssh-askpass
-then
-	SSH_ASKPASS=/usr/lib/ssh/x11-ssh-askpass ssh-add < /dev/null
-fi &
+eval $(keychain --eval --quiet id_ed25519)
 exec dstartup &
 exec xephyr-helper &
-exec xhost +si:localuser:"$USER" &
 no-hdmi-port.sh && with-hdmi-port.sh &
+exec xhost +si:localuser:"$USER" &
 exec unclutter &
 # relaunch DWM if the binary changes, otherwise bail
 csum=""

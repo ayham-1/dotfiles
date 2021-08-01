@@ -1,3 +1,36 @@
 #!/bin/sh
 
 # Options
+
+AddItem="1. Add todo item"
+RemItem="2. Remove todo item"
+MarkItem="3. Mark todo item"
+ListItems="4. List todo items"
+Archive="5. Archive todo items"
+Report="6. Report todo items"
+
+# Choose item
+ChosenMenu=$(printf '%s\n%s\n%s\n%s\n%s\n%s\n%s' \
+		"$AddItem" "$RemItem" "$MarkItem" "$ListItems" "$Archive" "$Report" \
+		| dmenu -i -l 10 -p "todo:")
+
+_select_item() {
+		return "$(todo.sh ls | dmenu -i -l 30 | awk '{print $1}')"
+}
+
+if [ "$ChosenMenu" = "$AddItem" ]; then
+		text=$(echo "" | dmenu -i -l 1 -p "item:")
+		todo.sh add "$text"
+elif [ "$ChosenMenu" = "$RemItem" ]; then
+		_select_item
+		todo.sh rm $?
+elif [ "$ChosenMenu" = "$MarkItem" ]; then
+		_select_item
+		todo.sh do $?
+elif [ "$ChosenMenu" = "$ListItems" ]; then
+		todo.sh ls | dmenu -i -l 30
+elif [ "$ChosenMenu" = "$Archive" ]; then
+		todo.sh archive
+elif [ "$ChosenMenu" = "$Report" ]; then
+		todo.sh report
+fi
