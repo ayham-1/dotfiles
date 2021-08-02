@@ -6,10 +6,12 @@ Plug 'mhinz/vim-startify'
 Plug 'liuchengxu/vim-which-key'
 Plug 'dylanaraps/wal.vim'
 Plug 'morhetz/gruvbox'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'folke/twilight.nvim'
 Plug 'folke/zen-mode.nvim'
 Plug 'hoob3rt/lualine.nvim'
-"Plug 'windwp/nvim-autopairs'
+Plug 'windwp/nvim-autopairs'
 Plug 'sindrets/diffview.nvim'
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
 Plug 'kyazdani42/nvim-tree.lua'
@@ -17,10 +19,6 @@ Plug 'akinsho/nvim-bufferline.lua'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'nekonako/xresources-nvim'
-
-" Debugger Plugins
-Plug 'puremourning/vimspector'
-Plug 'szw/vim-maximizer'
 
 " LSP
 Plug 'neovim/nvim-lspconfig'
@@ -42,7 +40,6 @@ Plug 'nvim-treesitter/playground'
 Plug 'puremourning/vimspector'
 
 call plug#end()
-filetype plugin indent on
 
 " Debugger Remaps
 fun! GotoWindow(id)
@@ -80,20 +77,18 @@ nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
 " Setup lua
 lua require("altffour")
 
-" Setup theme.
-set t_Co=256
-"let g:gruvbox_termcolors=16
-"set g:gruvbox_contrast_light="hard"
-"set background=light
-colorscheme wal
-"set termguicolors
-"hi Pmenu ctermbg=gray
-"hi PmenuSel ctermbg=white
-"hi PmenuSbar ctermbg=black
-"hi PmenuThumb ctermbg=black
-
 " General
-set textwidth=80
+filetype plugin indent on
+filetype on
+set noswapfile
+set nobackup
+set nomodeline
+set nocompatible
+set noequalalways
+set nowrap
+set textwidth=0
+set wrapmargin=0
+set ttimeoutlen=0
 set clipboard+=unnamed
 set autoread
 set backspace=indent,eol,start
@@ -102,6 +97,10 @@ set smartcase
 set incsearch
 set magic
 set tabstop=4
+set sidescrolloff=999
+set sidescrolloff=999
+set wildmenu
+set wildchar=<TAB>
 
 " LSP
 " Set completeopt to have a better completion experience
@@ -123,14 +122,24 @@ smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' 
 
 " Appearance
 set number
-set nowrap
 " toggle invisible characters
 set showbreak=↪
 set list
 set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮,space:·
 set ttyfast
 
-" Cursor appearance
+" Setup theme.
+set t_Co=256
+"let g:gruvbox_termcolors=16
+"set g:gruvbox_contrast_light="hard"
+"set background=light
+colorscheme wal
+"set termguicolors
+hi Pmenu ctermbg=black
+hi PmenuSel ctermbg=white
+hi PmenuSbar ctermbg=black
+hi PmenuThumb ctermbg=black
+
 set cursorline
 highlight Cursor ctermbg=white ctermfg=white
 " Default Colors for CursorLine
@@ -146,14 +155,6 @@ autocmd InsertLeave * highlight  CursorLine ctermbg=Black ctermfg=White
 let mapleader = " "
 map <leader>e :bufdo e!<CR>
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
-
-" Telescope
-nnoremap <leader>ff :Telescope find_files<cr>
-nnoremap <leader>fg :Telescope live_grep<cr>
-nnoremap <leader>fb :Telescope buffers<cr>
-nnoremap <leader>fh :Telescope help_tags<cr>
-
-" Keymaps
 nnoremap Y y$
 nnoremap n nzzzv
 nnoremap N nzzzv
@@ -169,6 +170,39 @@ vnoremap <C-j> :m .+1<CR>==
 nnoremap <leader>j :m .+1<CR>==
 vnoremap <C-k> :m .-1<CR>==
 nnoremap <leader>k :m .-1<CR>==
+
+nnoremap <silent> <leader>ac :center<CR>
+nnoremap <silent> <leader>ar :right<CR>
+nnoremap <silent> <leader>al :left<CR>
+
+nnoremap <silent> <leader>bn :next<CR>
+nnoremap <silent> <leader>bp :prev<CR>
+nnoremap <silent> <leader>bd :bd<CR>
+
+nnoremap <silent> <leader>ws :split<CR>
+nnoremap <silent> <leader>wvs :vsplit<CR>
+nnoremap <silent> <leader>wc :close<CR>
+
+noremap <up> <Nop>
+noremap <down> <Nop>
+noremap <left> <Nop>
+noremap <right> <Nop>
+
+inoremap <up> <Nop>
+inoremap <down> <Nop>
+inoremap <left> <Nop>
+inoremap <right> <Nop>
+
+vnoremap <up> <Nop>
+vnoremap <down> <Nop>
+vnoremap <left> <Nop>
+vnoremap <right> <Nop>
+
+" Telescope
+nnoremap <leader>ff :Telescope find_files<cr>
+nnoremap <leader>fg :Telescope live_grep<cr>
+nnoremap <leader>fb :Telescope buffers<cr>
+nnoremap <leader>fh :Telescope help_tags<cr>
 
 " Custom settings.
 set mouse=a

@@ -16,8 +16,15 @@ if pcall(require, 'plenary') then
   end
 end
 
-require('twilight').setup()
-require('zen-mode').setup()
+require('twilight').setup({
+		dimming = {
+				alpha = 0.25,
+				color = { "Normal", "#000000" },
+		}
+})
+require('zen-mode').setup({
+		width = .80,
+})
 require('lualine').setup({
 	options = {
 		theme = 'gruvbox'
