@@ -11,7 +11,7 @@ ChosenMenu=$(printf '%s\n%s\n%s' \
     | dmenu -i -l 10 -p "$ScriptName:")
 
 if [ "$ChosenMenu" = "$NormalApps" ]; then
-	alacritty -t "sys_monitor" -e "bpytop" &
+	alacritty -t "sys_monitor" -e "htop" &
 	alacritty -t "newsboat" -e "newsboat" &
 	alacritty -t "music" -e "ncmpcpp" &
 	alacritty -t "mixer" -e "pulsemixer" &

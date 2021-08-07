@@ -99,6 +99,7 @@ set magic
 set tabstop=4
 set sidescrolloff=999
 set sidescrolloff=999
+set scrolloff=999
 set wildmenu
 set wildchar=<TAB>
 

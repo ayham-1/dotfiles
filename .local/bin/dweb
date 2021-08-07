@@ -5,19 +5,25 @@
 ScriptName=${0##*/}
 Version=1.0.0
 
-#browser='firefox' # firefox
-browser='dbrowsel' # firefox
+browser='dbrowsel'
 search_engine='https://duckduckgo.com/?q='
 
 # Set menu options:
 SearchWeb='0. Search the web.'
-MenuOpen='1. Open a bookmark.'
-MenuSave='2. Create new bookmark.'
-RunFirefox='3. Run Firejailed Firefox.'
+OpenBrowser='1. Open a browser.'
+MenuOpen='2. Open a bookmark.'
+MenuSave='3. Create new bookmark.'
+RunFirefox='4. Run Firejailed Firefox.'
 
-ChosenMenu=$(printf '%s\n%s\n%s\n%s' \
-    "$SearchWeb" "$MenuOpen" "$MenuSave" "$RunFirefox" \
+ChosenMenu=$(printf '%s\n%s\n%s\n%s\n%s' \
+    "$SearchWeb" "$OpenBrowser" "$MenuOpen" "$MenuSave" "$RunFirefox" \
     | dmenu -i -l 10 -p "$ScriptName:")
+
+# Open browser
+if [ "$ChosenMenu" = "$OpenBrowser" ]; then
+		exec dbrowsel &
+fi
+
 # Search web
 if [ "$ChosenMenu" = "$SearchWeb" ]; then
 	search=$(dmenu -l 1 -i -p "Search:")

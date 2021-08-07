@@ -13,7 +13,6 @@ export TERMINAL="alacritty"
 export BROWSER="surf-open"
 
 export PATH="$XDG_DATA_HOME/gem/bin:$PATH"
-export PATH="/usr/games/:$PATH"
 export PATH="$XDG_BIN_HOME:$PATH"
 
 export GPG_TTY=$(tty)
@@ -23,6 +22,8 @@ export TODOTXT_DEFAULT_ACTION=ls
 export TODOTXT_SORT_COMMAND='env LC_COLLATE=C sort -k 2,2 -k 1,1n'
 
 # ~/ clean-up
+export MPD_HOST="$XDG_RUNTIME_DIR/mpd_socket"
+export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 export SSH_ASKPASS=ssh-askpass
 export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"

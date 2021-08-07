@@ -5,20 +5,18 @@ exec xrdb ~/.cache/wal/colors.Xresources &
 exec slstatus &
 exec picom -CG --config ~/.config/picom.conf &
 exec xrandr --auto --output HDMI1 --mode 1024x768 --right-of eDP1 &
-#exec flameshot &
-#exec greenclip daemon &
-#exec /usr/lib/kdeconnectd &
-#exec dunst
+exec setxkbmap -model -layout us,us -variant ,workman -option grp:alt_shift_toggle &
+sleep 0.5s
 exec xmodmap ~/.config/Xmodmap &
 exec mpd &
 source ~/.config/env &
-exec xss-lock -- /usr/bin/slock &
+exec xset s 300 5 &
+exec xss-lock -n /usr/lib/xsecurelock/dimmer -l -- xsecurelock &
 exec keynav &
 exec light -S 100 &
 umask 002 &
-eval $(keychain --eval --quiet id_ed25519)
+eval $(keychain --absolute --dir "$XDG_RUNTIME_DIR"/keychain --eval --quiet id_ed25519)
 exec dstartup &
-exec xephyr-helper &
 no-hdmi-port.sh && with-hdmi-port.sh &
 exec xhost +si:localuser:"$USER" &
 exec unclutter &

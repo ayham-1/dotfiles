@@ -21,6 +21,9 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UCjSEJkpGbcZhvo0lr-44X_w tec
 https://www.youtube.com/feeds/videos.xml?channel_id=UCgXdyySqz7qH-lDiVG-7KwA randy-the-sequel
 https://www.youtube.com/feeds/videos.xml?channel_id=UCUmLRMERmJrmUtgnbFfknAg randy
 https://www.youtube.com/feeds/videos.xml?channel_id=UCAiiOTio8Yu69c3XnR7nQBQ system-crafters
+https://www.youtube.com/feeds/videos.xml?channel_id=UCCuoqzrsHlwv1YyPKLuMDUQ jonathan-blow
+https://www.youtube.com/feeds/videos.xml?channel_id=UC6CjacQhqr-n1LnbYVZ0xKQ jonathan-blow-sream-archive
+https://www.youtube.com/feeds/videos.xml?channel_id=UCCuoqzrsHlwv1YyPKLuMDUQ hex-dsl
 
 "-----------------"
 "---- Blogs"
@@ -39,6 +42,7 @@ https://anchor.fm/s/149fd51c/podcast/rss TechOverTea
 https://www.youtube.com/feeds/videos.xml?channel_id=UCLwNTXWEjVd2qIHLcXxQWxA timcast right-center commentary
 https://www.youtube.com/feeds/videos.xml?channel_id=UCMMCy1le81jHY8rwcaqQrtA thedrip right-center left-center commentary finance
 https://chinaunscripted.libsyn.com/rss china-unscripted
+https://odysee.com/$/rss/@BretWeinstein:f
 
 "-----------------"
 "---- Luke Smith chad"
@@ -104,11 +108,20 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UCrI3dm4qgAEV67Jc6797WIA ran
 "-----------------"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCd6vEDS3SOhWbXZrxbrf_bw samtime
 https://www.youtube.com/feeds/videos.xml?channel_id=UClgVmK6jZTZKAIlEhK1KRVQ sixteenleo
+https://www.youtube.com/feeds/videos.xml?channel_id=UCcoDpbA4c9HQY0AjKHSlKLg cer-spence
+https://www.youtube.com/feeds/videos.xml?channel_id=UCBNG0osIBAprVcZZ3ic84vw jim-browning
 
 "-----------------"
 "---- Youtube-Keyboard"
 "-----------------"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCeHOkFGW-7uAZFvq3BXb8YA wildcat
+
+"-----------------"
+"---- Twitch"
+"-----------------"
+https://twitchrss.appspot.com/vod/michaelkadzioch
+https://twitchrss.appspot.com/vod/tsoding
+https://twitchrss.appspot.com/vod/togglebit
 
 "-----------------"
 "---- Pentesting"

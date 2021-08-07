@@ -3,7 +3,8 @@
 # Dmenu for selecting which browser to open.
 
 Browsers='1. firefox
-2. surf-open'
+2. brave
+3. surf-open'
 
 Chosen=$(printf '%s' "$Browsers" \
 	| dmenu -i -l 20 -p 'Select browser:')
@@ -11,6 +12,7 @@ Chosen=$(printf '%s' "$Browsers" \
 
 case $Chosen in
 	'1. firefox') firefox "$@";;
-	'2. surf-open') surf-open "$@";;
+	'2. brave') brave "$@";;
+	'3. surf-open') surf-open "$@";;
 	*) eval "$Chosen" "$@";;
 esac
