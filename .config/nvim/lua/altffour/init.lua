@@ -25,11 +25,11 @@ require('twilight').setup({
 require('zen-mode').setup({
 		width = .80,
 })
-require('lualine').setup({
-	options = {
-		theme = 'gruvbox'
-	}
-})
+--require('lualine').setup({
+--	options = {
+--		theme = 'gruvbox'
+--	}
+--})
 require('diffview').setup()
 --"vim.opt.termguicolors = true
 require('bufferline').setup()

@@ -4,13 +4,12 @@ Plug 'ThePrimeagen/vim-be-good'
 Plug 'vimwiki/vimwiki'
 Plug 'mhinz/vim-startify'
 Plug 'liuchengxu/vim-which-key'
-Plug 'dylanaraps/wal.vim'
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'folke/twilight.nvim'
 Plug 'folke/zen-mode.nvim'
-Plug 'hoob3rt/lualine.nvim'
+"Plug 'hoob3rt/lualine.nvim'
 Plug 'windwp/nvim-autopairs'
 Plug 'sindrets/diffview.nvim'
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
@@ -19,6 +18,12 @@ Plug 'akinsho/nvim-bufferline.lua'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'nekonako/xresources-nvim'
+
+" Wal theme
+Plug 'dylanaraps/wal.vim'
+Plug 'deviantfero/wpgtk.vim'
+
+Plug 'chriskempson/base16-vim/'
 
 " LSP
 Plug 'neovim/nvim-lspconfig'
@@ -96,12 +101,16 @@ set ignorecase
 set smartcase
 set incsearch
 set magic
+set ruler
 set tabstop=4
 set sidescrolloff=999
 set sidescrolloff=999
 set scrolloff=999
 set wildmenu
 set wildchar=<TAB>
+set nosmd
+set hidden
+set nomodeline
 
 " LSP
 " Set completeopt to have a better completion experience
@@ -126,15 +135,17 @@ set number
 " toggle invisible characters
 set showbreak=↪
 set list
-set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮,space:·
+"set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮,space:·
+set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
 set ttyfast
 
 " Setup theme.
 set t_Co=256
 "let g:gruvbox_termcolors=16
 "set g:gruvbox_contrast_light="hard"
-"set background=light
+"colorscheme koehler
 colorscheme wal
+"set background=dark
 "set termguicolors
 hi Pmenu ctermbg=black
 hi PmenuSel ctermbg=white
@@ -142,7 +153,7 @@ hi PmenuSbar ctermbg=black
 hi PmenuThumb ctermbg=black
 
 set cursorline
-highlight Cursor ctermbg=white ctermfg=white
+highlight Cursor ctermbg=NONE ctermfg=white
 " Default Colors for CursorLine
 highlight  CursorLine ctermbg=Black ctermfg=White
 
