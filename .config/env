@@ -22,6 +22,7 @@ export TODOTXT_DEFAULT_ACTION=ls
 export TODOTXT_SORT_COMMAND='env LC_COLLATE=C sort -k 2,2 -k 1,1n'
 
 # ~/ clean-up
+export ZPLUG_HOME="$XDG_CONFIG_HOME/zsh/zplug"
 export MPD_HOST="$XDG_RUNTIME_DIR/mpd_socket"
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 export SSH_ASKPASS=ssh-askpass
@@ -74,6 +75,9 @@ alias cp="cp -iv"
 alias mv="mv -iv"
 alias rm="rm -v"
 alias g="git"
+alias gph="git push"
+alias gpl="git pull"
+alias gc="git commit"
 alias f="$FILE"
 alias e="$EDITOR"
 alias v="$EDITOR"

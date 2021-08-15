@@ -18,12 +18,10 @@ Plug 'akinsho/nvim-bufferline.lua'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'nekonako/xresources-nvim'
+Plug 'tpope/vim-obsession'
 
 " Wal theme
 Plug 'dylanaraps/wal.vim'
-Plug 'deviantfero/wpgtk.vim'
-
-Plug 'chriskempson/base16-vim/'
 
 " LSP
 Plug 'neovim/nvim-lspconfig'
@@ -52,29 +50,6 @@ fun! GotoWindow(id)
     MaximizerToggle
 endfun
 
-" Debugger remaps
-nnoremap <leader>m :MaximizerToggle!<CR>
-nnoremap <leader>dd :call vimspector#Launch()<CR>
-nnoremap <leader>dc :call GotoWindow(g:vimspector_session_windows.code)<CR>
-nnoremap <leader>dt :call GotoWindow(g:vimspector_session_windows.tagpage)<CR>
-nnoremap <leader>dv :call GotoWindow(g:vimspector_session_windows.variables)<CR>
-nnoremap <leader>dw :call GotoWindow(g:vimspector_session_windows.watches)<CR>
-nnoremap <leader>ds :call GotoWindow(g:vimspector_session_windows.stack_trace)<CR>
-nnoremap <leader>do :call GotoWindow(g:vimspector_session_windows.output)<CR>
-nnoremap <leader>de :call vimspector#Reset()<CR>
-
-nnoremap <leader>dtcb :call vimspector#CleanLineBreakpoint()<CR>
-
-nmap <leader>dl <Plug>VimspectorStepInto
-nmap <leader>dj <Plug>VimspectorStepOver
-nmap <leader>dk <Plug>VimspectorStepOut
-nmap <leader>d_ <Plug>VimspectorRestart
-nnoremap <leader>d<space> :call vimspector#Continue()<CR>
-
-nmap <leader>drc <Plug>VimspectorRunToCursor
-nmap <leader>dbp <Plug>VimspectorToggleBreakpoint
-nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
-
 " <Plug>VimspectorStop
 " <Plug>VimspectorPause
 " <Plug>VimspectorAddFunctionBreakpoint
@@ -90,9 +65,9 @@ set nobackup
 set nomodeline
 set nocompatible
 set noequalalways
-set nowrap
-set textwidth=0
-set wrapmargin=0
+set wrap
+set textwidth=80
+set wrapmargin=80
 set ttimeoutlen=0
 set clipboard+=unnamed
 set autoread
@@ -187,8 +162,9 @@ nnoremap <silent> <leader>ac :center<CR>
 nnoremap <silent> <leader>ar :right<CR>
 nnoremap <silent> <leader>al :left<CR>
 
-nnoremap <silent> <leader>bn :next<CR>
-nnoremap <silent> <leader>bp :prev<CR>
+nnoremap <silent> <leader>bb :buffers<CR>
+nnoremap <silent> <leader>bn :bn<CR>
+nnoremap <silent> <leader>bp :bp<CR>
 nnoremap <silent> <leader>bd :bd<CR>
 
 nnoremap <silent> <leader>ws :split<CR>
@@ -210,7 +186,30 @@ vnoremap <down> <Nop>
 vnoremap <left> <Nop>
 vnoremap <right> <Nop>
 
-" Telescope
+"" Debugger remaps
+nnoremap <leader>m :MaximizerToggle!<CR>
+nnoremap <leader>dd :call vimspector#Launch()<CR>
+nnoremap <leader>dc :call GotoWindow(g:vimspector_session_windows.code)<CR>
+nnoremap <leader>dt :call GotoWindow(g:vimspector_session_windows.tagpage)<CR>
+nnoremap <leader>dv :call GotoWindow(g:vimspector_session_windows.variables)<CR>
+nnoremap <leader>dw :call GotoWindow(g:vimspector_session_windows.watches)<CR>
+nnoremap <leader>ds :call GotoWindow(g:vimspector_session_windows.stack_trace)<CR>
+
+nnoremap <leader>dtcb :call vimspector#CleanLineBreakpoint()<CR>
+
+nmap <leader>dl <Plug>VimspectorStepInto
+nmap <leader>dj <Plug>VimspectorStepOver
+nmap <leader>dk <Plug>VimspectorStepOut
+nmap <leader>d_ <Plug>VimspectorRestart
+nnoremap <leader>d<space> :call vimspector#Continue()<CR>
+
+nmap <leader>drc <Plug>VimspectorRunToCursor
+nmap <leader>dbp <Plug>VimspectorToggleBreakpoint
+nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
+
+
+
+"" Telescope remaps
 nnoremap <leader>ff :Telescope find_files<cr>
 nnoremap <leader>fg :Telescope live_grep<cr>
 nnoremap <leader>fb :Telescope buffers<cr>

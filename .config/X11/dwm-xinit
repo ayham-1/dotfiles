@@ -5,9 +5,9 @@ exec xrdb ~/.cache/wal/colors.Xresources &
 exec slstatus &
 exec picom -CG --config ~/.config/picom.conf &
 exec xrandr --auto --output HDMI1 --mode 1024x768 --right-of eDP1 &
-exec setxkbmap -model -layout us,us -variant ,workman -option grp:alt_shift_toggle &
-sleep 0.5s
 exec xmodmap ~/.config/Xmodmap &
+exec setxkbmap -model -layout us,us -variant ,workman -option grp:lctrl_rshift_toggle &
+sleep 0.5s
 exec mpd &
 source ~/.config/env &
 exec xset s 300 5 &

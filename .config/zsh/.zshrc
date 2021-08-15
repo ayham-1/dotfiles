@@ -51,11 +51,15 @@ bindkey -s '^f' 'cd "$(dirname "$(fzf)")"\n'
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
-# Load syntax highlighting; should be last.
-source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
+# shrink-path
+source ~/.config/zsh/shrink-path.plugin.zsh
+setopt prompt_subst
+local current_dir='$(shrink_path -f)'
 
-PS1="%B%{$fg[red]%}[%~] $fg[blue]$%b %{$reset_color%}"
+PS1="%B%{$fg[red]%}[$current_dir] $fg[blue]$%b %{$reset_color%}"
 
 . ~/.local/bin/z.sh
 source ~/.config/env
 
+# Load syntax highlighting; should be last.
+source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
