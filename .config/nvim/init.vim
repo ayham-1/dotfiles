@@ -117,7 +117,8 @@ set ttyfast
 " Setup theme.
 set t_Co=256
 "let g:gruvbox_termcolors=16
-"set g:gruvbox_contrast_light="hard"
+let g:gruvbox_contrast_light="hard"
+let g:gruvbox_contrast_dark="hard"
 "colorscheme koehler
 colorscheme wal
 "set background=dark
