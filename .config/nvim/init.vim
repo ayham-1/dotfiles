@@ -19,6 +19,7 @@ Plug 'L3MON4D3/LuaSnip'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'nekonako/xresources-nvim'
 Plug 'tpope/vim-obsession'
+Plug 'p00f/cphelper.nvim'
 
 " Wal theme
 Plug 'dylanaraps/wal.vim'
@@ -38,6 +39,8 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 " Neovim Tree Sitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
+
+Plug 'lervag/vimtex'
 
 " debugging
 Plug 'puremourning/vimspector'
@@ -86,6 +89,9 @@ set wildchar=<TAB>
 set nosmd
 set hidden
 set nomodeline
+
+" vimtex
+let g:vimtex_view_method="zathura"
 
 " LSP
 " Set completeopt to have a better completion experience
