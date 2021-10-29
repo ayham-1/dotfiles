@@ -61,8 +61,7 @@ endfun
 lua require("altffour")
 
 " General
-filetype plugin indent on
-filetype on
+filetype plugin on
 set noswapfile
 set nobackup
 set nomodeline
@@ -80,7 +79,6 @@ set smartcase
 set incsearch
 set magic
 set ruler
-set tabstop=4
 set sidescrolloff=999
 set sidescrolloff=999
 set scrolloff=999

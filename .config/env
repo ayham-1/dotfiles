@@ -14,6 +14,7 @@ export BROWSER="surf-open"
 
 export PATH="$XDG_DATA_HOME/gem/bin:$PATH"
 export PATH="$XDG_BIN_HOME:$PATH"
+export PATH="/opt/appimages/:$PATH"
 
 export GPG_TTY=$(tty)
 
