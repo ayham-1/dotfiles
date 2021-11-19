@@ -5,8 +5,9 @@
 DwmOption="DWM"
 EXWMOption="EXWM"
 MATEOption="MATE"
+EnlightenmentOption="Enlightenment"
 ConsoleOption="Console"
-menu=("$DwmOption" "$EXWMOption" "$MATEOption" "$ConsoleOption")
+menu=("$DwmOption" "$EXWMOption" "$MATEOption" "$EnlightenmentOption" "$ConsoleOption")
 
 echo "Which WM would you like to run?"
 select opt in "${menu[@]}"
@@ -22,6 +23,10 @@ do
 			;;
 		$MATEOption)
 			exec ssh-agent sx mate-session
+			break
+			;;
+		$EnlightenmentOption)
+			exec ssh-agent sx sh ~/.config/X11/enlightenment
 			break
 			;;
 		$ConsoleOption)

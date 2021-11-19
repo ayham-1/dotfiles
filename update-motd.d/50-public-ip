@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+COLUMNS=3
+
+ip_v4="$(cat /tmp/ip)"
+
+[ "${ip_v4}" == "" ] && curl -s ifconfig.me/ip >> /tmp/ip
+
+ip_v4="$(cat /tmp/ip)"
+
+echo "public IP address:" 
+printf "${ip_v4}" | column -ts $',' | sed -e 's/^/  /'
+echo ""
