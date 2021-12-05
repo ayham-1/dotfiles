@@ -2,7 +2,7 @@
 
 # Dmenu for selecting which browser to open.
 
-Browsers='1. firefox
+Browsers='1. librewolf
 2. brave
 3. surf-open'
 
@@ -11,7 +11,7 @@ Chosen=$(printf '%s' "$Browsers" \
 [ -z "$Chosen" ] && exit 1
 
 case $Chosen in
-	'1. firefox') firefox "$@";;
+	'1. librewolf') librewolf "$@";;
 	'2. brave') brave "$@";;
 	'3. surf-open') surf-open "$@";;
 	*) eval "$Chosen" "$@";;
