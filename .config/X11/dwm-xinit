@@ -22,7 +22,8 @@ eval $(keychain --absolute --dir "$XDG_RUNTIME_DIR"/keychain --eval --quiet id_e
 exec dstartup &
 exec xhost +si:localuser:"$USER" &
 exec unclutter --timeouts 2 --start-hidden &
-exec xsetroot -xcf /usr/share/icons/Adwaita/cursors/left_ptr 48 &
+exec xsetroot -xcf /usr/share/icons/WhiteSur-cursors/cursors/left_ptr 24 &
+#exec xsnow &
 # relaunch DWM if the binary changes, otherwise bail
 csum=""
 new_csum=$(sha1sum $(which dwm))

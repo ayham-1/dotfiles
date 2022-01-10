@@ -1,3 +1,0 @@
-#!/bin/bash
-
-/usr/bin/env figlet "sisyphus@$(hostname)" | /usr/bin/env lolcat -f
