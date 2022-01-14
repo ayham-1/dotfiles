@@ -25,9 +25,11 @@
    Disable menu, scrollbar and minibuffer scrollbar; Enable hl-line-mode.
 
    #+BEGIN_SRC emacs-lisp
-	 (tool-bar-mode -1)
-	 (menu-bar-mode -1)
-	 (scroll-bar-mode -1)
+	 (if (display-graphic-p)
+		 (progn
+		   (tool-bar-mode -1)
+		   (menu-bar-mode -1)
+		   (scroll-bar-mode -1)))
 	 (set-window-scroll-bars (minibuffer-window) nil nil)
 	 (global-hl-line-mode 1)
 	 (defalias 'yes-or-no-p 'y-or-n-p)
