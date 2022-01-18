@@ -19,7 +19,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(auctex dap-mode lsp-mode focus avy elfeed monokai-theme use-package magit)))
+   '(simple-httpd auctex dap-mode lsp-mode focus avy elfeed monokai-theme use-package magit)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

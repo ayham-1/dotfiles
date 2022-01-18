@@ -256,7 +256,46 @@
 	  (org-babel-load-file (expand-file-name "~/.config/emacs/config.org")))
 	(global-set-key (kbd "C-c r") 'config-reload)
   #+END_SRC
+
+  Fix tiling window managers
+  #+BEGIN_SRC emacs-lisp
+	(setq frame-resize-pixelwise t)
+  #+END_SRC
+
+  Text line stuff
+  #+BEGIN_SRC emacs-lisp
+	(setq-default truncate-lines t)
+	(setq-default tab-width 4)
+	(setq-default fill-column 80)
+	(setq sentence-end-double-space nil)
+  #+END_SRC
+
+  Scroll
+  #+BEGIN_SRC emacs-lisp
+	(setq scroll-conservatively 101)
+  #+END_SRC
+
+  Bells
+  #+BEGIN_SRC emacs-lisp
+	(setq visible-bell t)
+	(setq line-move-visual t)
+  #+END_SRC
+
+  Encoding
+  #+BEGIN_SRC emacs-lisp
+	(when (fboundp 'set-charset-priority)
+	  (set-charset-priority 'unicode))       ; pretty
+	(prefer-coding-system 'utf-8)            ; pretty
+	(setq locale-coding-system 'utf-8)       ; please
+  #+END_SRC
+
 * Packages Configuration
+** =uniquify=
+   #+BEGIN_SRC emacs-lisp
+	 (use-package uniquify :ensure t)
+	 (setq uniquify-buffer-name-style 'forward)
+   #+END_SRC
+
 ** =hungry-delete=
    Enable =hungry-delete=.
 
@@ -537,6 +576,11 @@
 			 ("C-M-i" . completion-at-point))
 	   :config
 	   (org-roam-setup))
+   #+END_SRC
+** =simple-httpd=
+   #+BEGIN_SRC emacs-lisp
+	 (use-package simple-httpd
+	   :ensure t)
    #+END_SRC
 ** Environment Specific Packages.
 *** =Lisp= Environment
