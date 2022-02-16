@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd public/
+git init
+git remote add origin git@github.com:realaltffour/website.public.git
+git push origin master
+

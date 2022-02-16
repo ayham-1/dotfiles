@@ -24,8 +24,11 @@
    ["gray35" "#ff8059" "#44bc44" "#d0bc00" "#2fafff" "#feacd0" "#00d3d0" "gray65"])
  '(awesome-tray-mode-line-active-color "#2fafff")
  '(awesome-tray-mode-line-inactive-color "#323232")
+ '(company-quickhelp-color-background "#3E4452")
+ '(company-quickhelp-color-foreground "#ABB2BF")
+ '(custom-enabled-themes '(modus-vivendi))
  '(custom-safe-themes
-   '("9f1d0627e756e58e0263fe3f00b16d8f7b2aca0882faacdc20ddd56a95acb7c2" "7397cc72938446348521d8061d3f2e288165f65a2dbb6366bb666224de2629bb" default))
+   '("b89a4f5916c29a235d0600ad5a0849b1c50fab16c2c518e1d98f0412367e7f97" "0dd2666921bd4c651c7f8a724b3416e95228a13fca1aa27dc0022f4e023bf197" "b73a23e836b3122637563ad37ae8c7533121c2ac2c8f7c87b381dd7322714cd0" "d0fb0c463d5d61e93f920e0fd1aa4c023bf719874b4d08f7f473b46c4adc0682" "6fc03df7304728b1346091dd6737cb0379f348ddc9c307f8b410fba991b3e475" "9f1d0627e756e58e0263fe3f00b16d8f7b2aca0882faacdc20ddd56a95acb7c2" "7397cc72938446348521d8061d3f2e288165f65a2dbb6366bb666224de2629bb" default))
  '(exwm-floating-border-color "#646464")
  '(flymake-error-bitmap '(flymake-double-exclamation-mark modus-themes-fringe-red))
  '(flymake-note-bitmap '(exclamation-mark modus-themes-fringe-cyan))
@@ -55,7 +58,7 @@
  '(ibuffer-title-face 'default)
  '(org-src-block-faces 'nil)
  '(package-selected-packages
-   '(kotlin-mode good-scroll org-contrib borg consult general emmet-mode web-mode embark-consult marginalia orderless vertico exec-path-from-shell exec-patch-from-shell uniquify simple-httpd auctex dap-mode lsp-mode focus avy elfeed monokai-theme use-package magit))
+   '(cyberpunk-theme one-themes kotlin-mode good-scroll org-contrib borg consult general emmet-mode web-mode embark-consult marginalia orderless vertico exec-path-from-shell exec-patch-from-shell uniquify simple-httpd auctex dap-mode lsp-mode focus avy elfeed monokai-theme use-package magit))
  '(pdf-view-midnight-colors '("#ffffff" . "#100f10"))
  '(vc-annotate-background nil)
  '(vc-annotate-background-mode nil)

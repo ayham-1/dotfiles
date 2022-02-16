@@ -1,0 +1,27 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+	int n, q;
+	cin >> n;
+	vector<int> prices(n);
+	for (int i = 0; i < n; i++) cin >> prices[i];
+	cin >> q;
+	vector<int> coins(q);
+	for (int i = 0; i < q; i++) cin >> coins[i];
+
+	sort(prices.begin(), prices.end());
+
+	for (auto day : coins) {
+		auto first = prices.begin(), last = prices.end();
+		first = lower_bound(first, last, day);
+		if (!(first == last) && !(day < *first))
+			cout << (first - prices.begin()) + 1 << endl;
+		else cout << "0" << endl;
+	}
+
+	return 0;
+}

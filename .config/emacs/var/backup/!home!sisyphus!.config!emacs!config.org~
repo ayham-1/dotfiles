@@ -1,0 +1,712 @@
+#+TITLE: EMACS Configuration.
+#+AUTHOR: ayham
+#+EMAIL: ayham@tilde.team
+
+* Configure =use-package=
+  
+  Always compile the packages, and use the newest version available.
+
+  #+BEGIN_SRC emacs-lisp
+	(require 'use-package-ensure)
+	(setq use-package-always-ensure t)
+	(use-package auto-package-update
+	  :custom
+	  (auto-package-update-interval 7)
+	  (auto-package-update-prompt-before-update t)
+	  (auto-package-update-hide-results t)
+	  :config
+	  (auto-package-update-maybe)
+	  (auto-package-update-at-time "09:00"))
+  #+END_SRC
+
+* UI Preferences
+** Tweak EMACS' window
+   
+   Disable menu, scrollbar and minibuffer scrollbar; Enable hl-line-mode.
+
+   #+BEGIN_SRC emacs-lisp
+	 (tool-bar-mode -1)
+	 (menu-bar-mode -1)
+	 (scroll-bar-mode -1)
+	 (set-window-scroll-bars (minibuffer-window) nil nil)
+	 (global-hl-line-mode 1)
+	 (defalias 'yes-or-no-p 'y-or-n-p)
+   #+END_SRC
+
+   Bind frame title to the name of the current project.
+
+   #+BEGIN_SRC emacs-lisp
+	 (setq frame-title-format '((:eval (projectile-project-name))))
+   #+END_SRC
+
+   Disable stuff
+
+   #+BEGIN_SRC emacs-lisp
+	 (setq inhibit-startup-message t) ;; replaced afterwards
+	 (setq ring-bell-function 'ignore)
+   #+END_SRC
+   
+   UTF-8
+
+   #+BEGIN_SRC emacs-lisp
+	 (setq locale-coding-system 'utf-8)
+	 (set-terminal-coding-system 'utf-8)
+	 (set-keyboard-coding-system 'utf-8)
+	 (set-selection-coding-system 'utf-8)
+	 (prefer-coding-system 'utf-8)
+   #+END_SRC
+
+** Load theme
+   
+   Set fonts.
+   #+BEGIN_SRC emacs-lisp
+	 ;;(add-to-list 'default-frame-alist '(font . "Fira Code-10" ))
+	 ;;(set-face-attribute 'default t :font "Fira Code-10" )
+   #+END_SRC
+   
+   Use =modus-vivendi= theme.
+
+   #+BEGIN_SRC emacs-lisp
+	 (use-package modus-themes
+	   :ensure
+	   :init
+	   (setq modus-themes-mode-line 'moddy)
+	   (modus-themes-load-themes)
+	   :config
+	   (modus-themes-load-vivendi)
+	   :bind("<f5>" . modus-themes-toggle))
+   #+END_SRC
+   
+   Setup icons.
+
+   #+BEGIN_SRC emacs-lisp
+	 (use-package all-the-icons
+	   :ensure t
+	   :init)
+
+	 (use-package all-the-icons-dired
+	   :ensure t
+	   :init (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
+
+	 (use-package all-the-icons-ibuffer
+	   :ensure t
+	   :init (all-the-icons-ibuffer-mode 1))
+   #+END_SRC
+
+** Load modeline
+
+   Spaceline.
+
+   #+BEGIN_SRC emacs-lisp
+	 (use-package spaceline
+	   :ensure t
+	   :config
+	   (require 'spaceline-config)
+	   (setq powerline-default-separator (quote arrow))
+	   (spaceline-spacemacs-theme))
+   #+END_SRC
+
+** Environment specific configuration
+*** =ORG-mode= Environment
+
+	Replace =ORG-mode= ellipsis with a downward arrow.
+
+	#+BEGIN_SRC emacs-lisp
+	  (setq org-ellipsis "↲")
+	#+END_SRC
+
+* Basic Configuration
+
+  Enable relative line numbering.
+  
+  #+BEGIN_SRC emacs-lisp
+	;;(global-linum-relative-mode t)
+	;;(global-display-line-numbers-mode t)
+	(setq display-line-numbers-type 'relative)
+	(global-set-key [f4] 'display-line-numbers-mode)
+  #+END_SRC
+
+  Increase the garbage collector threshold, to speed up some operations.
+	
+  #+BEGIN_SRC emacs-lisp
+	(setq gc-cons-threshold 20000000)
+  #+END_SRC
+
+  Treat CamelCaseSubWords as seperate words. 
+
+  #+BEGIN_SRC emacs-lisp
+	(add-hook 'prog-mode-hook 'subword-mode)
+  #+END_SRC
+
+  If a file starts with #!, make it executable.
+ 
+  #+BEGIN_SRC emacs-lisp
+	(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+  #+END_SRC
+ 
+  If saving a file in a directory doesn't exist, offer to create the parent directories recursively.
+
+  #+BEGIN_SRC emacs-lisp
+	(add-hook 'before-save-hook
+			  (lambda ()
+				(when buffer-file-name
+				  (let ((dir (file-name-directory buffer-file-name)))
+					(when (and (not (file-exists-p dir)) y-or-n-p (format "Directory %s does not exist, Create it?" dir))
+					  (make-directory dir t ))))))
+  #+END_SRC
+
+  Require having a new line.
+
+  #+BEGIN_SRC emacs-lisp
+	(setq require-final-newline t)
+  #+END_SRC
+
+  Make file sizes human-readable to dired buffers.
+
+  #+BEGIN_SRC emacs-lisp
+	(setq-default dired-listing-switches "-alh")
+  #+END_SRC
+
+  Refresh buffer when the file is changed, stoping buffers and file getting out of sync.
+
+  #+BEGIN_SRC emacs-lisp
+	(global-auto-revert-mode t)
+  #+END_SRC
+
+  When pressing the middle mouse button, paste where the curser is rather than where the mouse is.
+
+  #+BEGIN_SRC emacs-lisp
+	(setq mouse-yank-at-point 1)
+  #+END_SRC
+
+  Better increase and decrease text scale.
+
+  #+BEGIN_SRC emacs-lisp
+	(global-set-key  (kbd "C-+") 'text-scale-increase)
+	(global-set-key (kbd "C--") 'text-scale-decrease)
+  #+END_SRC
+
+  Enable visual parantheses matching.
+
+  #+BEGIN_SRC emacs-lisp
+	(show-paren-mode 1)
+  #+END_SRC
+
+  Keep folders clean
+
+  #+BEGIN_SRC emacs-lisp
+	;; NOTE: If you want to move everything out of the ~/.emacs.d folder
+	;; reliably, set `user-emacs-directory` before loading no-littering!
+											;(setq user-emacs-directory "~/.cache/emacs")
+
+	(use-package no-littering)
+
+	;; no-littering doesn't set this by default so we must place
+	;; auto save files in the same path as it uses for sessions
+	(setq auto-save-file-name-transforms
+		  `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
+
+  #+END_SRC
+
+  Startup Performance
+
+  #+BEGIN_SRC emacs-lisp
+	;; The default is 800 kilobytes.  Measured in bytes.
+	(setq gc-cons-threshold (* 50 1000 1000))
+
+	(defun efs/display-startup-time ()
+	  (message "Emacs loaded in %s with %d garbage collections."
+			   (format "%.2f seconds"
+					   (float-time
+						(time-subtract after-init-time before-init-time)))
+			   gcs-done))
+
+	(add-hook 'emacs-startup-hook #'efs/display-startup-time)
+	(setq display-time-default-load-average 1)
+  #+END_SRC
+
+  Config edit.
+
+  #+BEGIN_SRC emacs-lisp
+	(defun config-visit ()
+	  (interactive)
+	  (find-file "~/.config/emacs/config.org"))
+	(global-set-key (kbd "C-c e") 'config-visit)
+  #+END_SRC
+
+  Config reload.
+
+  #+BEGIN_SRC emacs-lisp
+	(defun config-reload ()
+	  (interactive)
+	  (org-babel-load-file (expand-file-name "~/.config/emacs/config.org")))
+	(global-set-key (kbd "C-c r") 'config-reload)
+  #+END_SRC
+* Packages Configuration
+** =hungry-delete=
+   Enable =hungry-delete=.
+
+   #+BEGIN_SRC emacs-lisp
+	 (use-package hungry-delete
+	   :ensure t
+	   :config (global-hungry-delete-mode))
+   #+END_SRC
+
+** =beacon=
+   Enable =beacon=.
+
+   #+BEGIN_SRC emacs-lisp
+	 (use-package beacon
+	   :ensure t
+	   :config (beacon-mode 1))
+   #+END_SRC
+
+** =rainbow=
+   Enable =rainbow=.
+
+   #+BEGIN_SRC emacs-lisp
+	 (use-package rainbow-mode
+	   :ensure t
+	   :init (add-hook 'prog-mode-hook 'rainbow-mode))
+	 (use-package rainbow-delimiters
+	   :ensure t
+	   :init (rainbow-delimiters-mode 1))
+   #+END_SRC
+
+** =async=
+   Enable =async=.
+
+   #+BEGIN_SRC emacs-lisp
+	 (use-package async
+	   :ensure t
+	   :init (dired-async-mode 1))
+   #+END_SRC
+
+** =which-key=
+   Enable =which-key= everywhere.
+
+   #+BEGIN_SRC emacs-lisp
+	 (use-package which-key)
+	 (which-key-mode)
+   #+END_SRC
+
+** =evil-mode=
+   Enable =evil-mode= everywhere.
+
+   #+BEGIN_SRC emacs-lisp
+	 (use-package evil)
+	 (evil-mode 1)
+   #+END_SRC
+
+** =company=
+
+   Enable =company-mode= everywhere.
+
+   #+BEGIN_SRC emacs-lisp
+	 (use-package company)
+	 (add-hook 'after-init-hook 'global-company-mode)
+   #+END_SRC
+
+   Use =M-/= for completion.
+
+   #+BEGIN_SRC emacs-lisp
+	 (global-set-key (kbd "M-/") 'company-complete-common)
+   #+END_SRC
+
+** =magit=
+
+   Use magit for git repos managment.
+
+   #+BEGIN_SRC emacs-lisp
+	 (use-package magit
+	   :ensure t
+	   :bind ("M-g" . magit-status))
+   #+END_SRC
+
+** =projectile=
+
+   Use projectile for useful funcationality for project management.
+
+   #+BEGIN_SRC emacs-lisp
+	 (use-package projectile)
+	 (projectile-mode +1)
+	 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+   #+END_SRC
+
+** =undo-tree=
+
+   Use =undo-tree=.
+
+   #+BEGIN_SRC emacs-lisp
+	 (use-package undo-tree)
+   #+END_SRC
+
+** =darkroom=
+
+   Use =darkroom=.
+
+   #+BEGIN_SRC emacs-lisp
+	 (use-package darkroom)
+	 (global-set-key (kbd "<f3>") 'darkroom-mode)
+   #+END_SRC
+
+** =dashboard=.
+
+   #+BEGIN_SRC emacs-lisp
+	 (use-package dashboard
+	   :ensure t
+	   :config
+	   (dashboard-setup-startup-hook)
+	   ;;(setq dashboard-startup-banner "~/.emacs.d/img/avatar.png")
+	   (setq dashboard-items '((recents  . 5)
+							   (projects . 5)))
+	   (setq dashboard-banner-logo-title "ello dere!")
+	   (setq dashboard-center-content t)
+	   (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))))
+   #+END_SRC
+
+** =fancy-battery=.
+   
+   #+BEGIN_SRC emacs-lisp
+	 (use-package fancy-battery
+	   :ensure t
+	   :init
+	   (fancy-battery-mode 1)
+	   (setq fancy-battery-show-percentage t))
+   #+END_SRC
+
+** =diminish=
+
+   #+BEGIN_SRC emacs-lisp
+	 (use-package diminish
+	   :ensure t
+	   :init
+	   (diminish 'which-key-mode)
+	   (diminish 'linum-relative-mode)
+	   (diminish 'hungry-delete-mode)
+	   (diminish 'visual-line-mode)
+	   (diminish 'subword-mode)
+	   (diminish 'beacon-mode)
+	   (diminish 'irony-mode)
+	   (diminish 'page-break-lines-mode)
+	   (diminish 'auto-revert-mode)
+	   (diminish 'rainbow-delimiters-mode)
+	   (diminish 'rainbow-mode)
+	   (diminish 'yas-minor-mode)
+	   (diminish 'flycheck-mode)
+	   (diminish 'helm-mode))
+   #+END_SRC
+
+** =sudo-edit=
+
+   #+BEGIN_SRC emacs-lisp
+	 (use-package sudo-edit
+	   :ensure t
+	   :bind ("s-e" . sudo-edit))
+   #+END_SRC
+
+** =ido=
+
+   Enable =ido=.
+
+   #+BEGIN_SRC emacs-lisp
+	 (setq ido-enable-flex-matching nil)
+	 (setq ido-create-new-buffer 'always)
+	 (setq ido-everywhere t)
+	 (ido-mode 1)
+   #+END_SRC
+
+   Enable =ido-vertical=.
+
+   #+BEGIN_SRC emacs-lisp
+	 (use-package ido-vertical-mode
+	   :ensure t
+	   :init
+	   (ido-vertical-mode 1))
+	 (setq ido-vertical-define-keys 'C-n-and-C-p-only)
+   #+END_SRC
+
+   switch buffer
+   #+BEGIN_SRC emacs-lisp
+	 (global-set-key (kbd "C-x C-b") 'ido-switch-buffer)
+	 (global-set-key (kbd "C-x b") 'ibuffer)
+   #+END_SRC
+
+** =smex=
+   #+BEGIN_SRC emacs-lisp
+	 (use-package smex
+	   :ensure t
+	   :init (smex-initialize)
+	   :bind
+	   ("M-x" . smex))
+   #+END_SRC
+
+** =avy=
+   #+BEGIN_SRC emacs-lisp
+	 (use-package avy
+	   :ensure t
+	   :bind
+	   ("M-s" . avy-goto-char))
+   #+END_SRC
+
+** Environment Specific Packages.
+*** =Lisp= Environment
+
+	Use =paredit=.
+
+	#+BEGIN_SRC emacs-lisp
+	  (use-package paredit)
+	#+END_SRC
+
+	Use =rainbow-delimiters=.
+
+	#+BEGIN_SRC emacs-lisp
+	  (use-package rainbow-delimiters)
+	#+END_SRC
+
+** Miscellanous Packages
+* Programming Environments Configuration
+
+  Use 4-spaced characters for tabs by default.
+
+  #+BEGIN_SRC emacs-lisp
+	(setq-default tab-width 4)
+  #+END_SRC
+
+  Use subword mode.
+
+  #+BEGIN_SRC emacs-lisp
+	(use-package subword
+	  :config (global-subword-mode 1))
+  #+END_SRC
+
+** =C/C++= Environment
+
+   Set the tab width when using C/C++ mode.
+
+   #+BEGIN_SRC emacs-lisp
+	 (setq-default c-basic-offset 4)
+   #+END_SRC
+
+** =Lisp= Environment
+
+   Uses lisp packages when lisp languages are enabled.
+
+   #+BEGIN_SRC emacs-lisp
+	 (setq lispy-mode-hooks
+		   '(emacs-lisp-hook lisp-mode-hook))
+
+	 (dolist (hook lispy-mode-hooks)
+	   (add-hook hook (lambda()
+						(setq show-paren-style 'expression)
+						(paredit-mode)
+						(rainbow-delimeters-mode))))
+   #+END_SRC
+
+   Set tab with
+
+** =org-mode= Environment
+   Enable indentation in =org= source blocks.
+
+   #+BEGIN_SRC emacs-lisp
+	 (setq org-src-tab-acts-natively t)
+   #+END_SRC
+
+   Better org bullets.
+
+   #+BEGIN_SRC emacs-lisp
+	 (use-package org-bullets
+	   :ensure t
+	   :config
+	   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+   #+END_SRC
+
+** =sh= Environment
+
+   Indent with 4 spaces.
+
+   #+BEGIN_SRC emacs-lisp
+	 (add-hook 'sh-mode-hook
+			   (lambda ()
+				 (setq sh-basic-offset 4
+					   sh-indentation 4)))
+   #+END_SRC
+
+* Setup EMACS as TWM
+** =exwm=
+   
+   Use =exwm=, and setup desktop environment.
+
+   #+BEGIN_SRC emacs-lisp
+	 (use-package exwm
+	   :ensure t
+	   :config
+	   (require 'exwm-config)
+	   (fringe-mode 3)
+	   ;;(server-start)
+	   (exwm-config-ido)
+	   (setq exwm-workspace-number 10)
+	   (exwm-input-set-key (kbd "s-r") #'exwm-reset)
+	   (exwm-input-set-key (kbd "s-k") #'exwm-workspace-delete)
+	   (exwm-input-set-key (kbd "s-w") #'exwm-workspace-swap)
+	   (dotimes (i 10)
+		 (exwm-input-set-key (kbd (format "s-%d" i))
+							 `(lambda ()
+								(interactive)
+								(exwm-workspace-switch-create ,i)
+								(message "Workspace %d", i))))
+	   (exwm-input-set-key (kbd "s-&")
+						   (lambda (command)
+							 (interactive (list (read-shell-command "$ ")))
+							 (start-process-shell-command command nil command)))
+	   (setq exwm-input-simulation-keys
+			 '(([?\C-h] . [left])
+			   ([?\C-l] . [right])
+			   ([?\C-k] . [up])
+			   ([?\C-j] . [down])
+			   ([?\C-0] . [home])
+			   ([?\C-e] . [end])
+			   ([?\M-v] . [prior])
+			   ([?\C-v] . [next])
+			   ([?\C-d] . [delete])
+			   ([?\C-k] . [S-end delete]))))
+
+	   ;; other stuff
+	   (use-package desktop-environment
+		 :ensure t
+		 :init (desktop-environment-mode 1)
+		 :config
+		 (setq desktop-environment-screenlock-command "xsecurelock"))
+	   (use-package dmenu
+		 :ensure t
+		 :bind
+		 ("s-SPC" . 'dmenu))
+	   (require 'vterm-module)
+	   (use-package vterm
+		 :ensure t
+		 :init
+		 (global-set-key (kbd "<s-return>") 'term))
+	 ;;(require 'exwm-systemtray)
+	 ;;(exwm-systemtray-enable)
+   #+END_SRC
+
+** setup clock
+   #+BEGIN_SRC emacs-lisp
+	 (setq display-time-24hr-format t)
+	 (setq display-time-format "%H:%M")
+	 (display-time-mode 1)
+   #+END_SRC
+
+** =elfeed= package
+   #+BEGIN_SRC emacs-lisp
+	 (use-package elfeed)
+	 (setf url-queue-timeout 30)
+	 ;; mark all youtube entries
+	 (add-hook 'elfeed-new-entry-hook
+			   (elfeed-make-tagger :feed-url "youtube\\.com"
+								   :add '(video youtube)))
+	 ;; mark all odysee entries
+	 (add-hook 'elfeed-new-entry-hook
+			   (elfeed-make-tagger :feed-url "odysee\\.com"
+								   :add '(video odysee)))
+	 ;; entries older than 2 weeks are marked as read
+	 (add-hook 'elfeed-new-entry-hook
+			   (elfeed-make-tagger :before "2 weeks ago"
+								   :remove 'unread))
+
+	 ;; use mpv
+	 (defun altf4/play-with-mpv (start end)
+	   "Play the link in the region with mpv"
+	   (interactive "r")
+	   (shell-command (concat "mpv " (buffer-substring start end) --ytdl-format=bestvideo[height<=?720][fps<=?30]+bestaudio/best"\&")))
+
+	 (define-key elfeed-show-mode-map (kbd "C-c o") 'altf4/play-with-mpv)
+
+	 ;; elfeed feed
+	 (setq elfeed-feeds
+		   '(("https://lukesmith.xyz/rss.xml" blog)
+			 ("https://lukesmith.xyz/videos" video)
+			 ("https://notrelated.xyz/rss" podcast)
+			 ("https://youtube.com/feeds/videos.xml?channel_id=UCZ4AMrDcNrfy3X6nsU8-rPg" economics)
+			 ("https://youtube.com/feeds/videos.xml?channel_id=UCL_f53ZEJxp8TtlOkHwMV9Q" philosphy)
+			 ("https://youtube.com/feeds/videos.xml?channel_id=UClcE-kVhqyiHCcjYwcpfj9w" security)
+			 ("https://youtube.com/feeds/videos.xml?channel_id=UCDETFHKteb-C_EaXmRKvP4w" philosphy)
+			 ("https://youtube.com/feeds/videos.xml?channel_id=UCIveFvW-ARp_B_RckhweNJw" based politics)
+			 ("https://youtube.com/feeds/videos.xml?channel_id=UCld68syR8Wi-GY_n4CaoJGA" tech)
+			 ("https://youtube.com/feeds/videos.xml?channel_id=UCO01ytfzgXYy4glnPJm4PPQ" based politics)
+			 ("https://youtube.com/feeds/videos.xml?channel_id=UC-wBAxgUX9P0fXZ6-D0frRA" comedy based)
+			 ("https://youtube.com/feeds/videos.xml?channel_id=UCDETFHKteb-C_EaXmRKvP4w" philosphy)
+			 ("https://youtube.com/feeds/videos.xml?channel_id=UCr4kgAUTFkGIwlWSodg43QA" based politics)
+			 ("https://youtube.com/feeds/videos.xml?channel_id=UCoryWpk4QVYKFCJul9KBdyw" tech based)
+			 ("https://drewdevault.com/blog/index.xml" blog)
+			 ("https://unixsheikh.com/feed.rss" blog)))
+   #+END_SRC
+** =erc= package
+
+   Configure =erc=.
+
+   #+BEGIN_SRC emacs-lisp
+	 (setq
+	  erc-nick "sisyphus"
+	  erc-user-full-name "ello")
+   #+END_SRC
+
+** setup music
+*** emms 
+	#+BEGIN_SRC emacs-lisp
+	  (use-package emms
+		:ensure t
+		:config
+		(require 'emms-setup)
+		(require 'emms-player-mpd)
+		(emms-all) ; don't change this to values you see on stackoverflow questions if you expect emms to work
+		(setq emms-source-file-default-directory "~/muz/")
+		(setq emms-seek-seconds 5)
+		(setq emms-player-list '(emms-player-mpd))
+		(setq emms-info-functions '(emms-info-mpd))
+		(setq emms-player-mpd-server-name "localhost")
+		(setq emms-player-mpd-server-port "6602")
+		:bind
+		("s-m p" . emms)
+		("s-m b" . emms-smart-browse)
+		("s-m r" . emms-player-mpd-update-all-reset-cache)
+		("<XF86AudioPrev>" . emms-previous)
+		("<XF86AudioNext>" . emms-next)
+		("<XF86AudioPlay>" . emms-pause)
+		("<XF86AudioStop>" . emms-stop))
+	#+END_SRC
+
+*** mpc 
+	#+BEGIN_SRC emacs-lisp
+	 (setq mpc-host "127.0.0.1")
+
+	 (defun mpd/start-music-daemon ()
+	   "Start MPD, connects to it and syncs the metadata cache."
+	   (interactive)
+	   (shell-command "mpd")
+	   (mpd/update-database)
+	   (emms-player-mpd-connect)
+	   (emms-cache-set-from-mpd-all)
+	   (message "MPD Started!"))
+	 (global-set-key (kbd "s-m c") 'mpd/start-music-daemon)
+
+
+	 (defun mpd/kill-music-daemon ()
+	   "Stops playback and kill the music daemon."
+	   (interactive)
+	   (emms-stop)
+	   (call-process "killall" nil nil nil "mpd")
+	   (message "MPD Killed!"))
+	 (global-set-key (kbd "s-m k") 'mpd/kill-music-daemon)
+
+	 (defun mpd/update-database ()
+	   "Updates the MPD database synchronously."
+	   (interactive)
+	   (call-process "mpc" nil nil nil "update")
+	   (message "MPD Database Updated!"))
+	 (global-set-key (kbd "s-m u") 'mpd/update-database)
+   #+END_SRC
+   
+   
+   
+   

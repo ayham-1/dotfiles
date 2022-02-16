@@ -1,0 +1,1 @@
+("~/.dotfiles/" "/data/sisyphus/proj/PrometricDataEntry/" "/data/sisyphus/proj/PrometricDataEntry/app/" "/data/sisyphus/proj/website.org/" "/data/sisyphus/proj/website/" "/data/sisyphus/proj/PaperTrader/" "/data/sisyphus/proj/dwm-bloat/" "/data/sisyphus/proj/DentalExamPrep/" "/data/sisyphus/proj/website.org/public/")

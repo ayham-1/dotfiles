@@ -1,0 +1,57 @@
+package com.dental.dataentry
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import androidx.room.*
+
+@Entity(tableName = "questions")
+data class Question (
+    @PrimaryKey(autoGenerate = true) var uid: Int = 0,
+    @ColumnInfo(name = "question") var title: String? = "",
+    @ColumnInfo(name = "quizNumber") var quizNumber: Int = 0,
+    @ColumnInfo(name = "correct") var correct: String? = "",
+    @ColumnInfo(name = "answers") var answers: String = "" // answer 1;answer 2;answer 3
+)
+
+@Dao
+interface QuestionsDao {
+    @Query("SELECT * From questions")
+    fun getAll(): List<Question>
+
+    @Query("SELECT * FROM questions WHERE uid IN (:questionsIds)")
+    fun loadAllByIds(questionsIds: IntArray): List<Question>
+
+    @Query("SELECT * FROM questions WHERE quizNumber = (:quizNumber)")
+    fun loadAllByQuiz(quizNumber: Int): List<Question>
+
+    @Query("SELECT COUNT(DISTINCT quizNumber) FROM questions")
+    fun getQuizCount(): Int
+
+    @Query("SELECT * FROM questions WHERE uid IN (SELECT uid FROM questions ORDER BY RANDOM() LIMIT 15)")
+    fun getRandomQuestions(): List<Question>
+
+    @Insert
+    fun insertAll(vararg questions: Question)
+
+    @Query("DELETE FROM questions")
+    fun nukeTable()
+}
+
+@Database(entities = [Question::class], version = 1)
+abstract class AppDatabase : RoomDatabase() {
+    abstract fun questionsDao(): QuestionsDao
+}
+
+class MainActivity : AppCompatActivity() {
+	lateinit var db: AppDatabase
+	lateinit var questionsDao: QuestionsDao
+	override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        this.db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "db"
+        ).build()
+        this.questionsDao = this.db.questionsDao()
+    }
+}

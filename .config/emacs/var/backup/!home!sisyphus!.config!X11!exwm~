@@ -1,0 +1,35 @@
+# Disable access control for the current user.
+xhost +SI:localuser:$USER
+
+# Make Java applications aware this is a non-reparenting window manager.
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+# Set default cursor.
+xsetroot -cursor_name left_ptr
+
+# Set keyboard repeat rate.
+xset r rate 200 60
+
+# Uncomment the following block to use the exwm-xim module.
+#export XMODIFIERS=@im=exwm-xim
+#export GTK_IM_MODULE=xim
+#export QT_IM_MODULE=xim
+#export CLUTTER_IM_MODULE=xim
+
+exec picom -CG --config ~/.config/picom.conf &
+exec setxkbmap -model -layout us,us -variant ,workman -option grp:alt_shift_toggle &
+sleep 0.5s
+exec xmodmap ~/.config/Xmodmap &
+source ~/.config/env &
+exec xset s 300 5 &
+exec xss-lock -n /usr/lib/xsecurelock/dimmer -l -- xsecurelock &
+exec keynav &
+exec light -S 100 &
+exec mpd &
+umask 002 &
+eval $(keychain --absolute --dir "$XDG_RUNTIME_DIR"/keychain --eval --quiet id_ed25519)
+exec unclutter &
+
+
+# Finally start Emacs
+exec dbus-launch emacs

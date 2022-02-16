@@ -1,0 +1,128 @@
+ls
+rm -r public/
+ls
+ll
+ls -al
+cd ~
+ls
+ls -al
+ls
+ls
+rm -r public/
+exit
+ls
+cd public/
+ls
+g status
+cd ..
+cd public/
+ls
+g init
+g remote 
+g remote -h
+g remote add origin git@github.com:realaltffour/website.public.git
+g status
+g add .
+g commit -m "commit"
+g commit -m "commit"
+g push origin master
+g push origin --force master
+g status
+g add .
+g commit -m "commit"
+g push origin master
+ls
+cat rss.xml
+cd ..
+ls
+rm -r public
+ls
+cd public
+ls
+s
+ls
+ls
+ls
+g status
+g init
+g remote add origin git@github.com:realaltffour/website.public.git
+g commit -m "init"
+g add .
+g commit -m "commit"
+g push origin master
+g push origin -f master
+cd ..
+g status
+g add .
+g commit -m "add rss feeds"
+g push origin master
+ls
+cd static
+ls
+rm sitemap.txt
+cd ..
+g status
+g status
+g add .
+g commit -m "compile an automatic sitemap"
+g push origin master
+cd public
+ls
+g status
+ls
+cd ..
+ls
+rm -r public
+ls
+rm -r public
+ls
+cd public
+ls
+g status
+g init
+cd ..
+ls
+ls
+./publish.sh
+ls
+cd static/
+ls
+ls
+cd ..
+ls
+cd public
+ls
+ls
+cd ..
+ls
+g status
+g add .
+g commit -m "add automatic publishing"
+g push origin master
+ls
+./publish.sh
+./publish.sh
+./publish.sh
+./publish.sh
+./publish.sh
+./publish.sh
+./publish.sh
+./publish.sh
+./publish.sh
+./publish.sh
+./publish.sh
+git status
+g add .
+g commit -m "fix code highlighting"
+g push origin master
+./gradlew build
+cd ..
+./publish.sh
+./publish.sh
+./publish.sh
+./publish.sh
+adb logcat
+adb logcat
+exit
+ls
+adb logcat -h

@@ -1,0 +1,12 @@
+(define-package "modus-themes" "20220120.1134" "Highly accessible themes (WCAG AAA)"
+  '((emacs "27.1"))
+  :commit "b464e3be93801f4553a3ef070eee17c65b0222d9" :authors
+  '(("Protesilaos Stavrou" . "info@protesilaos.com"))
+  :maintainer
+  '("Protesilaos Stavrou" . "info@protesilaos.com")
+  :keywords
+  '("faces" "theme" "accessibility")
+  :url "https://gitlab.com/protesilaos/modus-themes")
+;; Local Variables:
+;; no-byte-compile: t
+;; End:
