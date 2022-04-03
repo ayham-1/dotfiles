@@ -10,13 +10,14 @@ search_engine='https://duckduckgo.com/?q='
 
 # Set menu options:
 SearchWeb='0. Search the web.'
-OpenBrowser='1. Open a browser.'
-MenuOpen='2. Open a bookmark.'
-MenuSave='3. Create new bookmark.'
-RunFirefox='4. Run Firejailed Firefox.'
+OpenLink='1. Open a link.'
+OpenBrowser='2. Open a browser.'
+MenuOpen='3. Open a bookmark.'
+MenuSave='4. Create new bookmark.'
+RunFirefox='5. Run Firejailed Firefox.'
 
-ChosenMenu=$(printf '%s\n%s\n%s\n%s\n%s' \
-    "$SearchWeb" "$OpenBrowser" "$MenuOpen" "$MenuSave" "$RunFirefox" \
+ChosenMenu=$(printf '%s\n%s\n%s\n%s\n%s\n%s' \
+    "$SearchWeb" "$OpenLink" "$OpenBrowser" "$MenuOpen" "$MenuSave" "$RunFirefox" \
     | dmenu -i -l 10 -p "$ScriptName:")
 
 # Open browser

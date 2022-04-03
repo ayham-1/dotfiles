@@ -7,8 +7,8 @@ exec xrdb ~/.cache/wal/colors.Xresources &
 exec xrdb -merge ~/.config/Xresources &
 exec slstatus &
 exec picom -CG --config ~/.config/picom.conf &
-exec xmodmap ~/.config/Xmodmap &
-#exec setxkbmap -model -layout us,us -variant ,workman -option grp:lctrl_rshift_toggle &
+#setxkbmap -model -layout us,us -variant ,workman -option grp:lctrl_rshift_toggle &
+xmodmap ~/.config/Xmodmap &
 sleep 0.5s
 exec mpd &
 source ~/.config/env &
@@ -21,7 +21,8 @@ umask 002 &
 eval $(keychain --absolute --dir "$XDG_RUNTIME_DIR"/keychain --eval --quiet id_ed25519)
 exec dstartup &
 exec xhost +si:localuser:"$USER" &
-exec unclutter --timeouts 2 --start-hidden &
+exec unclutter --timeout 2 --start-hidden &
+exec toggle_touchpad &
 exec xsetroot -xcf /usr/share/icons/WhiteSur-cursors/cursors/left_ptr 24 &
 #exec xsnow &
 exec emacs --daemon &
