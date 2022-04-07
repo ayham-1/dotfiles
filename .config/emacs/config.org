@@ -10,6 +10,7 @@ Always compile the packages, and use the newest version available.
   (require 'use-package-ensure)
   ;;(use-package-always-ensure t)
   (use-package auto-package-update
+    :ensure t
     :custom
     (auto-package-update-interval 7)
     (auto-package-update-prompt-before-update t)
@@ -243,11 +244,11 @@ Keep folders clean
   ;; reliably, set `user-emacs-directory` before loading no-littering!
                                           ;(setq user-emacs-directory "~/.cache/emacs")
 
-  (use-package no-littering)
+  (use-package no-littering :ensure t)
 
   ;; no-littering doesn't set this by default so we must place
   ;; auto save files in the same path as it uses for sessions
-  (setq auto-save-file-name-transforms
+   (setq auto-save-file-name-transforms
         `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
 
 #+END_SRC
@@ -367,7 +368,7 @@ Enable =async=.
 Enable =which-key= everywhere.
 
 #+BEGIN_SRC emacs-lisp
-  (use-package which-key)
+  (use-package which-key :ensure t)
   (which-key-mode)
 #+END_SRC
 
@@ -377,7 +378,7 @@ Enable =evil-mode= everywhere.
 
 #+BEGIN_SRC emacs-lisp
   (setq evil-want-C-i-jump nil)
-  (use-package evil)
+  (use-package evil :ensure t)
   (evil-mode 1)
 #+END_SRC
 
@@ -421,7 +422,7 @@ Use magit for git repos managment.
 Use projectile for useful funcationality for project management.
 
 #+BEGIN_SRC emacs-lisp
-  (use-package projectile)
+  (use-package projectile :ensure t)
   (projectile-mode +1)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 #+END_SRC
@@ -431,7 +432,7 @@ Use projectile for useful funcationality for project management.
 Use =undo-tree=.
 
 #+BEGIN_SRC emacs-lisp
-  (use-package undo-tree)
+  (use-package undo-tree :ensure t)
 #+END_SRC
 
 ** =darkroom=
@@ -439,7 +440,7 @@ Use =undo-tree=.
 Use =darkroom=.
 
 #+BEGIN_SRC emacs-lisp
-  (use-package darkroom)
+  (use-package darkroom :ensure t)
   (global-set-key (kbd "<f3>") 'darkroom-mode)
 #+END_SRC
 
@@ -537,7 +538,7 @@ Use =darkroom=.
   (use-package helm-lsp :commands helm-lsp-workspace-symbol)
   (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
   ;; optionally if you want to use debugger
-  (use-package dap-mode)
+  (use-package dap-mode :ensure t)
   ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
   ;; optional if you want which-key integration
   (use-package which-key
@@ -592,7 +593,7 @@ Use =darkroom=.
 Use =paredit=.
 
 #+BEGIN_SRC emacs-lisp
-  (use-package paredit)
+  (use-package paredit :ensure t)
 #+END_SRC
 
 Use =rainbow-delimiters=.
@@ -822,181 +823,6 @@ Enable =markdown=.
            ("\\.md\\'" . markdown-mode)
            ("\\.markdown\\'" . markdown-mode))
     :init (setq markdown-command "multimarkdown"))
-#+END_SRC
-
-* Setup EMACS as TWM
-** =exwm=
-   
-Use =exwm=, and setup desktop environment.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package exwm
-    :ensure t
-    :config
-    (require 'exwm-config)
-    (fringe-mode 1)
-    ;;(server-start)
-    ;;(exwm-config-ido)
-    (setq exwm-workspace-number 10)
-    (exwm-input-set-key (kbd "s-r") #'exwm-reset)
-    (exwm-input-set-key (kbd "s-k") #'exwm-workspace-delete)
-    (exwm-input-set-key (kbd "s-w") #'exwm-workspace-swap)
-    (dotimes (i 10)
-      (exwm-input-set-key (kbd (format "s-%d" i))
-                          `(lambda ()
-                             (interactive)
-                             (exwm-workspace-switch-create ,i)
-                             (message "Workspace %d", i))))
-    (exwm-input-set-key (kbd "s-&")
-                        (lambda (command)
-                          (interactive (list (read-shell-command "$ ")))
-                          (start-process-shell-command command nil command)))
-    (setq exwm-input-simulation-keys
-          '(([?\C-h] . [left])
-            ([?\C-l] . [right])
-            ([?\C-k] . [up])
-            ([?\C-j] . [down])
-            ([?\C-0] . [home])
-            ([?\C-e] . [end])
-            ([?\M-v] . [prior])
-            ([?\C-v] . [next])
-            ([?\C-d] . [delete])
-            ([?\C-k] . [S-end delete]))))
-
-  ;; other stuff
-  (use-package desktop-environment
-    :ensure t
-    :init (desktop-environment-mode 1)
-    :config
-    (setq desktop-environment-screenlock-command "xsecurelock"))
-  (use-package dmenu
-    :ensure t
-    :bind
-    ("s-SPC" . 'dmenu))
-  (require 'vterm)
-  (use-package vterm
-    :ensure t
-    :init
-    (global-set-key (kbd "<s-return>") 'term))
-  ;;(require 'exwm-systemtray)
-  ;;(exwm-systemtray-enable)
-#+END_SRC
-
-** setup clock
-#+BEGIN_SRC emacs-lisp
-  (setq display-time-24hr-format t)
-  (setq display-time-format "%H:%M")
-  (display-time-mode 1)
-#+END_SRC
-
-** =elfeed= package
-#+BEGIN_SRC emacs-lisp
-  (use-package elfeed)
-  (setf url-queue-timeout 30)
-  ;; mark all youtube entries
-  (add-hook 'elfeed-new-entry-hook
-            (elfeed-make-tagger :feed-url "youtube\\.com"
-                                :add '(video youtube)))
-  ;; mark all odysee entries
-  (add-hook 'elfeed-new-entry-hook
-            (elfeed-make-tagger :feed-url "odysee\\.com"
-                                :add '(video odysee)))
-  ;; entries older than 2 weeks are marked as read
-  (add-hook 'elfeed-new-entry-hook
-            (elfeed-make-tagger :before "2 weeks ago"
-                                :remove 'unread))
-
-  ;; use mpv
-  (defun altf4/play-with-mpv (start end)
-    "Play the link in the region with mpv"
-    (interactive "r")
-    (shell-command (concat "mpv " (buffer-substring start end) --ytdl-format=bestvideo[height<=?720][fps<=?30]+bestaudio/best"\&")))
-
-  (define-key elfeed-show-mode-map (kbd "C-c o") 'altf4/play-with-mpv)
-
-  ;; elfeed feed
-  (setq elfeed-feeds
-        '(("https://lukesmith.xyz/rss.xml" blog)
-          ("https://lukesmith.xyz/videos" video)
-          ("https://notrelated.xyz/rss" podcast)
-          ("https://youtube.com/feeds/videos.xml?channel_id=UCZ4AMrDcNrfy3X6nsU8-rPg" economics)
-          ("https://youtube.com/feeds/videos.xml?channel_id=UCL_f53ZEJxp8TtlOkHwMV9Q" philosphy)
-          ("https://youtube.com/feeds/videos.xml?channel_id=UClcE-kVhqyiHCcjYwcpfj9w" security)
-          ("https://youtube.com/feeds/videos.xml?channel_id=UCDETFHKteb-C_EaXmRKvP4w" philosphy)
-          ("https://youtube.com/feeds/videos.xml?channel_id=UCIveFvW-ARp_B_RckhweNJw" based politics)
-          ("https://youtube.com/feeds/videos.xml?channel_id=UCld68syR8Wi-GY_n4CaoJGA" tech)
-          ("https://youtube.com/feeds/videos.xml?channel_id=UCO01ytfzgXYy4glnPJm4PPQ" based politics)
-          ("https://youtube.com/feeds/videos.xml?channel_id=UC-wBAxgUX9P0fXZ6-D0frRA" comedy based)
-          ("https://youtube.com/feeds/videos.xml?channel_id=UCDETFHKteb-C_EaXmRKvP4w" philosphy)
-          ("https://youtube.com/feeds/videos.xml?channel_id=UCr4kgAUTFkGIwlWSodg43QA" based politics)
-          ("https://youtube.com/feeds/videos.xml?channel_id=UCoryWpk4QVYKFCJul9KBdyw" tech based)
-          ("https://drewdevault.com/blog/index.xml" blog)
-          ("https://unixsheikh.com/feed.rss" blog)))
-#+END_SRC
-** =erc= package
-
-Configure =erc=.
-
-#+BEGIN_SRC emacs-lisp
-  (setq
-   erc-nick "sisyphus"
-   erc-user-full-name "ello")
-#+END_SRC
-
-** setup music
-*** emms 
-#+BEGIN_SRC emacs-lisp
-  (use-package emms
-    :ensure t
-    :config
-    (require 'emms-setup)
-    (require 'emms-player-mpd)
-    (emms-all) ; don't change this to values you see on stackoverflow questions if you expect emms to work
-    (setq emms-source-file-default-directory "~/muz/")
-    (setq emms-seek-seconds 5)
-    (setq emms-player-list '(emms-player-mpd))
-    (setq emms-info-functions '(emms-info-mpd))
-    (setq emms-player-mpd-server-name "localhost")
-    (setq emms-player-mpd-server-port "6602")
-    :bind
-    ("s-m p" . emms)
-    ("s-m b" . emms-smart-browse)
-    ("s-m r" . emms-player-mpd-update-all-reset-cache)
-    ("<XF86AudioPrev>" . emms-previous)
-    ("<XF86AudioNext>" . emms-next)
-    ("<XF86AudioPlay>" . emms-pause)
-    ("<XF86AudioStop>" . emms-stop))
-#+END_SRC
-
-*** mpc 
-#+BEGIN_SRC emacs-lisp
-  (setq mpc-host "127.0.0.1")
-
-  (defun mpd/start-music-daemon ()
-    "Start MPD, connects to it and syncs the metadata cache."
-    (interactive)
-    (shell-command "mpd")
-    (mpd/update-database)
-    (emms-player-mpd-connect)
-    (emms-cache-set-from-mpd-all)
-    (message "MPD Started!"))
-  (global-set-key (kbd "s-m c") 'mpd/start-music-daemon)
-
-
-  (defun mpd/kill-music-daemon ()
-    "Stops playback and kill the music daemon."
-    (interactive)
-    (emms-stop)
-    (call-process "killall" nil nil nil "mpd")
-    (message "MPD Killed!"))
-  (global-set-key (kbd "s-m k") 'mpd/kill-music-daemon)
-
-  (defun mpd/update-database ()
-    "Updates the MPD database synchronously."
-    (interactive)
-    (call-process "mpc" nil nil nil "update")
-    (message "MPD Database Updated!"))
-  (global-set-key (kbd "s-m u") 'mpd/update-database)
 #+END_SRC
    
 * Personal Configuration
