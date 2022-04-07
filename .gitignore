@@ -1,2 +1,6 @@
 .config/nvim/plugged
 .config/newsboat/cache.db
+
+.config/emacs
+!.config/emacs/config.org
+!.config/emacs/init.el

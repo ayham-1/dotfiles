@@ -60,6 +60,7 @@ export XMONAD_CONFIG_HOME="$XDG_CONFIG_HOME"/xmonad
 export XMONAD_DATA_HOME="$XDG_DATA_HOME"/xmonad
 export XMONAD_CACHE_HOME="$XDG_CACHE_HOME"/xmonad
 export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
+export ASPELL_CONF="per-conf $XDG_CONFIG_HOME/aspell/aspell.conf; personal $XDG_CONFIG_HOME/aspell/en.pws; repl $XDG_CONFIG_HOME/aspell/en.prepl"
 
 # ~/ alias clean-ups
 alias wget="wget --hsts-file=\"$XDG_CACHE_HOME/wget-hsts\""
@@ -70,6 +71,7 @@ alias monerod="monerod --data-dir \"$XDG_DATA_HOME\"/bitmonero"
 
 # Useful aliases
 alias ls="ls --color=auto"
+alias lf="lfub"
 alias config="/usr/bin/git --git-dir=$HOME/.config/dotfiles --work-tree=$HOME"
 alias update="sudo mount /dev/sda1 /boot && sudo pacman -Syu" # fix this
 alias pman="pacman"

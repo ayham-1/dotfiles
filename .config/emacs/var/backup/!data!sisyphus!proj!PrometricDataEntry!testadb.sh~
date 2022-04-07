@@ -1,3 +1,0 @@
-#!/bin/sh
-
-adb logcat | grep -F "`adb shell ps | grep com.dental.dataentry  | tr -s [:space:] ' ' | cut -d' ' -f2`"

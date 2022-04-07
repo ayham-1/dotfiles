@@ -53,7 +53,6 @@ local current_dir='$(shrink_path -f)'
 
 PS1="%B%{$fg[red]%}[$current_dir] $fg[blue]$%b %{$reset_color%}"
 
-. ~/.local/bin/z.sh
 source ~/.config/env
 
 # Load syntax highlighting; should be last.
