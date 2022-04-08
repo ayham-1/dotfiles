@@ -361,8 +361,6 @@ cursor:
 #   - (Windows) powershell
 shell:
   program: /bin/zsh
-#  args:
-#    - --login
 
 # Startup directory
 #

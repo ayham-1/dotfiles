@@ -17,12 +17,17 @@ MenuSave='4. Create new bookmark.'
 RunFirefox='5. Run Firejailed Firefox.'
 
 ChosenMenu=$(printf '%s\n%s\n%s\n%s\n%s\n%s' \
-    "$SearchWeb" "$OpenLink" "$OpenBrowser" "$MenuOpen" "$MenuSave" "$RunFirefox" \
-    | dmenu -i -l 10 -p "$ScriptName:")
+	"$SearchWeb" "$OpenLink" "$OpenBrowser" "$MenuOpen" "$MenuSave" "$RunFirefox" \
+	| dmenu -i -l 10 -p "$ScriptName:")
 
 # Open browser
 if [ "$ChosenMenu" = "$OpenBrowser" ]; then
-		exec dbrowsel &
+	exec dbrowsel &
+fi
+
+# Open Link
+if [ "$ChosenMenu" = "$OpenLink" ]; then
+	exec dbrowsel $(dmenu -i -l 10 -p "Link:") &
 fi
 
 # Search web
@@ -34,45 +39,45 @@ fi
 # run firefox
 if [ "$ChosenMenu" = "$RunFirefox" ]; then
 	gtk-launch Firejail-Firefox
-# Open bookmark:
+	# Open bookmark:
 elif [ "$ChosenMenu" = "$MenuOpen" ]; then
-    buku --np -p -f 5 \
-        | awk -F '\t' '{print $1, "-", $2, "#(" $3 ")"}' \
-        | dmenu -i -l 30 \
-        | awk '{print $1}' \
-        | xargs --no-run-if-empty buku --np -o
-# Create bookmark:
-elif [ "$ChosenMenu" = "$MenuSave" ]; then
-    # Get the name of the active window:
-    ActiveWindow=$(ps -p "$(xdotool getwindowfocus getwindowpid)" -o comm=)
+	buku --np -p -f 5 \
+		| awk -F '\t' '{print $1, "-", $2, "#(" $3 ")"}' \
+		| dmenu -i -l 30 \
+		| awk '{print $1}' \
+		| xargs --no-run-if-empty buku --np -o
+			# Create bookmark:
+		elif [ "$ChosenMenu" = "$MenuSave" ]; then
+			# Get the name of the active window:
+			ActiveWindow=$(ps -p "$(xdotool getwindowfocus getwindowpid)" -o comm=)
 
     # Set the name if the active window is a chromium based browser:
     printf '%s' "$ActiveWindow" | grep -Eq 'chromium|chrome|brave' \
-        && ActiveWindow='chromium-based'
-    ### Haven't actually checked whether Chromium's window name is chromium.
+	    && ActiveWindow='chromium-based'
+		### Haven't actually checked whether Chromium's window name is chromium.
 
     # Get URL/title based on browser:
     if [ "$ActiveWindow" = 'qutebrowser' ]; then
-        xdotool search --name qutebrowser key --clearmodifiers y P
-        sleep 0.1
-        URL=$(xclip -o)
-        sleep 0.1
-        xdotool search --name qutebrowser key --clearmodifiers y T
-        sleep 0.1
-        Title=$(xclip -o)
+	    xdotool search --name qutebrowser key --clearmodifiers y P
+	    sleep 0.1
+	    URL=$(xclip -o)
+	    sleep 0.1
+	    xdotool search --name qutebrowser key --clearmodifiers y T
+	    sleep 0.1
+	    Title=$(xclip -o)
     elif [ "$ActiveWindow" = 'chromium-based' ]; then
-        xdotool key --clearmodifiers ctrl+l
-        sleep 0.1
-        xdotool key --clearmodifiers ctrl+c
-        sleep 0.1
-        URL=$(xclip -o)
-        sleep 0.1
-        ### Maybe write it to a file in the background to speed it up.
-        ### Doesn't work for some generated sites.
-        Title=$(curl -s "$URL" \
-            | awk -F '<title>|</title>' '{for(i=2;i<=NF;i+=2){print $i}}' \
-            RS='' \
-            | recode html)
+	    xdotool key --clearmodifiers ctrl+l
+	    sleep 0.1
+	    xdotool key --clearmodifiers ctrl+c
+	    sleep 0.1
+	    URL=$(xclip -o)
+	    sleep 0.1
+	    ### Maybe write it to a file in the background to speed it up.
+	    ### Doesn't work for some generated sites.
+	    Title=$(curl -s "$URL" \
+		    | awk -F '<title>|</title>' '{for(i=2;i<=NF;i+=2){print $i}}' \
+		    RS='' \
+		    | recode html)
     fi
 
     # Prompt user to edit the URL:
@@ -86,19 +91,19 @@ elif [ "$ChosenMenu" = "$MenuSave" ]; then
     # Prompt the user to pick tags for the bookmark:
     BukuTags=$(buku --np -t)
     BukuTags=$(printf '%s' "$BukuTags" \
-        | grep '[0-9]\..' \
-        | awk '{print $2}')
-        # awk is POSIX, but means you need to avoid spaces in tags.
-        #| grep -oP '(?<=[0-9]\.\s).+(?=\s\([0-9])')
-        # grep -oP is non-POSIX, but allows for spaces in tags.
-    while true; do
-        SelectedTag=$(printf '%s' "$BukuTags" \
-            | dmenu -i -l 30 \
-            -p "Add tags. SHIFT+ENTER to create a new tag. $Tags")
-        [ -z "$SelectedTag" ] && break
-        Tags="$Tags$SelectedTag,"
-    done
-    Tags=$(printf '%s' "${Tags%?}")
+	    | grep '[0-9]\..' \
+	    | awk '{print $2}')
+		# awk is POSIX, but means you need to avoid spaces in tags.
+		#| grep -oP '(?<=[0-9]\.\s).+(?=\s\([0-9])')
+		# grep -oP is non-POSIX, but allows for spaces in tags.
+		while true; do
+			SelectedTag=$(printf '%s' "$BukuTags" \
+				| dmenu -i -l 30 \
+				-p "Add tags. SHIFT+ENTER to create a new tag. $Tags")
+							[ -z "$SelectedTag" ] && break
+							Tags="$Tags$SelectedTag,"
+						done
+						Tags=$(printf '%s' "${Tags%?}")
 
     # Prompt the user to add a comment/description:
     Comment=$(printf '' | dmenu -p 'Input comment:')
@@ -112,17 +117,17 @@ elif [ "$ChosenMenu" = "$MenuSave" ]; then
     Lock=''
     [ "$Immutability" = 'Yes' ] && Lock='(L)'
     Confirmation=$(printf '%s\nIDN. %s %s\n   > %s\n   + %s\n   # %s' \
-        'This is a preview. Press ENTER to confirm or ESCAPE to cancel.' \
-        "$Title" "$Lock" "$URL" "$Comment" "$Tags" \
-        | dmenu -i -l 5)
+	    'This is a preview. Press ENTER to confirm or ESCAPE to cancel.' \
+	    "$Title" "$Lock" "$URL" "$Comment" "$Tags" \
+	    | dmenu -i -l 5)
 
     # If the user pressed ENTER, create the bookmark:
     [ "$Confirmation" ] && \
-        buku $(printf '%s %s %s --title %s -c %s %s' \
-        '-a' "$URL" "$Tags" "$Title" "$Comment" "$Immutable")
-elif [ -z "$ChosenMenu" ]; then
-    exit 1
-else
-    printf 'ERROR: invalid selection.\n'
-    exit 1
-fi
+	    buku $(printf '%s %s %s --title %s -c %s %s' \
+	    '-a' "$URL" "$Tags" "$Title" "$Comment" "$Immutable")
+	elif [ -z "$ChosenMenu" ]; then
+		exit 1
+	else
+		printf 'ERROR: invalid selection.\n'
+		exit 1
+		fi
