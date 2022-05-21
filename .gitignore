@@ -4,3 +4,4 @@
 .config/emacs
 !.config/emacs/config.org
 !.config/emacs/init.el
+.local/bin/__pycache__/

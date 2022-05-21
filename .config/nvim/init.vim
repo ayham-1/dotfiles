@@ -45,6 +45,9 @@ Plug 'lervag/vimtex'
 " debugging
 Plug 'puremourning/vimspector'
 
+" ziglang
+Plug 'ziglang/zig.vim'
+
 call plug#end()
 
 " Debugger Remaps

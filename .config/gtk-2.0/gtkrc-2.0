@@ -3,7 +3,7 @@
 
 include "/home/ayham/.gtkrc-2.0.mine"
 gtk-theme-name="oomox-xresources-reverse"
-gtk-icon-theme-name="Adwaita"
+gtk-icon-theme-name="mate"
 gtk-font-name="Sans 10"
 gtk-cursor-theme-name="Adwaita"
 gtk-cursor-theme-size=0
