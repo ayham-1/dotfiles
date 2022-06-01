@@ -87,6 +87,8 @@ set wildchar=<TAB>
 set nosmd
 set hidden
 set nomodeline
+setlocal spell spelllang=en_us
+
 
 " vimtex
 let g:vimtex_view_method="zathura"
