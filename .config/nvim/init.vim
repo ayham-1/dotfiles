@@ -20,6 +20,7 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'nekonako/xresources-nvim'
 Plug 'tpope/vim-obsession'
 Plug 'p00f/cphelper.nvim'
+Plug 'Yggdroot/indentLine'
 
 " Wal theme
 Plug 'dylanaraps/wal.vim'
