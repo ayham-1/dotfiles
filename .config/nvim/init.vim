@@ -21,6 +21,7 @@ Plug 'nekonako/xresources-nvim'
 Plug 'tpope/vim-obsession'
 Plug 'p00f/cphelper.nvim'
 Plug 'Yggdroot/indentLine'
+Plug 'puremourning/vimspector'
 
 " Wal theme
 Plug 'dylanaraps/wal.vim'
@@ -50,12 +51,6 @@ Plug 'puremourning/vimspector'
 Plug 'ziglang/zig.vim'
 
 call plug#end()
-
-" Debugger Remaps
-fun! GotoWindow(id)
-    call win_gotoid(a:id)
-    MaximizerToggle
-endfun
 
 " <Plug>VimspectorStop
 " <Plug>VimspectorPause
@@ -195,7 +190,8 @@ vnoremap <left> <Nop>
 vnoremap <right> <Nop>
 
 "" Debugger remaps
-nnoremap <leader>m :MaximizerToggle!<CR>
+nnoremap <leader>s <Plug>VimspectorStop<CR>
+nnoremap <leader>r :VimspectorReset<CR>
 nnoremap <leader>dd :call vimspector#Launch()<CR>
 nnoremap <leader>dc :call GotoWindow(g:vimspector_session_windows.code)<CR>
 nnoremap <leader>dt :call GotoWindow(g:vimspector_session_windows.tagpage)<CR>
