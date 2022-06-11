@@ -39,6 +39,8 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
+Plug 'ThePrimeagen/harpoon'
+
 " Neovim Tree Sitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
@@ -62,6 +64,7 @@ lua require("altffour")
 
 " General
 filetype plugin on
+filetype plugin indent on
 set noswapfile
 set nobackup
 set nomodeline
@@ -226,6 +229,16 @@ nnoremap <leader>ff :Telescope find_files<cr>
 nnoremap <leader>fg :Telescope live_grep<cr>
 nnoremap <leader>fb :Telescope buffers<cr>
 nnoremap <leader>fh :Telescope help_tags<cr>
+
+"" Harpoon remaps
+nnoremap <leader>ha :lua require("harpoon.mark").add_file()<CR>
+nnoremap <leader>hm :lua require("harpoon.ui").toggle_quick_menu()<CR>
+nnoremap <leader>h1 :lua require("harpoon.ui").nav_file(1)<CR>
+nnoremap <leader>h2 :lua require("harpoon.ui").nav_file(2)<CR>
+nnoremap <leader>h3 :lua require("harpoon.ui").nav_file(3)<CR>
+nnoremap <leader>h4 :lua require("harpoon.ui").nav_file(4)<CR>
+nnoremap <leader>hn :lua require("harpoon.ui").nav_next()<CR>
+nnoremap <leader>hp :lua require("harpoon.ui").nav_prev()<CR>
 
 " Custom settings.
 set mouse=a
