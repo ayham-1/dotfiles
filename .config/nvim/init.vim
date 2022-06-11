@@ -22,6 +22,7 @@ Plug 'tpope/vim-obsession'
 Plug 'p00f/cphelper.nvim'
 Plug 'Yggdroot/indentLine'
 Plug 'puremourning/vimspector'
+Plug 'sbdchd/neoformat'
 
 " Wal theme
 Plug 'dylanaraps/wal.vim'
@@ -85,6 +86,12 @@ set hidden
 set nomodeline
 setlocal spell spelllang=en_us
 
+autocmd BufWritePre,TextChanged,InsertLeave *.js Neoformat
+autocmd BufWritePre,TextChanged,InsertLeave *.css Neoformat
+autocmd BufWritePre,TextChanged,InsertLeave *.html Neoformat
+autocmd BufWritePre,TextChanged,InsertLeave *.htm Neoformat
+autocmd BufWritePre,TextChanged,InsertLeave *.py Neoformat
+autocmd BufWritePre,TextChanged,InsertLeave *.cpp Neoformat
 
 " vimtex
 let g:vimtex_view_method="zathura"
@@ -198,6 +205,7 @@ nnoremap <leader>dt :call GotoWindow(g:vimspector_session_windows.tagpage)<CR>
 nnoremap <leader>dv :call GotoWindow(g:vimspector_session_windows.variables)<CR>
 nnoremap <leader>dw :call GotoWindow(g:vimspector_session_windows.watches)<CR>
 nnoremap <leader>ds :call GotoWindow(g:vimspector_session_windows.stack_trace)<CR>
+nnoremap <leader>dl :VimspectorLoadSession ".vimspector.json"<CR>
 
 nnoremap <leader>dtcb :call vimspector#CleanLineBreakpoint()<CR>
 
