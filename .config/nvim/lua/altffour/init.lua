@@ -37,3 +37,5 @@ require('luasnip/loaders/from_vscode').load()
 require('gitsigns').setup({
 	current_line_blame = true,
 })
+
+require('Comment').setup()

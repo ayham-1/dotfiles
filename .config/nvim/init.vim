@@ -21,8 +21,8 @@ Plug 'nekonako/xresources-nvim'
 Plug 'tpope/vim-obsession'
 Plug 'p00f/cphelper.nvim'
 Plug 'Yggdroot/indentLine'
-Plug 'puremourning/vimspector'
 Plug 'sbdchd/neoformat'
+Plug 'numToStr/Comment.nvim'
 
 " Wal theme
 Plug 'dylanaraps/wal.vim'
@@ -221,8 +221,6 @@ nnoremap <leader>d<space> :call vimspector#Continue()<CR>
 nmap <leader>drc <Plug>VimspectorRunToCursor
 nmap <leader>dbp <Plug>VimspectorToggleBreakpoint
 nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
-
-
 
 "" Telescope remaps
 nnoremap <leader>ff :Telescope find_files<cr>
