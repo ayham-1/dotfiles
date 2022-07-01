@@ -50,7 +50,7 @@ Plug 'lervag/vimtex'
 " debugging
 Plug 'puremourning/vimspector'
 
-" ziglang
+" zig
 Plug 'ziglang/zig.vim'
 
 call plug#end()
@@ -88,13 +88,6 @@ set nosmd
 set hidden
 set nomodeline
 setlocal spell spelllang=en_us
-
-autocmd BufWritePre,TextChanged,InsertLeave *.js Neoformat
-autocmd BufWritePre,TextChanged,InsertLeave *.css Neoformat
-autocmd BufWritePre,TextChanged,InsertLeave *.html Neoformat
-autocmd BufWritePre,TextChanged,InsertLeave *.htm Neoformat
-autocmd BufWritePre,TextChanged,InsertLeave *.py Neoformat
-autocmd BufWritePre,TextChanged,InsertLeave *.cpp Neoformat
 
 " vimtex
 let g:vimtex_view_method="zathura"

@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# requres XZ & tar
+
+XZ_OPT='-9'
+
+tar -cvJf $@
+
+sha512sum $1 > $1.sha512
