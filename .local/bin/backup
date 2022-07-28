@@ -2,8 +2,8 @@
 
 # requres XZ & tar
 
-XZ_OPT='-9'
+#XZ_OPT='-9'
 
-tar -cvJf $@
+tar -I 'pixz -9 -p3' -cvf $@
 
 sha512sum $1 > $1.sha512
