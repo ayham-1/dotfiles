@@ -1,0 +1,2 @@
+source ~/.config/X11/wayland.sh
+exec start-newm -d

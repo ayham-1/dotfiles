@@ -74,4 +74,14 @@ return require('packer').startup(function()
 
   -- You can alias plugin names
   use {'dracula/vim', as = 'dracula'}
+
+
+  -- Zen-Mode
+  use {
+	  "folke/zen-mode.nvim",
+	  config = function()
+		  require("zen-mode").setup { }
+	  end
+  }
+  
 end)

@@ -53,6 +53,11 @@ Plug 'puremourning/vimspector'
 " zig
 Plug 'ziglang/zig.vim'
 
+" Writing
+Plug 'preservim/vim-pencil'
+Plug 'godlygeek/tabular'
+Plug 'preservim/vim-markdown'
+
 call plug#end()
 
 " <Plug>VimspectorStop
