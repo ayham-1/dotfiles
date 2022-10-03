@@ -10,13 +10,30 @@ export XDG_BIN_HOME="$HOME/.local/bin"
 export EDITOR="nvim"
 export VISUAL="nvim"
 export TERMINAL="alacritty"
-export BROWSER="surf-open"
+export BROWSER="brave"
+export CHROME_EXECUTABLE="brave"
 
 export PATH="$XDG_DATA_HOME/gem/bin:$PATH"
 export PATH="$XDG_BIN_HOME:$PATH"
 export PATH="/opt/appimages/:$PATH"
 
+export ANDROID_HOME='$HOME/.local/share/Android/Sdk'
+export ANDROID_SDK_ROOT='/opt/android-sdk'
+export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools/
+export PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin/
+export PATH=$PATH:$ANDROID_ROOT/emulator
+export PATH=$PATH:$ANDROID_SDK_ROOT/tools/
+export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin
+export JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions'
+export JAVA_HOME='/usr/lib/jvm/default'
+export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+
+export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 export GPG_TTY=$(tty)
+gpgconf --launch gpg-agent
+gpg-connect-agent /bye
+gpg-connect-agent updatestartuptty /bye >/dev/null
 
 export _JAVA_AWT_WM_NONREPARENTING=1
 export ANDROID_SDK_ROOT="$HOME/.local/share/Android/Sdk"
@@ -55,7 +72,6 @@ export ANDROID_EMULATOR_HOME="$XDG_DATA_HOME"/android
 export ADB_VENDOR_KEY="$XDG_CONFIG_HOME"/android
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export HISTFILE="$XDG_DATA_HOME"/bash/history
-export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export XMONAD_CONFIG_HOME="$XDG_CONFIG_HOME"/xmonad
 export XMONAD_DATA_HOME="$XDG_DATA_HOME"/xmonad
 export XMONAD_CACHE_HOME="$XDG_CACHE_HOME"/xmonad
@@ -63,6 +79,12 @@ export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
 export ASPELL_CONF="per-conf $XDG_CONFIG_HOME/aspell/aspell.conf; personal $XDG_CONFIG_HOME/aspell/en.pws; repl $XDG_CONFIG_HOME/aspell/en.prepl"
 export MBSYNCRC="$XDG_CONFIG_HOME"/isync/mbsyncrc
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
+export EM_CONFIG="$XDG_CONFIG_HOME"/emscripten/config
+export EM_CACHE="$XDG_CACHE_HOME"/emscripten/cache
+export EM_PORTS="$XDG_DATA_HOME"/emscripten/cache
+export CONDARC="$XDG_CONFIG_HOME/conda/condarc"
+export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
+export CONAN_USER_HOME="$XDG_CONFIG_HOME"
 
 # ~/ alias clean-ups
 alias wget="wget --hsts-file=\"$XDG_CACHE_HOME/wget-hsts\""

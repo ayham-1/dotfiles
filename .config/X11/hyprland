@@ -1,0 +1,13 @@
+#!/bin/sh
+
+cd ~
+
+export XDG_CURRENT_DESKTOP=sway
+export _JAVA_AWT_WM_NONREPARENTING=1
+export XCURSOR_SIZE=24
+
+light -S 100
+umask 002 &
+mpd &
+
+dbus-run-session Hyprland

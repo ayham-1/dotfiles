@@ -3,11 +3,11 @@
 [[ -f ~/.config/env ]] && source ~/.config/env
 
 DwmOption="DWM"
-NEWMOption="NEWM"
+hyprOption="Hyprland"
 MATEOption="MATE"
 EnlightenmentOption="Enlightenment"
 ConsoleOption="Console"
-menu=("$DwmOption" "$NEWMOption" "$MATEOption" "$EnlightenmentOption" "$ConsoleOption")
+menu=("$DwmOption" "$hyprOption" "$MATEOption" "$EnlightenmentOption" "$ConsoleOption")
 
 echo "Which WM would you like to run?"
 select opt in "${menu[@]}"
@@ -17,8 +17,8 @@ do
 			exec ssh-agent sx sh ~/.config/X11/dwm-xinit 
 			break
 			;;
-		$NEWMOption)
-			exec ssh-agent sh ~/.config/X11/newm
+		$hyprOption)
+			exec ~/.config/X11/hyprland
 			break
 			;;
 		$MATEOption)
