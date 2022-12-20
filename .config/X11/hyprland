@@ -2,12 +2,16 @@
 
 cd ~
 
+exec rm -r ~/.cache/wal/ &
+exec wal -n -i ~/pix/wallpapers/wallpaper &
+
 export XDG_CURRENT_DESKTOP=sway
 export _JAVA_AWT_WM_NONREPARENTING=1
 export XCURSOR_SIZE=24
+export QT_QPA_PLATFORM="wayland;xcb"
 
 light -S 100
 umask 002 &
 mpd &
 
-dbus-run-session Hyprland
+DRI_PRIME=1 dbus-run-session Hyprland

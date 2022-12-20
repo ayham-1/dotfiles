@@ -4,9 +4,6 @@ Plug 'ThePrimeagen/vim-be-good'
 Plug 'vimwiki/vimwiki'
 Plug 'mhinz/vim-startify'
 Plug 'liuchengxu/vim-which-key'
-Plug 'morhetz/gruvbox'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'folke/twilight.nvim'
 Plug 'folke/zen-mode.nvim'
 "Plug 'hoob3rt/lualine.nvim'
@@ -23,9 +20,9 @@ Plug 'p00f/cphelper.nvim'
 Plug 'Yggdroot/indentLine'
 Plug 'sbdchd/neoformat'
 Plug 'numToStr/Comment.nvim'
-
-" Wal theme
-Plug 'dylanaraps/wal.vim'
+Plug 'sbdchd/neoformat'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-sleuth'
 
 " LSP
 Plug 'neovim/nvim-lspconfig'
@@ -40,6 +37,7 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
 Plug 'ThePrimeagen/harpoon'
+Plug 'nvim-tree/nvim-tree.lua'
 
 " Neovim Tree Sitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -58,6 +56,11 @@ Plug 'preservim/vim-pencil'
 Plug 'godlygeek/tabular'
 Plug 'preservim/vim-markdown'
 
+" flutter
+Plug 'akinsho/flutter-tools.nvim'
+
+Plug 'Lokaltog/vim-monotone'
+
 call plug#end()
 
 " <Plug>VimspectorStop
@@ -66,6 +69,11 @@ call plug#end()
 
 " Setup lua
 lua require("altffour")
+
+augroup fmt
+  autocmd!
+  autocmd BufWritePre * undojoin | Neoformat
+augroup END
 
 " General
 filetype plugin on
@@ -93,6 +101,8 @@ set nosmd
 set hidden
 set nomodeline
 setlocal spell spelllang=en_us
+nnoremap("<C-d>", "<C-d>zz")
+nnoremap("<C-u>", "<C-u>zz")
 
 " vimtex
 let g:vimtex_view_method="zathura"
@@ -118,36 +128,44 @@ smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' 
 " Appearance
 set number
 " toggle invisible characters
-set showbreak=↪
-set list
+"set showbreak=↪
+"set list
 "set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮,space:·
-set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
+"set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
 set ttyfast
 
 " Setup theme.
 set t_Co=256
 "let g:gruvbox_termcolors=16
-let g:gruvbox_contrast_light="hard"
-let g:gruvbox_contrast_dark="hard"
-"colorscheme koehler
-colorscheme wal
+"let g:gruvbox_contrast_light="hard"
+"let g:gruvbox_contrast_dark="hard"
+colorscheme monotone
+"colorscheme wal
 "set background=dark
-"set termguicolors
+set termguicolors
 hi Pmenu ctermbg=black
 hi PmenuSel ctermbg=white
 hi PmenuSbar ctermbg=black
 hi PmenuThumb ctermbg=black
 
-set cursorline
-highlight Cursor ctermbg=NONE ctermfg=white
+"set cursorline
+"set cursorcolumn
+"highlight Cursor ctermbg=NONE ctermfg=white
 " Default Colors for CursorLine
-highlight  CursorLine ctermbg=Black ctermfg=White
+"highlight  CursorLine ctermbg=White ctermfg=Black
+"highlight  CursorColumn ctermbg=White ctermfg=Black
 
 " Change Color when entering Insert Mode
-autocmd InsertEnter * highlight  CursorLine ctermbg=Gray ctermfg=Black
-
-" Revert Color to default when leaving Insert Mode
-autocmd InsertLeave * highlight  CursorLine ctermbg=Black ctermfg=White
+"autocmd InsertLeave * highlight  CursorLine ctermbg=White ctermfg=Black
+"
+"" Revert Color to default when leaving Insert Mode
+"autocmd InsertEnter * highlight  CursorLine ctermbg=Black ctermfg=White
+"
+"" Change Color when entering Insert Mode
+"autocmd InsertLeave * highlight  CursorColumn ctermbg=White ctermfg=Black
+"
+"" Revert Color to default when leaving Insert Mode
+"autocmd InsertEnter * highlight  CursorColumn ctermbg=Black ctermfg=White
 
 " Leader keys
 let mapleader = " "

@@ -51,7 +51,7 @@ source ~/.config/zsh/shrink-path.plugin.zsh
 setopt prompt_subst
 local current_dir='$(shrink_path -f)'
 
-PS1="%B%{$fg[red]%}[$current_dir] $fg[blue]$%b %{$reset_color%}"
+PS1="[$current_dir] $ "
 
 source ~/.config/env
 

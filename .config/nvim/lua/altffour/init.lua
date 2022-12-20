@@ -34,9 +34,6 @@ require('diffview').setup()
 --"vim.opt.termguicolors = true
 require('bufferline').setup()
 require('luasnip/loaders/from_vscode').load()
-require('gitsigns').setup({
-	current_line_blame = true,
-})
 
 require('Comment').setup()
 
@@ -54,3 +51,5 @@ require("zen-mode").setup({
     },
   }
 })
+
+require("flutter-tools").setup{}

@@ -83,5 +83,8 @@ return require('packer').startup(function()
 		  require("zen-mode").setup { }
 	  end
   }
-  
+
+  use {'MetalPhaeton/neo-easy-brackets'}
+
 end)
+

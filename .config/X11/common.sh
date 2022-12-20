@@ -4,7 +4,7 @@ xhost +si:localuser:"$USER" &
 
 source ~/.config/env &
 
-/usr/bin/pipewire & /usr/bin/pipewire-pulse & /usr/bin/wireplumber &
+/usr/bin/pipewire 5A &
 
 xset s 300 5 &
 xss-lock -n /usr/lib/xsecurelock/dimmer -l -- xsecurelock &

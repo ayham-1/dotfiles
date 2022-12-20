@@ -32,6 +32,5 @@ if [ "$ChosenMenu" = "$DevApps" ]; then
 	alacritty -t "code5" --working-directory $Environment &
 	alacritty -t "code6" --working-directory $Environment &
 	sleep 5s
-	wal -i ~/pix/wallpapers/wallpaper
 	notify-send "Started Development Apps."
 fi

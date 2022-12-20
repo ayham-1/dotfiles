@@ -1,14 +1,15 @@
 exec xrandr --auto --output HDMI1 --mode 1024x768 --right-of eDP1 &
 no-hdmi-port.sh && with-hdmi-port.sh &
-exec rm -r ~/.cache/wal/ &
-exec wal -n -i ~/pix/wallpapers/wallpaper &
+#exec rm -r ~/.cache/wal/ &
+#exec wal -n -i ~/pix/wallpapers/wallpaper &
 exec feh --no-fehbg --bg-fill ~/pix/wallpapers/wallpaper &
-exec xrdb ~/.cache/wal/colors.Xresources &
-exec xrdb -merge ~/.config/Xresources &
+#exec xrdb ~/.cache/wal/colors.Xresources &
+exec xrdb ~/.config/Xresources &
 exec slstatus &
 exec picom -CG --config ~/.config/picom.conf &
 sh ~/.config/X11/common.sh
 exec dstartup &
+exec xsnow &
 # relaunch DWM if the binary changes, otherwise bail
 csum=""
 new_csum=$(sha1sum $(which dwm))
