@@ -1,6 +1,36 @@
+vim.g.gui_font_default_size = 13
+vim.g.gui_font_size = vim.g.gui_font_default_size
+vim.g.gui_font_face = "Monospace"
+
+RefreshGuiFont = function()
+  vim.opt.guifont = string.format("%s:h%s",vim.g.gui_font_face, vim.g.gui_font_size)
+end
+
+ResizeGuiFont = function(delta)
+  vim.g.gui_font_size = vim.g.gui_font_size + delta
+  RefreshGuiFont()
+end
+
+ResetGuiFont = function ()
+  vim.g.gui_font_size = vim.g.gui_font_default_size
+  RefreshGuiFont()
+end
+
+-- Call function on startup to set default value
+ResetGuiFont()
+
+-- Keymaps
+
+local opts = { noremap = true, silent = true }
+
+vim.keymap.set({'n', 'i'}, "<C-+>", function() ResizeGuiFont(1)  end, opts)
+vim.keymap.set({'n', 'i'}, "<C-->", function() ResizeGuiFont(-1) end, opts)
+vim.keymap.set({'n', 'i'}, "<C-BS>", function() ResetGuiFont() end, opts)
+
 require("altffour.telescope")
 require("altffour.lsp")
 require("altffour.autocompletion")
+require("altffour.zk")
 
 P = function(v)
   print(vim.inspect(v))
@@ -39,7 +69,7 @@ require('Comment').setup()
 
 require("zen-mode").setup({
   window = {
-    width = 81,
+    width = 80,
     options = {
       signcolumn = "no", -- disable signcolumn
       number = false, -- disable number column
@@ -53,3 +83,5 @@ require("zen-mode").setup({
 })
 
 require("flutter-tools").setup{}
+
+

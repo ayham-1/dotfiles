@@ -61,6 +61,8 @@ Plug 'akinsho/flutter-tools.nvim'
 
 Plug 'Lokaltog/vim-monotone'
 
+Plug 'mickael-menu/zk-nvim'
+
 call plug#end()
 
 " <Plug>VimspectorStop
@@ -76,6 +78,7 @@ augroup fmt
 augroup END
 
 " General
+"
 filetype plugin on
 filetype plugin indent on
 set noswapfile
@@ -100,6 +103,7 @@ set wildchar=<TAB>
 set nosmd
 set hidden
 set nomodeline
+set undofile
 setlocal spell spelllang=en_us
 nnoremap("<C-d>", "<C-d>zz")
 nnoremap("<C-u>", "<C-u>zz")
@@ -254,6 +258,16 @@ nnoremap <leader>h4 :lua require("harpoon.ui").nav_file(4)<CR>
 nnoremap <leader>hn :lua require("harpoon.ui").nav_next()<CR>
 nnoremap <leader>hp :lua require("harpoon.ui").nav_prev()<CR>
 
+"" zk-nvim
+nnoremap <leader>zz :ZenMode<CR>
+nnoremap <leader>zn :ZkNew { title = vim.fn.input('Title: ') }<CR>
+nnoremap <leader>zo :ZkNotes { sort = { 'modified' } }<CR>
+nnoremap <leader>zt :ZkTags<CR>
+nnoremap <leader>zf :ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') } }<CR>
+nnoremap <leader>zb :ZkBacklinks<CR>
+nnoremap <leader>zl :ZkLinks<CR>
+vnoremap <leader>zf :'<,'>ZkMatch<CR>
+
 " Custom settings.
 set mouse=a
 set encoding=utf-8
@@ -261,3 +275,8 @@ set backspace=indent,eol,start
 "set timeoutlen=50
 syntax on
 set rnu
+
+" cph config
+let g:cph#lang="python"
+
+

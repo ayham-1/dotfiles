@@ -20,6 +20,7 @@ export PATH="$XDG_DATA_HOME/gem/bin:$PATH"
 export PATH="$XDG_BIN_HOME:$PATH"
 export PATH="/opt/appimages/:$PATH"
 
+# Configurations
 export ANDROID_HOME='$HOME/.local/share/Android/Sdk'
 export ANDROID_SDK_ROOT='/opt/android-sdk'
 export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools/
@@ -40,6 +41,8 @@ export GPG_TTY=$(tty)
 
 export _JAVA_AWT_WM_NONREPARENTING=1
 export ANDROID_SDK_ROOT="$HOME/.local/share/Android/Sdk"
+
+export ZK_NOTEBOOK_DIR='dox/notebook'
 
 # TODOTXT STUFF
 export TODOTXT_DEFAULT_ACTION=ls
