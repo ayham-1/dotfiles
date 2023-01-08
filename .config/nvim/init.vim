@@ -72,11 +72,6 @@ call plug#end()
 " Setup lua
 lua require("altffour")
 
-augroup fmt
-  autocmd!
-  autocmd BufWritePre * undojoin | Neoformat
-augroup END
-
 " General
 "
 filetype plugin on
@@ -277,6 +272,16 @@ syntax on
 set rnu
 
 " cph config
-let g:cph#lang="python"
+"let g:cph#lang="python"
+nnoremap <leader>tt :CphTest<CR>
+nnoremap <leader>tr :CphReceive<CR>
 
+" Neoformat
+augroup fmt
+  autocmd!
+  autocmd BufWritePre * undojoin | Neoformat
+augroup END
 
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
