@@ -85,5 +85,4 @@ require("zen-mode").setup({
 })
 
 require("flutter-tools").setup{}
-
-
+require('Comment').setup()

@@ -25,7 +25,8 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-sleuth'
 Plug 'andreasvc/vim-256noir'
 Plug 'searleser97/cpbooster.vim'
-
+Plug 'numToStr/Comment.nvim'
+Plug 'ggandor/lightspeed.nvim'
 
 " LSP
 Plug 'neovim/nvim-lspconfig'
@@ -115,6 +116,9 @@ set hidden
 set nomodeline
 set undofile
 setlocal spell spelllang=en_us
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 nnoremap("<C-d>", "<C-d>zz")
 nnoremap("<C-u>", "<C-u>zz")
 
@@ -297,7 +301,3 @@ augroup fmt
   autocmd!
   autocmd BufWritePre * undojoin | Neoformat
 augroup END
-
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
