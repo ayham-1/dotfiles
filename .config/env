@@ -100,6 +100,7 @@ alias lynx="lynx -cfg=$XDG_CONFIG_HOME/lynx/lynx.cfg"
 alias monerod="monerod --data-dir \"$XDG_DATA_HOME\"/bitmonero"
 
 # Useful aliases
+alias cpb='cpb --configPath ~/.config/cpbooster/cpbooster-config.json'
 alias ls="ls --color=auto"
 alias lf="lfub"
 alias config="/usr/bin/git --git-dir=$HOME/.config/dotfiles --work-tree=$HOME"

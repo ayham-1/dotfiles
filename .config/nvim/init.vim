@@ -23,6 +23,8 @@ Plug 'numToStr/Comment.nvim'
 Plug 'sbdchd/neoformat'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-sleuth'
+Plug 'andreasvc/vim-256noir'
+Plug 'searleser97/cpbooster.vim'
 
 " LSP
 Plug 'neovim/nvim-lspconfig'
@@ -138,8 +140,9 @@ set t_Co=256
 "let g:gruvbox_termcolors=16
 "let g:gruvbox_contrast_light="hard"
 "let g:gruvbox_contrast_dark="hard"
-colorscheme monotone
+"colorscheme zellner
 "colorscheme wal
+colorscheme 256_noir
 "set background=dark
 set termguicolors
 hi Pmenu ctermbg=black
@@ -273,8 +276,8 @@ set rnu
 
 " cph config
 "let g:cph#lang="python"
-nnoremap <leader>tt :CphTest<CR>
-nnoremap <leader>tr :CphReceive<CR>
+nnoremap <leader>tt :Test<CR>
+nnoremap <leader>ts :Submit<CR>
 
 " Neoformat
 augroup fmt
