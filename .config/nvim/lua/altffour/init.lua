@@ -31,6 +31,8 @@ require("altffour.telescope")
 require("altffour.lsp")
 require("altffour.autocompletion")
 require("altffour.zk")
+require("altffour.cmp")
+require("altffour.snip")
 
 P = function(v)
   print(vim.inspect(v))

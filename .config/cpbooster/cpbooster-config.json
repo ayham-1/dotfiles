@@ -11,11 +11,11 @@
   "cloneInCurrentDir": false,
   "languages": {
     "cpp": {
-      "template": "",
-      "command": "g++ -std=gnu++17 -O2",
+      "template": "/home/ayham/.config/cpbooster/template.cpp",
+      "command": "g++ -std=gnu++17 -Dlocal -O2",
       "debugCommand": "g++ -std=gnu++17 -DDEBUG -Wshadow -Wall",
       "aliases": {
-        "codeforces": "54",
+        "codeforces": "73",
         "atcoder": "4003",
         "omegaup": "cpp17-gcc",
         "szkopul": "C++",
