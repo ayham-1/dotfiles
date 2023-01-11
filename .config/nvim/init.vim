@@ -119,6 +119,7 @@ setlocal spell spelllang=en_us
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
+set scrolloff=9999
 nnoremap("<C-d>", "<C-d>zz")
 nnoremap("<C-u>", "<C-u>zz")
 
@@ -295,6 +296,7 @@ set rnu
 "let g:cph#lang="python"
 nnoremap <leader>tt :Test<CR>
 nnoremap <leader>ts :Submit<CR>
+nnoremap <leader>td :Debug<CR>
 
 " Neoformat
 augroup fmt

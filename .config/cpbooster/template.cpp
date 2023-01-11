@@ -4,15 +4,16 @@
 #endif
 #include <bits/stdc++.h>
 
+#ifdef LOCAL
+#define watch(x) cerr << "\n" << (#x) << " is " << (x) << endl;
+#endif
+#ifndef LOCAL
+#define watch(x)
+#endif
+
 using namespace std;
-
-template <class T> void print(const vector<T> &v) {
-	for (size_t i = 0; i < v.size() - 1; i++)
-		cout << v[i] << " ";
-	cout << v[v.size() - 1] << endl;
-}
-
 using ll = long long;
+using ld = long double;
 
 void solve() {}
 
