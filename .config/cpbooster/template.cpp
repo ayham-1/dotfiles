@@ -1,15 +1,17 @@
-#ifndef LOCAL
 #pragma GCC optimize("Ofast")
 #pragma GCC optimize("unroll-loops")
-#endif
 #include <bits/stdc++.h>
 
-#ifdef LOCAL
+#define all(x) x.begin(), x.end()
 #define watch(x) cerr << "\n" << (#x) << " is " << (x) << endl;
-#endif
-#ifndef LOCAL
-#define watch(x)
-#endif
+#define rall(x) x.rbegin(), x.rend()
+#define take(v)                                                                \
+	for (auto &it : v)                                                         \
+		cin >> it;
+#define printv(v)                                                              \
+	for (auto it : v)                                                          \
+		cout << it;                                                            \
+	cout << endl;
 
 using namespace std;
 using ll = long long;
@@ -19,6 +21,7 @@ void solve() {}
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
+	cout.tie(0)->sync_with_stdio(0);
 
 	int t;
 	cin >> t;

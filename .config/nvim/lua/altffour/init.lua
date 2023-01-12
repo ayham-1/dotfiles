@@ -86,3 +86,10 @@ require("zen-mode").setup({
 
 require("flutter-tools").setup{}
 require('Comment').setup()
+
+-- nvim-lint
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  callback = function()
+    require("lint").try_lint()
+  end,
+})

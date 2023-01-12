@@ -33,6 +33,10 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
 Plug 'simrat39/symbols-outline.nvim'
 Plug 'glepnir/lspsaga.nvim'
+Plug 'williamboman/mason.nvim'
+
+" Lint
+Plug 'mfussenegger/nvim-lint'
 
 " nvim-cmp
 Plug 'hrsh7th/cmp-nvim-lsp'

@@ -14,7 +14,7 @@ local on_attach = function(client, bufnr)
   vim.lsp.diagnostic.on_publish_diagnostics, {
 	  virtual_text = true,
 	  signs = true,
-	  update_in_insert = true,
+	  update_in_insert = false,
   }
   )
 
@@ -46,3 +46,4 @@ for _, lsp in ipairs(servers) do
 end
 
 require('symbols-outline').setup(opts)
+require('mason').setup()
