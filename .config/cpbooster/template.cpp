@@ -3,7 +3,7 @@
 #include <bits/stdc++.h>
 
 #define all(x) x.begin(), x.end()
-#define watch(x) cerr << "\n" << (#x) << " is " << (x) << endl;
+#define watch(x) cout << (#x) << " is " << (x) << endl;
 #define rall(x) x.rbegin(), x.rend()
 #define take(v)                                                                \
 	for (auto &it : v)                                                         \
