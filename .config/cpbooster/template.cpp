@@ -17,9 +17,15 @@ using namespace std;
 using ll = long long;
 using ld = long double;
 
+double startTime;
+double getCurrentTime() {
+	return ((double)clock() - startTime) / CLOCKS_PER_SEC;
+}
+
 void solve() {}
 
 int main() {
+	startTime = (double)clock();
 	cin.tie(0)->sync_with_stdio(0);
 	cout.tie(0)->sync_with_stdio(0);
 
