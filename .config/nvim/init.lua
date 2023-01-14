@@ -1,14 +1,14 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-require("altffour.plugins")
-require("altffour.telescope")
-require("altffour.lsp")
-require("altffour.zk")
-require("altffour.cmp")
-require("altffour.snip")
-require("altffour.hydra")
-require("altffour.keymaps")
-require("altffour.neovide")
+require("plugins")
+require("telescope")
+require("lsp")
+require("zk")
+require("cmp")
+require("snip")
+require("hydra")
+require("keymaps")
+require("neovide")
 
 -- general config
 vim.g.auto_reload_config = true
