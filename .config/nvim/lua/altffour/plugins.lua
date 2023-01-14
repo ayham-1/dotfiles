@@ -1,77 +1,64 @@
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
-
--- Only required if you have packer configured as `opt`
-vim.cmd [[packadd packer.nvim]]
--- Only if your version of Neovim doesn't have https://github.com/neovim/neovim/pull/12632 merged
-vim._update_package_paths()
+--vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function()
-  -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
-  -- Simple plugins can be specified as strings
-  use '9mm/vim-closer'
-
-  -- Lazy loading:
-  -- Load on specific commands
-  use {'tpope/vim-dispatch', opt = true, cmd = {'Dispatch', 'Make', 'Focus', 'Start'}}
-
-  -- Load on an autocommand event
-  use {'andymass/vim-matchup', event = 'VimEnter'}
-
-  -- Load on a combination of conditions: specific filetypes or commands
-  -- Also run code after load (see the "config" key)
   use {
-    'w0rp/ale',
-    ft = {'sh', 'zsh', 'bash', 'c', 'cpp', 'cmake', 'html', 'markdown', 'racket', 'vim', 'tex'},
-    cmd = 'ALEEnable',
-    config = 'vim.cmd[[ALEEnable]]'
+    'goolord/alpha-nvim',
+    config = function ()
+      require('alpha').setup(require('alpha.themes.startify').config)
+    end
+  }
+  use {
+    "lewis6991/hover.nvim",
+    config = function()
+      require("hover").setup {
+	init = function()
+	  -- Require providers
+	  require("hover.providers.lsp")
+	  require('hover.providers.gh')
+	  require('hover.providers.gh_user')
+	  -- require('hover.providers.jira')
+	  require('hover.providers.man')
+	  require('hover.providers.dictionary')
+	end,
+	preview_opts = {
+	  border = nil
+	},
+	-- Whether the contents of a currently open hover window should be moved
+	-- to a :h preview-window when pressing the hover keymap.
+	preview_window = false,
+	title = true
+      }
+
+      -- Setup keymaps
+      vim.keymap.set("n", "K", require("hover").hover, {desc = "hover.nvim"})
+      vim.keymap.set("n", "gK", require("hover").hover_select, {desc = "hover.nvim (select)"})
+    end
   }
 
-  -- You can specify rocks in isolation
-  use_rocks 'penlight'
-  use_rocks {'lua-resty-http', 'lpeg'}
-
-  -- Local plugins can be included
-  use '~/projects/personal/hover.nvim'
-
-  -- Plugins can have post-install/update hooks
-  use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview'}
-
-  -- Post-install/update hook with neovim command
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-
-  -- Post-install/update hook with call of vimscript function with argument
-  use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
-
-  -- Use specific branch, dependency and run lua file after load
+  use 'anuvyklack/hydra.nvim'
   use {
-    'glepnir/galaxyline.nvim', branch = 'main', config = function() require'statusline' end,
-    requires = {'kyazdani42/nvim-web-devicons'}
+    'lewis6991/gitsigns.nvim',
+    -- tag = 'release' -- To use the latest release (do not use this if you run Neovim nightly or dev builds!)
   }
+  
+  use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
 
-  -- Use dependency and run lua function after load
   use {
-    'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' },
-    config = function() require('gitsigns').setup() end
+    "folke/which-key.nvim",
+    config = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+      require("which-key").setup {
+	-- your configuration comes here
+	-- or leave it empty to use the default settings
+	-- refer to the configuration section below
+      }
+    end
   }
+  use 'simrat39/symbols-outline.nvim'
 
-  -- You can specify multiple plugins in a single call
-  use {'tjdevries/colorbuddy.vim', {'nvim-treesitter/nvim-treesitter', opt = true}}
-
-  -- You can alias plugin names
-  use {'dracula/vim', as = 'dracula'}
-
-
-  -- Zen-Mode
-  use {
-	  "folke/zen-mode.nvim",
-	  config = function()
-		  require("zen-mode").setup { }
-	  end
-  }
-
-  use {'MetalPhaeton/neo-easy-brackets'}
-
+use 'lewis6991/impatient.nvim'
 end)
 

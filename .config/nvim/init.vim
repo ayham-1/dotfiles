@@ -1,9 +1,7 @@
 call plug#begin()
-"Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ThePrimeagen/vim-be-good'
 Plug 'vimwiki/vimwiki'
-Plug 'mhinz/vim-startify'
-Plug 'liuchengxu/vim-which-key'
+"Plug 'mhinz/vim-startify'
 Plug 'folke/twilight.nvim'
 Plug 'folke/zen-mode.nvim'
 "Plug 'hoob3rt/lualine.nvim'
@@ -17,7 +15,6 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'nekonako/xresources-nvim'
 Plug 'tpope/vim-obsession'
 Plug 'p00f/cphelper.nvim'
-Plug 'Yggdroot/indentLine'
 Plug 'sbdchd/neoformat'
 Plug 'numToStr/Comment.nvim'
 Plug 'sbdchd/neoformat'
@@ -27,6 +24,8 @@ Plug 'andreasvc/vim-256noir'
 Plug 'searleser97/cpbooster.vim'
 Plug 'numToStr/Comment.nvim'
 Plug 'ggandor/lightspeed.nvim'
+Plug 'milkias17/reloader.nvim'
+Plug 'jbyuki/venn.nvim'
 
 " LSP
 Plug 'neovim/nvim-lspconfig'
@@ -75,6 +74,7 @@ Plug 'ziglang/zig.vim'
 Plug 'preservim/vim-pencil'
 Plug 'godlygeek/tabular'
 Plug 'preservim/vim-markdown'
+Plug 'poljar/typos.nvim'
 
 " flutter
 Plug 'akinsho/flutter-tools.nvim'
@@ -123,20 +123,22 @@ setlocal spell spelllang=en_us
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set scrolloff=9999
+"set scrolloff=9999
 nnoremap("<C-d>", "<C-d>zz")
 nnoremap("<C-u>", "<C-u>zz")
-
-" vimtex
-let g:vimtex_view_method="zathura"
-
-" LSP
 " Set completeopt to have a better completion experience
 " :help completeopt
 " menuone: popup even when there's only one match
 " noinsert: Do not insert text until a selection is made
 " noselect: Do not select, force user to select one from the menu
 set completeopt=menuone,noinsert,noselect
+
+
+" vimtex
+let g:vimtex_view_method="zathura"
+
+" LSP
+
 
 " LuaSnip
 imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
@@ -194,7 +196,6 @@ hi PmenuThumb ctermbg=black
 " Leader keys
 let mapleader = " "
 map <leader>e :bufdo e!<CR>
-nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 nnoremap Y y$
 nnoremap n nzzzv
 nnoremap N nzzzv

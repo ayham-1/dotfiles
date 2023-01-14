@@ -1,3 +1,5 @@
+vim.g.mapleader=" "
+vim.g.auto_reload_config = true;
 vim.g.gui_font_default_size = 13
 vim.g.gui_font_size = vim.g.gui_font_default_size
 vim.g.gui_font_face = "Monospace"
@@ -27,26 +29,31 @@ vim.keymap.set({'n', 'i'}, "<C-+>", function() ResizeGuiFont(1)  end, opts)
 vim.keymap.set({'n', 'i'}, "<C-->", function() ResizeGuiFont(-1) end, opts)
 vim.keymap.set({'n', 'i'}, "<C-BS>", function() ResetGuiFont() end, opts)
 
+require("altffour.plugins")
 require("altffour.telescope")
 require("altffour.lsp")
 require("altffour.autocompletion")
 require("altffour.zk")
 require("altffour.cmp")
 require("altffour.snip")
+require("altffour.hydra")
 
 P = function(v)
   print(vim.inspect(v))
   return v
 end
 
-if pcall(require, 'plenary') then
-  RELOAD = require('plenary.reload').reload_module
-
-  R = function(name)
-    RELOAD(name)
-    return require(name)
-  end
-end
+_G.__luacache_config = {
+  chunks = {
+    enable = true,
+    path = vim.fn.stdpath('cache')..'/luacache_chunks',
+  },
+  modpaths = {
+    enable = true,
+    path = vim.fn.stdpath('cache')..'/luacache_modpaths',
+  }
+}
+require('impatient')
 
 require('twilight').setup({
 		dimming = {
@@ -93,3 +100,9 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
     require("lint").try_lint()
   end,
 })
+
+
+require("typos").setup()
+
+require('neogit').setup {}
+require('gitsigns').setup ()
