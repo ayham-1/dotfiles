@@ -8,7 +8,7 @@ return {
 	"lewis6991/gitsigns.nvim",
 	"p00f/cphelper.nvim",
 	"numToStr/Comment.nvim",
-	"sbdchd/neoformat",
+	{"sbdchd/neoformat", lazy = false},
 	{ "windwp/nvim-autopairs", lazy = false },
 	"andreasvc/vim-256noir",
 	"numToStr/Comment.nvim",
@@ -43,7 +43,7 @@ return {
 	"Lokaltog/vim-monotone",
 
 	-- lint
-	"mfussenegger/nvim-lint",
+	{"mfussenegger/nvim-lint", lazy= false},
 
 	-- debug
 	"puremourning/vimspector",
