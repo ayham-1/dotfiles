@@ -2,9 +2,11 @@
 -- plug in specific is added when there is no separate file.
 
 -- general
+vim.keymap.set("n", "<leader>ll", ":Lazy<CR>")
+
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "<leader>s", ":update")
+vim.keymap.set("n", "<leader>s", ":update<CR>")
 
 vim.keymap.set("v", "<C-j>", ":m .+1")
 vim.keymap.set("v", "<C-k>", ":m .-2")
@@ -25,8 +27,3 @@ vim.keymap.set("n", "<leader>bd", ":bd<CR>")
 vim.keymap.set("n", "<leader>ws", ":split<CR>")
 vim.keymap.set("n", "<leader>wvs", ":vsplit<CR>")
 vim.keymap.set("n", "<leader>wc", ":close<CR>")
-
--- competitive programing
-vim.keymap.set("n", "<leader>tt", ":Test<CR>")
-vim.keymap.set("n", "<leader>ts", ":Submit<CR>")
-vim.keymap.set("n", "<leader>td", ":Debug<CR> ")

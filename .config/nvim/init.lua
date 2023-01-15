@@ -1,18 +1,47 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-require("plugins")
-require("telescope")
-require("lsp")
-require("zk")
-require("cmp")
-require("snip")
-require("hydra")
+vim.mapleader = " "
+vim.maplocalleader = " "
+
+-- Lazy.nvim and Plugins setup
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup("plugins", {
+	defaults = { lazy = true },
+	checker = { enabled = true },
+	performance = {
+		rtp = {
+			disabled_plugins = {
+				"gzip",
+				"matchit",
+				"matchparen",
+				"netrwPlugin",
+				"tarPlugin",
+				"tohtml",
+				"tutor",
+				"zipPlugin",
+			},
+		},
+	},
+})
+
+require("setups")
 require("keymaps")
 require("neovide")
 
 -- general config
 vim.g.auto_reload_config = true
-vim.g.termguicolors = true
 vim.g.noswapfile = true
 vim.g.nobackup = true
 vim.g.nomodeline = true
@@ -23,15 +52,11 @@ vim.g.textwidth = 80
 vim.g.wrapmargin = 80
 vim.g.ttimeoutlen = 0
 vim.g.autoread = true
-vim.g.backspace = indent, eol, start
 vim.g.ignorecase = true
 vim.g.smartcase = true
 vim.g.incsearch = true
 vim.g.magic = true
 vim.g.ruler = true
-vim.g.wildmenu = true
-vim.g.nosmd = true
-vim.g.hidden = true
 vim.g.nomodeline = true
 vim.g.undofile = true
 vim.g.tabstop = 4
@@ -39,8 +64,11 @@ vim.g.softtabstop = 4
 vim.g.shiftwidth = 4
 vim.g.mouse = a
 vim.g.encoding = "utf-8"
-vim.g.backspace = indent, eol, start
 vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.relativenumber = true
+vim.g.NERDTreeChDirMode=2
+
 vim.cmd("syntax on")
 
 -- appearance
