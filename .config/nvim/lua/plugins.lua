@@ -8,16 +8,16 @@ return {
 	"lewis6991/gitsigns.nvim",
 	"p00f/cphelper.nvim",
 	"numToStr/Comment.nvim",
-	{"sbdchd/neoformat", lazy = false},
+	{ "sbdchd/neoformat", lazy = false },
 	{ "windwp/nvim-autopairs", lazy = false },
 	"andreasvc/vim-256noir",
 	"numToStr/Comment.nvim",
 	"ggandor/lightspeed.nvim",
 	"milkias17/reloader.nvim",
 	"simrat39/symbols-outline.nvim",
-	"jbyuki/venn.nvim",
+	{ "jbyuki/venn.nvim", lazy = false },
 	"j-hui/fidget.nvim",
-	{"preservim/nerdtree", lazy= false },
+	{ "preservim/nerdtree", lazy = false },
 	"stevearc/dressing.nvim",
 	{
 		"goolord/alpha-nvim",
@@ -43,7 +43,7 @@ return {
 	"Lokaltog/vim-monotone",
 
 	-- lint
-	{"mfussenegger/nvim-lint", lazy= false},
+	{ "mfussenegger/nvim-lint", lazy = false },
 
 	-- debug
 	"puremourning/vimspector",

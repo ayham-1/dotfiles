@@ -1,5 +1,6 @@
 local M = {
 	"mickael-menu/zk-nvim",
+	keys = { { "<leader>z" } },
 }
 
 function M.config()
@@ -28,8 +29,8 @@ function M.config()
 	-- zk keybinds
 	vim.keymap.set("n", "<leader>zz", ":ZenMode<CR>")
 	vim.keymap.set("n", "<leader>zn", ":ZkNew { title = vim.fn.input('Title: ') }<CR>")
-	vim.keymap.set("n", "<leader>zo", ":ZkNotes { sort = { 'modified' } }<CR")
-	vim.keymap.set("n", "<leader>zt", ":ZkTags<CR")
+	vim.keymap.set("n", "<leader>zo", ":ZkNotes { sort = { 'modified' } }<CR>")
+	vim.keymap.set("n", "<leader>zt", ":ZkTags<CR>")
 	vim.keymap.set("n", "<leader>zf", ":ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') } }<CR>")
 	vim.keymap.set("n", "<leader>zb", ":ZkBacklinks<CR>")
 	vim.keymap.set("n", "<leader>zl", ":ZkLinks<CR>")

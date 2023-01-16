@@ -4,15 +4,20 @@
 #include <bits/stdc++.h>
 
 #define all(x) x.begin(), x.end()
-#define watch(x) cout << (#x) << " is " << (x) << endl
 #define rall(x) x.rbegin(), x.rend()
 #define take(v)                                                                \
 	for (auto &it : v)                                                         \
 		cin >> it;
+#ifndef ONLINE_JUDGE
 #define printv(v)                                                              \
 	for (auto it : v)                                                          \
 		cout << it;                                                            \
 	cout << endl;
+#define watch(x) cout << (#x) << " is " << (x) << endl
+#else
+#define watch(x)
+#define printv(v)
+#endif
 
 using namespace std;
 using ll = long long;

@@ -12,8 +12,8 @@
   "languages": {
     "cpp": {
       "template": "/home/ayham/.config/cpbooster/template.cpp",
-      "command": "g++ -std=gnu++17 -Dlocal -O2",
-      "debugCommand": "g++ -std=gnu++17 -DDEBUG -Wshadow -Wall",
+      "command": "g++ -std=gnu++17 -DLOCAL_PROJECT -O2",
+      "debugCommand": "g++ -std=gnu++17 -DLOCAL_PROJECT -DDEBUG -Wshadow -Wall",
       "aliases": {
         "codeforces": "73",
         "atcoder": "4003",
