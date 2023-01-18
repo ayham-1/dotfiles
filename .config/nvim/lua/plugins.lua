@@ -42,6 +42,7 @@ return {
 	-- colorschemes
 	"savq/melange",
 	"Lokaltog/vim-monotone",
+	"ellisonleao/gruvbox.nvim",
 
 	-- lint
 	{ "mfussenegger/nvim-lint", lazy = false },

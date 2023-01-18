@@ -11,7 +11,7 @@
 #ifndef ONLINE_JUDGE
 #define printv(v)                                                              \
 	for (auto it : v)                                                          \
-		cout << it;                                                            \
+		cout << it << " ";                                                     \
 	cout << endl;
 #define watch(x) cout << (#x) << " is " << (x) << endl
 #else
