@@ -67,7 +67,8 @@ vim.g.encoding = "utf-8"
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.relativenumber = true
-vim.g.NERDTreeChDirMode=2
+vim.g.NERDTreeChDirMode = 2
+vim.cmd("set clipboard+=unnamedplus")
 
 vim.cmd("syntax on")
 

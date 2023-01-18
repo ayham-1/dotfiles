@@ -18,6 +18,7 @@ return {
 	{ "jbyuki/venn.nvim", lazy = false },
 	"j-hui/fidget.nvim",
 	{ "preservim/nerdtree", lazy = false },
+	{ "mg979/vim-visual-multi", lazy = false },
 	"stevearc/dressing.nvim",
 	{
 		"goolord/alpha-nvim",
@@ -49,7 +50,7 @@ return {
 	"puremourning/vimspector",
 
 	-- writing
-	"preservim/vim-pencil",
+	{ "preservim/vim-pencil", lazy = false },
 	"preservim/vim-markdown",
 	"poljar/typos.nvim",
 	"folke/twilight.nvim",
