@@ -90,4 +90,4 @@ vim.o.background = "dark"
 --colorscheme zellner
 --colorscheme wal
 --colorscheme 256_noir
-vim.cmd("colorscheme gruvbox")
+vim.cmd("colorscheme melange")
