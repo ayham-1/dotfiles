@@ -5,10 +5,10 @@ local M = {
 }
 
 function M.config()
--- competitive programing
-vim.keymap.set("n", "<leader>tt", ":Test<CR>")
-vim.keymap.set("n", "<leader>ts", ":Submit<CR>")
-vim.keymap.set("n", "<leader>td", ":Debug<CR> ")
+	-- competitive programing
+	vim.keymap.set("n", "<leader>tt", ":Test<CR>")
+	vim.keymap.set("n", "<leader>ts", ":Submit<CR>")
+	--vim.keymap.set("n", "<leader>td", ":Debug<CR> ")
 end
 
 return M

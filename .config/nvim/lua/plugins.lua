@@ -43,6 +43,7 @@ return {
 	"savq/melange",
 	"Lokaltog/vim-monotone",
 	"ellisonleao/gruvbox.nvim",
+	"folke/tokyonight.nvim",
 
 	-- lint
 	{ "mfussenegger/nvim-lint", lazy = false },

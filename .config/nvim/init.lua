@@ -20,6 +20,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins", {
 	defaults = { lazy = true },
 	checker = { enabled = true },
+	dev = { path = "~/.local/src/", fallback = false },
 	performance = {
 		rtp = {
 			disabled_plugins = {
@@ -90,4 +91,4 @@ vim.o.background = "dark"
 --colorscheme zellner
 --colorscheme wal
 --colorscheme 256_noir
-vim.cmd("colorscheme melange")
+vim.cmd("colorscheme tokyonight-night")

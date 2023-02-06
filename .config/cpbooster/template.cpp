@@ -31,12 +31,12 @@ sim > struct rge {
 	c b, e;
 };
 sim > rge<c> range(c i, c j) { return rge<c>{i, j}; }
-sim > auto dud(c *x) -> decltype(cerr << *x, 0);
+sim > auto dud(c *x) -> decltype(cout << *x, 0);
 sim > char dud(...);
 struct debug {
 #ifndef ONLINE_JUDGE
-	~debug() { cerr << endl; }
-	eni(!=) cerr << boolalpha << i;
+	~debug() { cout << endl; }
+	eni(!=) cout << boolalpha << i;
 	ris;
 } eni(==) ris << range(begin(i), end(i));
 }
