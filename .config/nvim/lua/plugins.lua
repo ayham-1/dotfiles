@@ -38,12 +38,15 @@ return {
 			})
 		end,
 	},
+	{'declancm/cinnamon.nvim' },
 
 	-- colorschemes
+	{ "tjdevries/colorbuddy.nvim", lazy = false },
 	"savq/melange",
 	"Lokaltog/vim-monotone",
 	"ellisonleao/gruvbox.nvim",
 	"folke/tokyonight.nvim",
+	{ "ishan9299/modus-theme-vim", lazy = false },
 
 	-- lint
 	{ "mfussenegger/nvim-lint", lazy = false },

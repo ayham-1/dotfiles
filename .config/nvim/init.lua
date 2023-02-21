@@ -91,4 +91,4 @@ vim.o.background = "dark"
 --colorscheme zellner
 --colorscheme wal
 --colorscheme 256_noir
-vim.cmd("colorscheme tokyonight-night")
+vim.cmd("colorscheme modus-vivendi")

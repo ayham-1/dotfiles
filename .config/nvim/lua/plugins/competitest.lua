@@ -13,7 +13,9 @@ function M.config()
 	vim.keymap.set("n", "<leader>trp", ":CompetiTestReceive problem<CR>")
 	vim.keymap.set("n", "<leader>trc", ":CompetiTestReceive contest<CR>")
 	vim.keymap.set("n", "<leader>ta", ":CompetiTestAdd<CR> ")
-	require("competitest").setup({})
+	require("competitest").setup({
+		template_file = "~/.config/cpbooster/template.$(FEXT)",
+	})
 end
 
 return M

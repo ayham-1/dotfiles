@@ -42,8 +42,8 @@ require("zen-mode").setup({
 require("flutter-tools").setup({})
 require("Comment").setup()
 
-require('lint').linters_by_ft = {
-  markdown = {'markdownlint',}
+require("lint").linters_by_ft = {
+	markdown = { "markdownlint" },
 }
 
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
@@ -58,6 +58,10 @@ require("neogit").setup({})
 require("gitsigns").setup()
 require("fidget").setup({})
 require("nvim-autopairs").setup({})
+require("cinnamon").setup({})
+
+-- colorschemes
+require("colorbuddy").setup()
 
 -- neoformat on save
 vim.cmd([[augroup fmt
