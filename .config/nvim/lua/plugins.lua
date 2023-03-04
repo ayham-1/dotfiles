@@ -38,7 +38,8 @@ return {
 			})
 		end,
 	},
-	{'declancm/cinnamon.nvim' },
+	{ "declancm/cinnamon.nvim" },
+	{ "ThePrimeagen/vim-be-good", lazy = false },
 
 	-- colorschemes
 	{ "tjdevries/colorbuddy.nvim", lazy = false },

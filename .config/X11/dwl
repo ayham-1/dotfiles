@@ -1,5 +1,4 @@
 source .config/env
 
 light -A 100
-dbus-launch mako &
 dbus-launch dwl -s somebar & someblocks
