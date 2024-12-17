@@ -49,7 +49,7 @@ source ~/.config/zsh/shrink-path.plugin.zsh
 setopt prompt_subst
 local current_dir='$(shrink_path -f)'
 
-PS1="($HOST) [$current_dir] $ "
+PROMPT="(%n@%m) [$current_dir] > "
 
 ####################
 source ~/.config/aliases
