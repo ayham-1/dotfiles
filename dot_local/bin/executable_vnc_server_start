@@ -1,0 +1,32 @@
+#!/bin/bash
+
+SWAY_SERVER_RUNTIME_DIR=/tmp/$(whoami)-sway-server
+
+# Function to handle cleanup and exit
+cleanup() {
+    echo "Stopping Sway headless server..."
+    kill -SIGTERM $SWAY_PID  # Send SIGTERM to Sway headless server process
+    rm -fr ${SWAY_SERVER_RUNTIME_DIR}
+    exit 0
+}
+
+# Trap Ctrl+C and call cleanup function
+trap cleanup SIGINT
+
+# Start Sway headless server
+echo "Starting Sway headless server..."
+mkdir -p ${SWAY_SERVER_RUNTIME_DIR}
+XDG_RUNTIME_DIR=${SWAY_SERVER_RUNTIME_DIR} WLR_BACKENDS=headless WLR_LIBINPUT_NO_DEVICES=1 sway &  # Start Sway headless server in background
+SWAY_PID=$!   # Capture the PID of Sway headless server
+
+sleep 3
+# Run swaymsg immediately after Sway starts
+echo "Running swaymsg..."
+swaymsg --socket ${SWAY_SERVER_RUNTIME_DIR}/sway-ipc.*.sock exec 'WAYLAND_DISPLAY=wayland-1 wayvnc 0.0.0.0'
+#for i in {1..5}; do  && break || sleep 15; done
+
+# Wait for Sway headless server to complete or be interrupted
+wait $SWAY_PID
+
+# Additional commands after Sway has finished or was interrupted
+echo "Sway headless server stopped."

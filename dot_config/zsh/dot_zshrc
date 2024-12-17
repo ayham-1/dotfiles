@@ -1,0 +1,69 @@
+autoload -U colors && colors	# Load colors
+setopt autocd
+stty stop undef
+setopt interactive_comments
+
+# History in cache directory:
+HISTSIZE=0
+SAVEHIST=0
+HISTFILE=/dev/null
+
+# Basic auto/tab complete
+autoload -Uz compinit && compinit
+#zstyle ':completion:*' menu select
+#zmodload zsh/complist compinit
+#_comp_options+=(globdots)
+
+# vi mode
+bindkey -v
+export KEYTIMEOUT=1
+
+# use vim keys in tab complete menu
+bindkey -v '^?' backward-delete-char
+
+# Change cursor shape for different vi modes.
+function zle-keymap-select () {
+    case $KEYMAP in
+        vicmd) echo -ne '\e[1 q';;      # block
+        viins|main) echo -ne '\e[5 q';; # beam
+    esac
+}
+
+zle -N zle-keymap-select
+zle-line-init() {
+    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+    echo -ne "\e[5 q"
+}
+zle -N zle-line-init
+echo -ne '\e[5 q' # Use beam shape cursor on startup.
+preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+
+bindkey -s '^f' 'cd "$(dirname "$(fzf)")"\n'
+
+# Edit line in vim with ctrl-e:
+autoload edit-command-line; zle -N edit-command-line
+bindkey '^e' edit-command-line
+
+# shrink-path
+source ~/.config/zsh/shrink-path.plugin.zsh
+setopt prompt_subst
+local current_dir='$(shrink_path -f)'
+
+PS1="($HOST) [$current_dir] $ "
+
+####################
+source ~/.config/aliases
+unset SSH_AGENT_PID
+if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+fi
+export GPG_TTY=$(tty)
+gpgconf --kill gpg-agent
+gpg-connect-agent updatestartuptty /bye >/dev/null
+####################
+
+# Load syntax highlighting; should be last.
+source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
+
+
+[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh

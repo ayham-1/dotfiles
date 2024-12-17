@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ -n "$SSH_CLIENT" ]; then 
+    echo "Running ZSH through SSH" 
+else 
+    if [[ "$(tty)" == "/dev/tty1" ]]
+    then
+        exec env XDG_SESSION_TYPE=wayland XDG_CURRENT_DESKTOP=sway dbus-run-session sway 
+    fi
+fi

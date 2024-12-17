@@ -1,0 +1,34 @@
+#!/bin/sh
+
+alias dbclient="GPG_TTY=$(tty) dbclient"
+
+alias wget="wget --hsts-file=\"$XDG_CACHE_HOME/wget-hsts\""
+alias irssi="irssi --config=\"$XDG_CONFIG_HOME\"/irssi/config
+--home=\"$XDG_DATA_HOME\"/irssi"
+alias lynx="lynx -cfg=$XDG_CONFIG_HOME/lynx/lynx.cfg"
+alias monerod="monerod --data-dir \"$XDG_DATA_HOME\"/bitmonero"
+
+# Useful aliases
+alias cpb='cpb --configPath ~/.config/cpbooster/cpbooster-config.json'
+alias ls="ls --color=auto"
+alias lf="lfub"
+alias config="/usr/bin/git --git-dir=$HOME/.config/dotfiles --work-tree=$HOME"
+alias update="sudo mount /dev/sda1 /boot && sudo pacman -Syu" # fix this
+alias pman="pacman"
+alias cleanup_packages='(set -x; sudo pacman -R $(pacman -Qdtq))'
+alias myip="curl ipinfo.io/ip"
+alias cp="cp -iv"
+alias mv="mv -iv"
+alias rm="rm -v"
+alias g="git"
+alias gs="git status"
+alias gdiff="git diff --cached"
+alias gph="git push"
+alias gpl="git pull"
+alias gc="git commit"
+alias f="$FILE"
+alias e="$EDITOR"
+alias v="$EDITOR"
+alias ll="ls -lhA"
+alias ..="cd .."
+alias t="todo.sh"

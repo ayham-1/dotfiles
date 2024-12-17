@@ -1,0 +1,301 @@
+#+TITLE: Configuration
+#+AUTHOR: ayham
+#+EMAIL: me@ayham.xyz
+
+* UI Prefrences
+** Tweak EMACS' window
+
+Disable menu, scrollbar and minibuffer scrollbar.
+
+#+BEGIN_SRC emacs-lisp
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+  (scroll-bar-mode -1)
+  (set-window-scroll-bars (minibuffer-window) nil nil)
+  (global-hl-line-mode 1)
+#+END_SRC
+
+Bind frame title to the name of the current project.
+
+#+BEGIN_SRC emacs-lisp
+(setq frame-title-format '((:eval (projectile-project-name))))
+#+END_SRC
+
+** Load theme
+
+#+BEGIN_SRC emacs-lisp
+  ;;; For the built-in themes which cannot use `require'.
+  (use-package emacs
+    :config
+    (require-theme 'modus-themes) ; `require-theme' is ONLY for the built-in Modus themes
+
+    ;; Load the theme of your choice.
+    (load-theme 'modus-vivendi :no-confirm)
+
+    (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
+#+END_SRC
+
+** Environment specific configuration
+*** =ORG-mode= Environment
+
+Replace =ORG-mode= ellipsis with a downward arrow.
+
+#+BEGIN_SRC emacs-lisp
+(setq org-ellipsis "↲")
+#+END_SRC
+
+* Basic Configuration
+
+Increase the garbage collector threshold, to speed up some operations.
+
+#+BEGIN_SRC emacs-lisp
+  (setq gc-cons-threshold 20000000)
+#+END_SRC
+
+Treat CamelCaseSubWords as seperate words. 
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'prog-mode-hook 'subword-mode)
+#+END_SRC
+
+If a file starts with #!, make it executable.
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+#+END_SRC
+
+If saving a file in a directory doesn't exist, offer to create the parent directories recursively.
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'before-save-hook
+	    (lambda ()
+	      (when buffer-file-name
+		(let ((dir (file-name-directory buffer-file-name)))
+		  (when (and (not (file-exists-p dir)) y-or-n-p (format "Directory %s does not exist, Create it?" dir))
+		    (make-directory dir t ))))))
+#+END_SRC
+
+Require having a new line.
+
+#+BEGIN_SRC emacs-lisp
+  (setq require-final-newline t)
+#+END_SRC
+
+Make file sizes human-readable to dired buffers.
+
+#+BEGIN_SRC emacs-lisp
+  (setq-default dired-listing-switches "-alh")
+#+END_SRC
+
+Refresh buffer when the file is changed, stoping buffers and file getting out of sync.
+
+#+BEGIN_SRC emacs-lisp
+  (global-auto-revert-mode t)
+#+END_SRC
+
+When pressing the middle mouse button, paste where the curser is rather than where the mouse is.
+
+#+BEGIN_SRC emacs-lisp
+  (setq mouse-yank-at-point 1)
+#+END_SRC
+
+Better increase and decrease text scale.
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key  (kbd "C-+") 'text-scale-increase)
+  (global-set-key (kbd "C--") 'text-scale-decrease)
+#+END_SRC
+
+Enable visual parantheses matching.
+
+#+BEGIN_SRC emacs-lisp
+  (show-paren-mode 1)
+#+END_SRC
+
+Store backups and temperory files in =temporary-file-directory=.
+=/tmp= on Unix. Warning: =/tmp= on most Unix-like systems is VOLATILE, IN-MEMORY storage.
+
+#+BEGIN_SRC emacs-lisp
+(setq backup-directory-alist `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms `((".*", temporary-file-directory t)))
+#+END_SRC
+
+* Packages Configuration
+** =evil=
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil
+  :ensure t
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode 1))
+
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
+#+END_SRC
+
+** =ivy=
+
+#+BEGIN_SRC emacs-lisp
+  (use-package ivy)
+  (use-package counsel)
+  (ivy-mode)
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  ;; enable this if you want `swiper' to use it
+  ;; (setq search-default-mode #'char-fold-to-regexp)
+  (global-set-key "\C-s" 'swiper)
+  (global-set-key (kbd "C-c C-r") 'ivy-resume)
+  (global-set-key (kbd "<f6>") 'ivy-resume)
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+  (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+  (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+  (global-set-key (kbd "<f1> o") 'counsel-describe-symbol)
+  (global-set-key (kbd "<f1> l") 'counsel-find-library)
+  (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+  (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+  (global-set-key (kbd "C-c g") 'counsel-git)
+  (global-set-key (kbd "C-c j") 'counsel-git-grep)
+  (global-set-key (kbd "C-c k") 'counsel-ag)
+  (global-set-key (kbd "C-x l") 'counsel-locate)
+  (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+  (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+#+END_SRC
+
+** =company=
+
+Enable =company-mode= everywhere.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package company)
+  (add-hook 'after-init-hook 'global-company-mode)
+#+END_SRC
+
+Use =M-/= for completion.
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "M-/") 'company-complete-common)
+#+END_SRC
+
+** =flycheck=
+
+Install flycheck.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package flycheck)
+  (global-flycheck-mode)
+#+END_SRC
+
+** =flyspell-correct=
+
+Install flyspell
+
+#+BEGIN_SRC emacs-lisp
+  (use-package flyspell-correct)
+  (add-hook 'text-mode-hook 'flyspell-mode)
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+#+END_SRC
+
+** =magit=
+
+Use magit for git repos managment.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package magit
+	:bind ("C-x g" . magit-status))
+#+END_SRC
+
+** =projectile=
+
+Use projectile for useful funcationality for project management.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package projectile)
+#+END_SRC
+
+** =undo-tree=
+
+Use =undo-tree=.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package undo-tree)
+#+END_SRC
+
+** =yasnippet=
+
+Use =yasnippet=.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package yasnippet)
+  (yas-global-mode 1)
+  (use-package yasnippet-snippets)
+#+END_SRC
+
+** =fancy-icons=
+
+#+BEGIN_SRC emacs-lisp
+  (use-package all-the-icons
+    :if (display-graphic-p))
+#+END_SRC
+
+** =org-roam=
+
+#+BEGIN_SRC emacs-lisp
+#+END_SRC
+
+** Environment Specific Packages.
+*** =Lisp= Environment
+
+Use =paredit=.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package paredit)
+#+END_SRC
+
+Use =rainbow-delimiters=.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package rainbow-delimiters)
+#+END_SRC
+
+*** =Clang= Environment
+
+#+BEGIN_SRC emacs-lisp
+  (use-package clang-format)
+  (setq clang-format-style "file")
+#+END_SRC
+
+** Miscellanous Packages
+Use subword mode.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package subword
+	:config (global-subword-mode 1))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (use-package rainbow-mode)
+  (rainbow-mode 1)
+#+END_SRC
+
+
+** =Lisp= Environment
+
+Uses lisp packages when lisp languages are enabled.
+
+#+BEGIN_SRC emacs-lisp
+  (setq lispy-mode-hooks
+		'(emacs-lisp-hook lisp-mode-hook))
+
+  (dolist (hook lispy-mode-hooks)
+	(add-hook hook (lambda()
+					 (setq show-paren-style 'expression)
+  (paredit-mode)
+  (rainbow-delimeters-mode))))
+#+END_SRC

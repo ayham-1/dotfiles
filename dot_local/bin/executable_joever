@@ -1,0 +1,19 @@
+#!/bin/bash
+
+now=$(date +%s $now)
+
+expected_life_expectency=80
+
+target=$(date +%s -d "+$expected_life_expectency years")
+target=$(($target - $(($now - $(date +%s -d "$1")))))
+days=$(($target - $now));
+
+if [ $days -lt 0 ]
+then
+	echo error
+	exit 1
+else
+	days=$(($days / 86400))
+	echo "$days days left"
+fi
+

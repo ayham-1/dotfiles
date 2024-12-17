@@ -1,0 +1,157 @@
+" Author: ayham
+" Website: ayham.xyz
+
+set visualbell
+set nocompatible
+set autoindent
+set smarttab
+set expandtab
+set shiftwidth=4
+set tabstop=8
+set softtabstop=8
+set noignorecase
+set autowrite
+set nonumber
+set ruler
+set showmode
+set t_vb=
+let mapleader=" "
+set softtabstop=2
+set clipboard+=unnamed
+
+set textwidth=120
+set colorcolumn=121
+set number relativenumber
+set nu rnu
+set nobackup
+set noswapfile
+set nowritebackup
+set icon
+set hlsearch
+set incsearch
+set linebreak
+set shortmess=aoOtTI
+set viminfo='20,<1000,s1000
+set wrapscan
+set nowrap
+set hidden
+set history=100
+set noshowmatch
+set mouse=a
+
+set timeoutlen=1000
+set ttimeoutlen=50
+
+syntax on
+
+set ttyfast
+
+filetype plugin on
+
+" Ledger
+let g:ledger_maxwidth = 80
+let g:ledger_is_hledger = 0
+
+" Plug install & plugins
+let data_dir = '~/.vim/'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source $MYVIMRC
+\| endif
+
+
+" LSP
+let g:lsp_diagnostics_enabled = 0
+let g:lsp_document_highlight_enabled = 0
+
+call plug#begin('~/.vim/autoload/plugged')
+  Plug 'ledger/vim-ledger'
+  autocmd! BufWritePre *.ledger call execute('LedgerAlign')
+
+  Plug 'morhetz/gruvbox'
+  Plug 'tpope/vim-fugitive'
+  Plug 'airblade/vim-gitgutter'
+  Plug 'ctrlpvim/ctrlp.vim'
+
+  Plug 'ConradIrwin/vim-bracketed-paste'
+  Plug 'tpope/vim-surround'
+  Plug 'bfrg/vim-cpp-modern'
+
+  " LSP
+  Plug 'prabirshrestha/vim-lsp'
+  Plug 'mattn/vim-lsp-settings'
+  Plug 'prabirshrestha/asyncomplete.vim'
+  Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
+  function! s:on_lsp_buffer_enabled() abort
+      setlocal omnifunc=lsp#complete
+      setlocal signcolumn=yes
+      if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+      nmap <buffer> gd <plug>(lsp-definition)
+      nmap <buffer> gs <plug>(lsp-document-symbol-search)
+      nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+      nmap <buffer> gr <plug>(lsp-references)
+      nmap <buffer> gi <plug>(lsp-implementation)
+      nmap <buffer> gt <plug>(lsp-type-definition)
+      nmap <buffer> <leader>rn <plug>(lsp-rename)
+      nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+      nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+      nmap <buffer> K <plug>(lsp-hover)
+      nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
+      nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
+
+      let g:lsp_format_sync_timeout = 1000
+      autocmd! BufWritePre *.rs,*.go,*.c,*.cpp,*.h,*.hxx,*.py,*.md call execute('LspDocumentFormatSync')
+  endfunction
+  augroup lsp_install
+      au!
+      " call s:on_lsp_buffer_enabled only for languages that has the server
+      " registered.
+      autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+  augroup END
+  " allow modifying the completeopt variable, or it will
+  " be overridden all the time
+  let g:asyncomplete_auto_completeopt = 0
+  set completeopt=menuone,noinsert,noselect,preview
+  autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+call plug#end()
+
+set wildmenu
+set omnifunc=syntaxcomplete#Complete
+
+" functions keys
+map <F1> :set number!<CR> :set relativenumber!<CR>
+nmap <F2> :call <SID>SynStack()<CR>
+set pastetoggle=<F3>
+map <F4> :set list!<CR>
+map <F5> :set cursorline!<CR>
+map <F7> :set spell!<CR>
+map <F12> :set fdm=indent<CR>
+
+nmap <leader>2 :set paste<CR>i
+
+" disable arrow keys
+noremap <up> :echoerr "Umm, use k instead"<CR>
+noremap <down> :echoerr "Umm, use j instead"<CR>
+noremap <left> :echoerr "Umm, use h instead"<CR>
+noremap <right> :echoerr "Umm, use l instead"<CR>
+inoremap <up> <NOP>
+inoremap <down> <NOP>
+inoremap <left> <NOP>
+inoremap <right> <NOP>
+
+nnoremap <up> <C-a>
+nnoremap <down> <C-x>
+
+noremap <C-n> <C-d>
+noremap <C-p> <C-b>
+
+let &t_SI = "\e[4 q"
+let &t_EI = "\e[2 q"
+colo industry

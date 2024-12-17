@@ -1,0 +1,15 @@
+[user]
+    email = me@ayham.xyz
+    name = ayham-1
+    signingKey = 8C38DD3A3030F8AEB8A9A2BC783F6DE277DA7BFF
+[commit]
+    gpgsign = true
+[init]
+    defaultBranch = master
+[advice]
+	mergeConflict = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

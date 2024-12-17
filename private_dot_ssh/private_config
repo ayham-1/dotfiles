@@ -1,0 +1,15 @@
+Host aur.archlinux.org
+  IdentityFile ~/.ssh/aur
+  User aur
+
+  #HostName gtitan.local
+  #LocalForward 5900 localhost:5900
+
+Host gtitan
+    HostName gamma
+    User ayham
+    Port 31337
+
+Host *
+    ServerAliveInterval 120
+    VisualHostKey yes

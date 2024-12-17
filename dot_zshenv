@@ -1,0 +1,95 @@
+# Default stuff
+XDG_CONFIG_HOME="$HOME/.config"
+XDG_CACHE_HOME="$HOME/.cache"
+XDG_DATA_HOME="$HOME/.local/share"
+XDG_BIN_HOME="$HOME/.local/bin"
+
+# Default Programs
+EDITOR="vim"
+VISUAL="vim"
+
+KITTY_ENABLE_WAYLAND=1
+TERMINAL="kitty"
+
+BROWSER="librewolf"
+
+PATH="$XDG_DATA_HOME/gem/bin:$PATH"
+PATH="$XDG_BIN_HOME:$PATH"
+PATH="/opt/appimages/:$PATH"
+
+# /opt apps (yuck Jetbrains)
+PATH="/opt/intelliJ/bin/:$PATH"
+
+# SSH & GPG
+#GNUPGHOME="$XDG_DATA_HOME"/gnupg # use default, firejail does its thing better
+SSH_AGENT_PID=""
+SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh"
+
+XDG_CURRENT_DESKTOP=sway
+
+# wayland
+#XDG_CURRENT_DESKTOP=qtile
+#QT_QPA_PLATFORM="wayland;xcb"
+
+# Configurations
+WINIT_X11_SCALE_FACTOR=1
+ANDROID_HOME='$HOME/.local/share/Android/Sdk'
+ANDROID_SDK_ROOT='/opt/android-sdk'
+PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools/
+PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin/
+PATH=$PATH:$ANDROID_ROOT/emulator
+PATH=$PATH:$ANDROID_SDK_ROOT/tools/
+PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin
+JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions'
+JAVA_HOME='/usr/lib/jvm/default'
+_JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+
+_JAVA_AWT_WM_NONREPARENTING=1
+ANDROID_SDK_ROOT="$HOME/.local/share/Android/Sdk"
+
+ZK_NOTEBOOK_DIR='dox/notebook'
+
+# TODOTXT STUFF
+TODOTXT_DEFAULT_ACTION=ls
+TODOTXT_SORT_COMMAND='env LC_COLLATE=C sort -k 2,2 -k 1,1n'
+
+# ~/ clean-up
+ZPLUG_HOME="$XDG_CONFIG_HOME/zsh/zplug"
+MPD_HOST="$XDG_RUNTIME_DIR/mpd_socket"
+DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
+XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
+GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
+LESSHISTFILE="-"
+GEM_HOME="$XDG_DATA_HOME"/gem
+GEM_SPEC_CACHE="$XDG_CACHE_HOME"/gem
+#XINITRC="$XDG_CONFIG_HOME/X11/xinitrc"
+WGETRC="$XDG_CONFIG_HOME/wgetrc"
+WINEPREFIX=/home/ayham/.local/share/wineprefixes/default
+RUSTUP_HOME="$XDG_DATA_HOME"/rustup
+PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass
+NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
+LESSKEY="$XDG_CONFIG_HOME"/less/lesskey
+LESSHISTFILE="$XDG_CACHE_HOME"/less/history
+INPUTRC="$XDG_CONFIG_HOME"/readline/inputrc
+CRAWL_DIR="$XDG_DATA_HOME"/crawl
+CCACHE_CONFIGPATH="$XDG_CONFIG_HOME"/ccache.config
+CCACHE_DIR="$XDG_CACHE_HOME"/ccache
+ANDROID_SDK_HOME="$XDG_CONFIG_HOME"/android
+ANDROID_AVD_HOME="$XDG_DATA_HOME"/android
+ANDROID_EMULATOR_HOME="$XDG_DATA_HOME"/android
+ADB_VENDOR_KEY="$XDG_CONFIG_HOME"/android
+CARGO_HOME="$XDG_DATA_HOME"/cargo
+HISTFILE="$XDG_DATA_HOME"/bash/history
+XMONAD_CONFIG_HOME="$XDG_CONFIG_HOME"/xmonad
+XMONAD_DATA_HOME="$XDG_DATA_HOME"/xmonad
+XMONAD_CACHE_HOME="$XDG_CACHE_HOME"/xmonad
+ZDOTDIR="$XDG_CONFIG_HOME"/zsh
+ASPELL_CONF="per-conf $XDG_CONFIG_HOME/aspell/aspell.conf; personal $XDG_CONFIG_HOME/aspell/en.pws; repl $XDG_CONFIG_HOME/aspell/en.prepl"
+MBSYNCRC="$XDG_CONFIG_HOME"/isync/mbsyncrc
+VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
+EM_CONFIG="$XDG_CONFIG_HOME"/emscripten/config
+EM_CACHE="$XDG_CACHE_HOME"/emscripten/cache
+EM_PORTS="$XDG_DATA_HOME"/emscripten/cache
+CONDARC="$XDG_CONFIG_HOME/conda/condarc"
+GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
+CONAN_USER_HOME="$XDG_CONFIG_HOME"
