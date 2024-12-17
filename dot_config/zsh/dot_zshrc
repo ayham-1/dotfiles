@@ -5,7 +5,7 @@ setopt interactive_comments
 
 # History in cache directory:
 HISTSIZE=100
-SAVEHIST=0
+SAVEHIST=100
 HISTFILE=/dev/null
 
 # Basic auto/tab complete
