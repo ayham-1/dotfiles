@@ -1,0 +1,2 @@
+#!/bin/zsh
+vncviewer -via xyz localhost::5902
