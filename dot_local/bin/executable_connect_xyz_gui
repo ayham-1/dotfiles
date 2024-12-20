@@ -1,2 +1,2 @@
-#!/bin/zsh
-vncviewer -via alpha localhost::5902
+#!/bin/sh
+vncviewer -via $1 localhost::$2
