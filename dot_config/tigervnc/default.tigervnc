@@ -1,10 +1,6 @@
 TigerVNC Configuration file Version 1.0
 
-ServerName=gamma:5903
-X509CA=/home/ayham/.config/tigervnc/x509_ca.pem
-X509CRL=/home/ayham/.config/tigervnc/x509_crl.pem
-SecurityTypes=None,VncAuth,RA2ne,RA2ne_256,Plain,DH,MSLogonII,TLSNone,TLSVnc,TLSPlain,X509None,X509Vnc,X509Plain,RA2,RA2_256
-ReconnectOnError=1
+ReconnectOnError=0
 Shared=0
 AutoSelect=1
 FullColor=1
@@ -18,8 +14,8 @@ FullScreen=0
 FullScreenMode=Current
 FullScreenSelectedMonitors=1
 ViewOnly=0
-EmulateMiddleButton=0
-DotWhenNoCursor=0
+EmulateMiddleButton=1
+DotWhenNoCursor=1
 AcceptClipboard=1
 SendClipboard=1
 SendPrimary=1
