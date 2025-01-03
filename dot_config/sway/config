@@ -267,7 +267,7 @@ mode "resize" {
 }
 
 for_window [title="^Picture-in-Picture$"] border none, floating enable, sticky enable
-for_window [app_id="kitty" title="ssh:*"] border normal
+for_window [app_id="kitty" title="ssh*"] border normal
 
 bindsym $mod+r mode "resize"
 
