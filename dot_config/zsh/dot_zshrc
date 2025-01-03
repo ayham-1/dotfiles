@@ -8,6 +8,9 @@ HISTSIZE=100
 SAVEHIST=100
 HISTFILE=/dev/null
 
+# fix GPG_TTY
+preexec() { export GPG_TTY=$(tty); }
+
 # Basic auto/tab complete
 autoload -Uz compinit && compinit
 #zstyle ':completion:*' menu select
