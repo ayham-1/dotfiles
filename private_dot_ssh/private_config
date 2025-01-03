@@ -13,3 +13,5 @@ Host gtitan
 Host *
     ServerAliveInterval 120
     VisualHostKey yes
+    ForwardAgent yes
+    StreamLocalBindUnlink yes
