@@ -1,4 +1,9 @@
+# automatically generated from the hostname
+{{- if or (eq .chezmoi.hostname "alpha") (eq .chezmoi.hostname "gamma") }}
+pinentry-program /usr/bin/pinentry-tty
+{{- else }}
 pinentry-program /usr/bin/pinentry-gnome3
+{{- end }}
 
 allow-loopback-pinentry
 no-allow-external-cache
