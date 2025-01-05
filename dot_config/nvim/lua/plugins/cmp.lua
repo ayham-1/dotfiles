@@ -40,13 +40,13 @@ function M.config()
 			--documentation = cmp.config.window.bordered(),
 		},
 		sources = cmp.config.sources({
-			{ name = "nvim_lsp" },
+			--{ name = "nvim_lsp" },
 			--{ name = "nvim_lua" },
-			{ name = "luasnip" },
-			{ name = "emoji" },
-			{ name = "calc" },
+			--{ name = "luasnip" },
+			--{ name = "emoji" },
+			--{ name = "calc" },
 			--{ name = "dap" },
-			{ name = "spell" },
+			--{ name = "spell" },
 			{ name = "buffer", keyword_length = 5 },
 		}),
 		experemintal = {
