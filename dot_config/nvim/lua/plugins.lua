@@ -46,7 +46,7 @@ return {
 			"MunifTanjim/nui.nvim",
 		},
 	},
-	{"github/copilot.vim", lazy=false},
+	--{"github/copilot.vim", lazy=false},
 	{"nvim-java/nvim-java", lazy=false},
 
 	-- colorschemes
