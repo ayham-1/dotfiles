@@ -8,9 +8,6 @@ HISTSIZE=100
 SAVEHIST=100
 HISTFILE=/dev/null
 
-# fix GPG_TTY
-preexec() { export GPG_TTY=$(tty); }
-
 # Basic auto/tab complete
 autoload -Uz compinit && compinit
 #zstyle ':completion:*' menu select
@@ -39,7 +36,7 @@ zle-line-init() {
 }
 zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
-preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+preexec() { export GPG_TTY=$(tty); echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 bindkey -s '^f' 'cd "$(dirname "$(fzf)")"\n'
 
