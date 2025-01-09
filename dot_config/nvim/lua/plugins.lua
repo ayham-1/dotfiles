@@ -66,14 +66,7 @@ return {
 	{ "mfussenegger/nvim-dap", lazy = false },
 	{ "mfussenegger/nvim-dap-python", lazy = false },
 
-	-- writing
-	{ "preservim/vim-pencil", lazy = false },
-	"preservim/vim-markdown",
-	"poljar/typos.nvim",
-	"folke/twilight.nvim",
-	"folke/zen-mode.nvim",
-
-	-- coding language specific
+-- coding language specific
 	"akinsho/flutter-tools.nvim",
 	"ziglang/zig.vim",
 	{ "nvim-neorg/neorg", lazy = false },
