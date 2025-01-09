@@ -73,10 +73,10 @@ call plug#begin('~/.vim/autoload/plugged')
   Plug 'ledger/vim-ledger'
   autocmd! BufWritePre *.ledger call execute('LedgerAlign')
 
-  Plug 'morhetz/gruvbox'
   Plug 'tpope/vim-fugitive'
   Plug 'airblade/vim-gitgutter'
   Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'sheerun/vim-polyglot'
 
   Plug 'ConradIrwin/vim-bracketed-paste'
   Plug 'tpope/vim-surround'
