@@ -8,6 +8,7 @@ return {
 		}, 
 	},
 	{ "f-person/git-blame.nvim", lazy = false },
+        { "sheerun/vim-polyglot", lazy = false },
 	"nvim-lua/plenary.nvim",
 	"ThePrimeagen/harpoon",
 	"nvim-lua/popup.nvim",
