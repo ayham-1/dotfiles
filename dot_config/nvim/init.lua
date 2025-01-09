@@ -72,6 +72,7 @@ vim.g.NERDTreeChDirMode = 2
 vim.cmd("set clipboard+=unnamedplus")
 
 vim.cmd("syntax on")
+vim.opt_local.conceallevel = 2
 
 -- appearance
 vim.number = true
