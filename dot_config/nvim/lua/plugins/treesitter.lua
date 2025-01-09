@@ -8,7 +8,7 @@ function M.config()
 		-- indentation
 		indent = { enable = true },
 		-- A list of parser names, or "all" (the four listed parsers should always be installed)
-		ensure_installed = { "cpp", "c", "lua", "vim", "all" },
+		ensure_installed = { "cpp", "c", "lua", "vim" },
 
 		-- Install parsers synchronously (only applied to `ensure_installed`)
 		sync_install = false,
