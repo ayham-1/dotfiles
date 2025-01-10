@@ -8,6 +8,7 @@ return {
 		}, 
 	},
 	{ "f-person/git-blame.nvim", lazy = false },
+	{ "sheerun/vim-polyglot", lazy = false },
 	"nvim-lua/plenary.nvim",
 	"ThePrimeagen/harpoon",
 	"nvim-lua/popup.nvim",
@@ -65,6 +66,42 @@ return {
 	{ "mfussenegger/nvim-dap", lazy = false },
 	{ "mfussenegger/nvim-dap-python", lazy = false },
 
+	-- obsidian/markdown
+	{ "epwalsh/obsidian.nvim", lazy = false, version = "*",
+		opts = {
+			workspaces = {
+				{
+					name = "uni",
+					path = "~/dox/uni",
+				},
+			},
+		},
+	},
+	{
+		"vhyrro/luarocks.nvim",
+		lazy = false,
+		priority = 1001,
+		opts = {
+			rocks = { "magick" },
+		},
+	},
+	{
+		"3rd/image.nvim",
+		version = "*",
+		lazy = false,
+		dependencies = { "luarocks.nvim" },
+	},
+	{
+		"OXY2DEV/markview.nvim",
+		lazy = false,      -- Recommended
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-tree/nvim-web-devicons"
+		}
+	},
+	{ "jbyuki/nabla.nvim" },
+
+	-- coding language specific
 	"akinsho/flutter-tools.nvim",
 	"ziglang/zig.vim",
 	{ "nvim-neorg/neorg", lazy = false },
