@@ -16,10 +16,8 @@ set $menu dmenu_path | wmenu | xargs swaymsg exec --
 set $screenshot exec grim -g "$(slurp)" - | swappy -f -
 set $screen_lock swaylock -f -c 000000
 
-#exec_always --no-startup-id kitti3
-#bindsym $mod+n nop kitti3
-exec_always --no-startup-id kitti3 -n caterwaul -p CC -s 0.5 0.3 -- --session ~/.kitty_session
-bindsym $mod+n nop caterwaul
+exec_always --no-startup-id kitti3
+bindsym $mod+n nop kitti3
 
 # theme
 exec_always import-gsettings
