@@ -93,3 +93,7 @@ EM_PORTS="$XDG_DATA_HOME"/emscripten/cache
 CONDARC="$XDG_CONFIG_HOME/conda/condarc"
 GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
 CONAN_USER_HOME="$XDG_CONFIG_HOME"
+
+# nchat
+alias telegram='nchat -d ~/.config/nchat/telegram'
+alias whatsapp='nchat -d ~/.config/nchat/whatsapp'

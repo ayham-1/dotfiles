@@ -1,5 +1,9 @@
 TigerVNC Configuration file Version 1.0
 
+ServerName=localhost:5902
+X509CA=/home/ayham/.config/tigervnc/x509_ca.pem
+X509CRL=/home/ayham/.config/tigervnc/x509_crl.pem
+SecurityTypes=X509Plain,TLSPlain,X509Vnc,TLSVnc,X509None,TLSNone,RA2,RA2_256,RA2ne,RA2ne_256,DH,MSLogonII,VncAuth,None
 ReconnectOnError=0
 Shared=0
 AutoSelect=1

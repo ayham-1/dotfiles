@@ -9,15 +9,6 @@ require("mason-lspconfig").setup()
 
 require("dressing").setup()
 
-require("twilight").setup({
-	dimming = {
-		alpha = 0.25,
-		color = { "Normal", "#000000" },
-	},
-})
-require("zen-mode").setup({
-	width = 0.80,
-})
 require("diffview").setup()
 require("luasnip/loaders/from_vscode").load()
 require("luasnip.loaders.from_vscode").lazy_load()
@@ -27,27 +18,14 @@ require('lspconfig').jdtls.setup({})
 
 require("Comment").setup()
 
-require("zen-mode").setup({
-	window = {
-		width = 80,
-		options = {
-			signcolumn = "no", -- disable signcolumn
-			number = false, -- disable number column
-			relativenumber = false, -- disable relative numbers
-			cursorline = false, -- disable cursorline
-			cursorcolumn = false, -- disable cursor column
-			foldcolumn = "0", -- disable fold column
-			list = false, -- disable whitespace characters
-		},
-	},
-})
-
 require("flutter-tools").setup({})
 require("Comment").setup()
 
 require("lint").linters_by_ft = {
 	markdown = { "markdownlint" },
 }
+
+--require("image").setup({})
 
 --vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 --	callback = function()
