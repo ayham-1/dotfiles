@@ -32,3 +32,7 @@ alias v="$EDITOR"
 alias ll="ls -lhA"
 alias ..="cd .."
 alias t="todo.sh"
+
+# nchat
+alias telegram='nchat -d ~/.config/nchat-telegram'
+alias whatsapp='nchat -d ~/.config/nchat-whatsapp'
