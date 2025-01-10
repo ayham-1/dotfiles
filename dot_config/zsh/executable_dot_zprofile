@@ -2,6 +2,7 @@
 
 if [ -n "$SSH_CLIENT" ]; then 
     echo "Running ZSH through SSH" 
+    tmux-chooser || true
 else 
     if [[ "$(tty)" == "/dev/tty1" ]]
     then

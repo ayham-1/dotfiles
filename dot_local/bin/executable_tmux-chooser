@@ -1,16 +1,30 @@
 #!/bin/bash
 
 SESSION="$1"
+
+# Check if no session name is provided
 if [ -z "$1" ]; then
-	if [ -n "$( tmux ls )" ]; then
-		SESSION=$(tmux ls | sed 's/:.*//g' | fzf --height 20% --layout=reverse --prompt "Choose session:" --preview 'tmux ls | grep {}' --preview-window up:1 --print-query | \tail -n1)
+	if tmux ls &>/dev/null; then
+		# List existing sessions if tmux server is running
+		SESSION=$(tmux ls | sed 's/:.*//g' | fzf --height 20% --layout=reverse --prompt "Choose session:" \
+			--preview 'tmux ls | grep {}' --preview-window up:1 --print-query | tail -n1)
+				else
+					# Prompt for a new session name if no tmux server is running
+					echo "No tmux server detected. Please enter a name for a new session:"
+					read -r SESSION
+					if [ -z "$SESSION" ]; then
+						echo "Session name cannot be empty. Exiting."
+						exit 1
+					fi
+					fi
+		fi
+
+# Proceed with attaching or creating the session
+if [ -n "$SESSION" ]; then
+	if [ -z "$TMUX" ]; then
+		tmux attach -t "$SESSION" || tmux new -s "$SESSION"
+	else
+		tmux switch-client -t "$SESSION" || (tmux -2 new-session -d -s "$SESSION" && tmux switch-client -t "$SESSION")
 	fi
 fi
 
-if [ -n "$SESSION" ]; then
-	if [ -z "$TMUX" ];then
-		tmux attach -t "$SESSION" || tmux new -s "$SESSION"
-	else 
-		tmux switch-client -t "$SESSION" || tmux -2 new-session -d -s "$SESSION" && tmux switch-client -t "$SESSION"
-	fi
-fi

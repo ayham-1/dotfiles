@@ -48,7 +48,15 @@ return {
 		},
 	},
 	--{"github/copilot.vim", lazy=false},
-	{"nvim-java/nvim-java", lazy=false},
+	{ "hiphish/rainbow-delimiters.nvim", lazy = false },
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		---@module "ibl"
+		---@type ibl.config
+		opts = {},
+	},
+	{ "karb94/neoscroll.nvim", lazy = false },
 
 	-- colorschemes
 	{ "tjdevries/colorbuddy.nvim", lazy = false },
@@ -104,5 +112,6 @@ return {
 	-- coding language specific
 	"akinsho/flutter-tools.nvim",
 	"ziglang/zig.vim",
+	{"nvim-java/nvim-java", lazy=false},
 	{ "nvim-neorg/neorg", lazy = false },
 }
