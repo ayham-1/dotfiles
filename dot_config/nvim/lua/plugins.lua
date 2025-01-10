@@ -8,7 +8,6 @@ return {
 		}, 
 	},
 	{ "f-person/git-blame.nvim", lazy = false },
-        { "sheerun/vim-polyglot", lazy = false },
 	"nvim-lua/plenary.nvim",
 	"ThePrimeagen/harpoon",
 	"nvim-lua/popup.nvim",
@@ -66,7 +65,6 @@ return {
 	{ "mfussenegger/nvim-dap", lazy = false },
 	{ "mfussenegger/nvim-dap-python", lazy = false },
 
--- coding language specific
 	"akinsho/flutter-tools.nvim",
 	"ziglang/zig.vim",
 	{ "nvim-neorg/neorg", lazy = false },
