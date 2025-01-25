@@ -13,6 +13,7 @@ Disable menu, scrollbar and minibuffer scrollbar.
   (scroll-bar-mode -1)
   (set-window-scroll-bars (minibuffer-window) nil nil)
   (global-hl-line-mode 1)
+  (global-display-line-numbers-mode 1)
 #+END_SRC
 
 Bind frame title to the name of the current project.
