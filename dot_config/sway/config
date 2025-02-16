@@ -315,6 +315,7 @@ include @sysconfdir@/sway/config.d/*
 
 # floating windows for development
 for_window [title="pinentry-gtk"] floating enable
+for_window [class="amux"] floating enable
 include pointer
 
 mode passthrough {
