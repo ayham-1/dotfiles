@@ -101,7 +101,14 @@ augroup fmt
 augroup END
 ]], false)
 
+vim.api.nvim_exec([[
+	augroup fmt
+  autocmd!
+  autocmd BufWritePre * undojoin | Neoformat
+	augroup END
+]], false)
 
+vim.g.polyglot_disabled = { "autoindent" }
 --vim.cmd("hi CursorLine gui=underline cterm=underline")
 --vim.cmd("au InsertEnter * set cul")
 --vim.cmd("au InsertLeave * set nocul")
