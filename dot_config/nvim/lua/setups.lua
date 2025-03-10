@@ -10,8 +10,6 @@ require("mason-lspconfig").setup()
 require("dressing").setup()
 
 require("diffview").setup()
-require("luasnip/loaders/from_vscode").load()
-require("luasnip.loaders.from_vscode").lazy_load()
 
 require("java").setup()
 require('lspconfig').jdtls.setup({})
@@ -43,7 +41,6 @@ require("cinnamon").setup({})
 require("leap").add_default_mappings({})
 
 -- colorschemes
-require("neoscroll").setup({ easing = "linear" })
 local highlight = {
     "RainbowRed",
     "RainbowYellow",

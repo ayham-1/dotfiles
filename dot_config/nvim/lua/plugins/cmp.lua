@@ -12,9 +12,9 @@ local M = {
 		"hrsh7th/cmp-emoji",
 		--"rcarriga/cmp-dap",
 		"f3fora/cmp-spell",
-		"L3MON4D3/LuaSnip",
 		"onsails/lspkind-nvim",
-		"rafamadriz/friendly-snippets",
+		"hrsh7th/cmp-vsnip",
+		"hrsh7th/vim-vsnip"
 	},
 }
 
@@ -32,7 +32,7 @@ function M.config()
 		}),
 		snippet = {
 			expand = function(args)
-				require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+				vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
 			end,
 		},
 		window = {
@@ -42,11 +42,12 @@ function M.config()
 		sources = cmp.config.sources({
 			{ name = "nvim_lsp" },
 			{ name = "nvim_lua" },
-			{ name = "luasnip" },
+			{ name = "vsnip" },
 			{ name = "emoji" },
 			{ name = "calc" },
 			{ name = "dap" },
 			{ name = "spell" },
+			{ name = "path" },
 			{ name = "buffer", keyword_length = 5 },
 		}),
 		experemintal = {

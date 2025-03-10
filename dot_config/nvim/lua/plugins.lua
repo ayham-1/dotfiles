@@ -22,7 +22,6 @@ return {
 	"andreasvc/vim-256noir",
 	"numToStr/Comment.nvim",
 	"ggandor/lightspeed.nvim",
-	"milkias17/reloader.nvim",
 	"simrat39/symbols-outline.nvim",
 	{ "jbyuki/venn.nvim", lazy = false },
 	{ "j-hui/fidget.nvim", tag = "legacy" },
@@ -56,7 +55,6 @@ return {
 		---@type ibl.config
 		opts = {},
 	},
-	{ "karb94/neoscroll.nvim", lazy = false },
 
 	-- colorschemes
 	{ "tjdevries/colorbuddy.nvim", lazy = false },

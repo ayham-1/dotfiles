@@ -42,7 +42,6 @@ require("keymaps")
 require("neovide")
 
 -- general config
-vim.g.auto_reload_config = true
 vim.g.noswapfile = true
 vim.g.nobackup = true
 vim.g.nomodeline = true

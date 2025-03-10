@@ -12,8 +12,9 @@ set $term kitty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu_path | wmenu | xargs swaymsg exec --
+set $menu dmenu_path | wmenu -b | xargs swaymsg exec --
 set $screenshot exec grim -g "$(slurp)" - | swappy -f -
+#set $screenshot exec flameshot gui
 set $screen_lock swaylock -f -c 000000
 
 exec_always --no-startup-id kitti3
@@ -305,7 +306,7 @@ hide_edge_borders --i3 smart
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-    status_command i3status_custom
+    status_command "SCRIPT_DIR=~/.config/i3blocks/blocklets i3blocks"
     mode hide
     position bottom
     tray_output HDMI-A-1
