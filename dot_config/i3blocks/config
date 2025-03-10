@@ -1,0 +1,77 @@
+[joever]
+command=joever '02/04/2005'
+interval=900
+color=#F79494
+
+[weather]
+command=curl -Ss 'wttr.in/?format="+%c+%t,+%w"' | xargs echo
+interval=900
+color=#A4C2F4
+
+[ip-public]
+command=curl -Ss 'ifconfig.me' | awk '{ print "🌍" $1 }'
+interval=900
+color=#91E78B
+
+[ip]
+command=hostname -i | awk '{ print "🖧" $1 }'
+interval=900
+color=#91E78B
+
+[bandwidth3]
+command=$SCRIPT_DIR/bandwidth3
+interval=persist
+markup=pango
+#LABEL=<span font='FontAwesome'>  </span>
+#IFACE=[automatically determined]
+#DT=3
+UNIT=MB
+# Exposed variables: rx, wx, tx, unit, iface
+#PRINTF_COMMAND=printf "${LABEL}%-5.1f/%5.1f %s/s\n", rx, wx, unit;
+
+[battery2]
+command=$SCRIPT_DIR/battery2
+markup=pango
+interval=30
+
+[cpu]
+command=$SCRIPT_DIR/cpu_usage
+interval=10
+LABEL=🧠
+#min_width=CPU: 100.00%
+#T_WARN=50
+#T_CRIT=80
+#DECIMALS=2
+#COLOR_NORMAL=#EBDBB2
+#COLOR_WARN=#FFFC00
+#COLOR_CRIT=#FF0000
+
+[disk-io]
+command=$SCRIPT_DIR/disk-io
+#command=$SCRIPT_DIR/disk-io -w 3 -M -P 0
+interval=persist
+markup=pango
+LABEL=💾
+#instance=/^sda/
+#DT=5
+#MB_ONLY=0 #0 or 1
+#KB_ONLY=0 #0 or 1
+#WIDTH=4
+#MB_PRECISION=1
+#KB_PRECISION=0
+#REGEX=/^(s|h)d[a-zA-Z]+/
+#THRESHOLD=0
+#WARN_COLOR="#FF0000"
+#SEPARATOR=/
+#PREFIX=
+#SUFFIX="B/s"
+
+[memory]
+command=$SCRIPT_DIR/memory
+label=📟
+interval=30
+
+# Update time every 5 seconds
+[time]
+command=date +"%Y-%m-%d %H:%M:%S"
+interval=1
