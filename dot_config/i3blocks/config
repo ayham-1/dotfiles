@@ -29,10 +29,10 @@ UNIT=MB
 # Exposed variables: rx, wx, tx, unit, iface
 #PRINTF_COMMAND=printf "${LABEL}%-5.1f/%5.1f %s/s\n", rx, wx, unit;
 
-[battery2]
-command=$SCRIPT_DIR/battery2
-markup=pango
+[battery]
+command=$SCRIPT_DIR/battery
 interval=30
+LABEL=BAT
 
 [cpu]
 command=$SCRIPT_DIR/cpu_usage

@@ -38,16 +38,16 @@ vim.opt.relativenumber = true
 
 vim.cmd("syntax on")
 vim.cmd("set clipboard+=unnamedplus")
+vim.cmd("filetype plugin indent on")
 
 -- Colorscheme
 vim.t_Co = 256
 vim.cmd.colorscheme("industry")
 
 --- Swap, Backup, Undo Directories
-local homedir = vim.fn.expand("~/")
-vim.opt.directory = homedir .. "/.cache/nvim/swap"
-vim.opt.backupdir = homedir .. "/.cache/nvim/backup"
-vim.opt.undodir = homedir .. "/.cache/nvim/undo"
+vim.opt.directory = vim.env.HOME .. "/.cache/nvim/swap"
+vim.opt.backupdir = vim.env.HOME .. "/.cache/nvim/backup"
+vim.opt.undodir = vim.env.HOME .. "/.cache/nvim/undo"
 
 -- Diagnostics
 vim.diagnostic.config({
@@ -68,8 +68,10 @@ require("lazy").setup {
 
     { "nvim-lua/plenary.nvim" },
     { "BurntSushi/ripgrep" },
-    {  "nvim-treesitter/nvim-treesitter", build = function() require("nvim-treesitter.install").update({ with_sync = true })() end },
+    {  "nvim-treesitter/nvim-treesitter" },
     { "sbdchd/neoformat" },
+    { "Darazaki/indent-o-matic" },
+    { "nvim-lualine/lualine.nvim" },
 
     { "nvim-telescope/telescope.nvim", tag = "0.1.8" },
     { "nvim-telescope/telescope-fzf-native.nvim", build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release" },
@@ -105,6 +107,10 @@ require("lazy").setup {
 require("mini.icons").setup()
 require("rainbow-delimiters.setup").setup()
 
+-- Indentation Magic
+require("indent-o-matic").setup{}
+vim.api.nvim_exec([[ autocmd! indent_o_matic ]], false)
+
 -- Lsp/Mason
 require("mason").setup()
 require("mason-lspconfig").setup()
@@ -119,8 +125,8 @@ require("mason-lspconfig").setup_handlers {
 require("telescope").setup()
 require("telescope").load_extension("fzf")
 local pickers = require("telescope.builtin")
-vim.keymap.set('n', "<leader>tf", pickers.find_files, { desc = "Telescope find files" })
-vim.keymap.set('n', "<leader>tg", pickers.live_grep, { desc = "Telescope live grep" })
+vim.keymap.set('n', "<leader>tf", function() pickers.find_files({ hidden = true, no_ignore = true }) end, { desc = "Telescope find files" })
+vim.keymap.set('n', "<leader>tg", function () pickers.live_grep({ hidden = true, no_ignore = true }) end, { desc = "Telescope live grep" })
 vim.keymap.set('n', "<leader>tb", pickers.buffers, { desc = "Telescope buffers" })
 vim.keymap.set('n', "<leader>th", pickers.help_tags, { desc = "Telescope help tags" })
 vim.keymap.set('n', "<leader>tc", pickers.commands, { desc = "Telescope commands" })
@@ -128,6 +134,13 @@ vim.keymap.set('n', "<leader>ts", pickers.lsp_document_symbols, { desc = "Telesc
 vim.keymap.set('n', "<leader>td", pickers.diagnostics, { desc = "Telescope document symbols" })
 vim.keymap.set('n', "<leader>tgs", pickers.git_status, { desc = "Telescope git status" })
 vim.keymap.set('n', "<leader>tgc", pickers.git_commits, { desc = "Telescope git commits" })
+
+-- Treesitter
+require("nvim-treesitter.configs").setup { 
+	auto_install = true, 
+	highlight = { enable = true },
+	indent = { enable = true }
+}
 
 -- Completion
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
@@ -156,6 +169,14 @@ cmp.setup {
       --{ name = 'vsnip' }, -- For vsnip users.
     }),
   formatting = { format = lspkind.cmp_format() }
+}
+
+-- Status Line
+require("lualine").setup {
+  options = {
+    theme = "16color",
+    section_separators = '', component_separators = ''
+  },
 }
 
 -- Neoformatter
