@@ -5,7 +5,7 @@ XDG_DATA_HOME="$HOME/.local/share"
 XDG_BIN_HOME="$HOME/.local/bin"
 
 # Default Programs
-EDITOR="vim"
+EDITOR="nvim"
 VISUAL="vim"
 
 KITTY_ENABLE_WAYLAND=1
@@ -97,3 +97,6 @@ CONAN_USER_HOME="$XDG_CONFIG_HOME"
 # nchat
 alias telegram='nchat -d ~/.config/nchat/telegram'
 alias whatsapp='nchat -d ~/.config/nchat/whatsapp'
+
+# themes
+  export QT_QPA_PLATFORMTHEME=qt5ct

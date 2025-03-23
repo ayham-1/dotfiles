@@ -38,7 +38,7 @@ vim.opt.relativenumber = true
 
 vim.cmd("syntax on")
 vim.cmd("set clipboard+=unnamedplus")
-vim.cmd("filetype plugin indent on")
+--vim.cmd("filetype plugin indent on")
 
 -- Colorscheme
 vim.t_Co = 256
@@ -86,6 +86,12 @@ require("lazy").setup {
     { "hrsh7th/vim-vsnip" },
     { "onsails/lspkind.nvim" },
 
+    { "mfussenegger/nvim-dap" },
+    { "rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} },
+    { "igorlfs/nvim-dap-view" },
+    { "theHamsta/nvim-dap-virtual-text" },
+    {"LiadOz/nvim-dap-repl-highlights"},
+
     { "windwp/nvim-autopairs", event = "InsertEnter", config = true },
     { "hiphish/rainbow-delimiters.nvim" },
 
@@ -109,7 +115,36 @@ require("rainbow-delimiters.setup").setup()
 
 -- Indentation Magic
 require("indent-o-matic").setup{}
-vim.api.nvim_exec([[ autocmd! indent_o_matic ]], false)
+
+-- DAP
+require("nvim-dap-virtual-text").setup()
+require('nvim-dap-repl-highlights').setup()
+local dap = require("dap")
+dap.adapters.gdb = {
+  type = "executable",
+  command = "gdb",
+  args = { "--interpreter=dap", "--eval-command", "set print pretty on" }
+}
+dap.configurations.c = {
+  {
+    name = "Launch",
+    type = "gdb",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = "${workspaceFolder}",
+    stopAtBeginningOfMainSubprogram = false,
+  }}
+vim.keymap.set("n", "<leader>dt", require("dap-view").toggle, { desc = "Toggle Debug View" })
+vim.keymap.set("n", "<leader>dbt", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
+vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "Start/Continue Debugging" })
+vim.keymap.set("n", "<leader>dsn", dap.step_over, { desc = "Step Over" })
+vim.keymap.set("n", "<leader>dsi", dap.step_into, { desc = "Step Into" })
+vim.keymap.set("n", "<leader>dso", dap.step_out, { desc = "Step Out" })
+vim.keymap.set("n", "<Leader>dr", dap.run_last, { desc = "Run last configuration" })
+vim.keymap.set({'n', 'v'}, "<Leader>dh", require('dap.ui.widgets').hover, { desc = "Hover Information" })
+vim.keymap.set({'n', 'v'}, "<Leader>dp", require('dap.ui.widgets').preview, { desc = "Preview Information" })
 
 -- Lsp/Mason
 require("mason").setup()
@@ -125,8 +160,8 @@ require("mason-lspconfig").setup_handlers {
 require("telescope").setup()
 require("telescope").load_extension("fzf")
 local pickers = require("telescope.builtin")
-vim.keymap.set('n', "<leader>tf", function() pickers.find_files({ hidden = true, no_ignore = true }) end, { desc = "Telescope find files" })
-vim.keymap.set('n', "<leader>tg", function () pickers.live_grep({ hidden = true, no_ignore = true }) end, { desc = "Telescope live grep" })
+vim.keymap.set('n', "<leader>tf", pickers.find_files, { desc = "Telescope find files" })
+vim.keymap.set('n', "<leader>tg", pickers.live_grep, { desc = "Telescope live grep" })
 vim.keymap.set('n', "<leader>tb", pickers.buffers, { desc = "Telescope buffers" })
 vim.keymap.set('n', "<leader>th", pickers.help_tags, { desc = "Telescope help tags" })
 vim.keymap.set('n', "<leader>tc", pickers.commands, { desc = "Telescope commands" })
