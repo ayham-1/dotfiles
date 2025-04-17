@@ -15,3 +15,7 @@ Host *
     VisualHostKey yes
     ForwardAgent yes
     StreamLocalBindUnlink yes
+
+Host ants.cs.ovgu.de
+  User uzom25om
+

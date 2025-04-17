@@ -307,7 +307,7 @@ hide_edge_borders --i3 smart
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-    status_command "SCRIPT_DIR=~/.config/i3blocks/blocklets i3blocks"
+    status_command i3status_custom
     mode hide
     position bottom
     tray_output HDMI-A-1

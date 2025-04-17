@@ -74,7 +74,7 @@ require("lazy").setup {
     { "nvim-lualine/lualine.nvim" },
 
     { "nvim-telescope/telescope.nvim", tag = "0.1.8" },
-    { "nvim-telescope/telescope-fzf-native.nvim", build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release" },
+    --{ "nvim-telescope/telescope-fzf-native.nvim", build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release" },
 
     { "neovim/nvim-lspconfig" },
     { "williamboman/mason.nvim" },
@@ -155,13 +155,19 @@ require("mason-lspconfig").setup_handlers {
     require("lspconfig")[server_name].setup { capabilities = capabilities }
   end
 }
+local opts = { noremap = true, silent = true }
+vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+vim.api.nvim_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+vim.api.nvim_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
 
 -- Telescope
 require("telescope").setup()
-require("telescope").load_extension("fzf")
+--require("telescope").load_extension("fzf")
 local pickers = require("telescope.builtin")
 vim.keymap.set('n', "<leader>tf", pickers.find_files, { desc = "Telescope find files" })
+vim.keymap.set('n', "<leader>ta", function() pickers.find_files({hidden=true, no_ignore=true}) end, { desc = "Telescope all files" })
 vim.keymap.set('n', "<leader>tg", pickers.live_grep, { desc = "Telescope live grep" })
+vim.keymap.set('n', "<leader>tga", function() pickers.live_grep({hidden=true, no_ignore=true}) end, { desc = "Telescope live grep all files" })
 vim.keymap.set('n', "<leader>tb", pickers.buffers, { desc = "Telescope buffers" })
 vim.keymap.set('n', "<leader>th", pickers.help_tags, { desc = "Telescope help tags" })
 vim.keymap.set('n', "<leader>tc", pickers.commands, { desc = "Telescope commands" })
@@ -221,3 +227,9 @@ vim.api.nvim_exec([[
   autocmd BufWritePre * undojoin | Neoformat
 	augroup END
 ]], false)
+
+-- Sane Keybindings
+vim.keymap.set('n', "<leader>bn", ":bn<CR>", { desc = "Buffer Next" })
+vim.keymap.set('n', "<leader>bp", ":bp<CR>", { desc = "Buffer Prev" })
+vim.keymap.set('n', "<leader>bd", ":bd<CR>", { desc = "Buffer Delete" })
+vim.keymap.set('n', "<leader>s", ":w<CR>", { desc = "Buffer Write" })
